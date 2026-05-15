@@ -1,0 +1,280 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "MySQL Visual Explain",
+    "description": "This API provides a visualization tool that helps users understand and optimize their MySQL queries through easy-to-read graphical outputs. It transforms the cryptic output of MySQL's EXPLAIN command into interactive graphics, assisting users in identifying performance issues and understanding complex query plans.",
+    "version": "1.0.0",
+    "contact": {
+      "url": "https://mysqlexplain.com/"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://mysqlexplain.com",
+      "description": "Production server"
+    }
+  ],
+  "paths": {
+    "/api/explain": {
+      "post": {
+        "summary": "Generate Visual Explanation",
+        "description": "Submits a MySQL query and receives a visual explanation of the query execution plan. Transforms MySQL EXPLAIN output into an interactive graphical representation.",
+        "operationId": "generateVisualExplain",
+        "tags": [
+          "Query Analysis"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "query"
+                ],
+                "properties": {
+                  "query": {
+                    "type": "string",
+                    "description": "The SQL query to analyze and visualize",
+                    "example": "SELECT * FROM users WHERE id = 1"
+                  },
+                  "mysqlVersion": {
+                    "type": "string",
+                    "description": "MySQL version for compatibility (e.g., 8.0, 5.7)",
+                    "example": "8.0"
+                  }
+                }
+              },
+              "examples": {
+                "simpleQuery": {
+                  "summary": "Simple SELECT query",
+                  "value": {
+                    "query": "SELECT * FROM users WHERE id = 1",
+                    "mysqlVersion": "8.0"
+                  }
+                },
+                "joinQuery": {
+                  "summary": "Query with JOIN",
+                  "value": {
+                    "query": "SELECT u.*, o.* FROM users u JOIN orders o ON u.id = o.user_id WHERE u.status = 'active'",
+                    "mysqlVersion": "8.0"
+                  }
+                },
+                "subqueryExample": {
+                  "summary": "Query with subquery",
+                  "value": {
+                    "query": "SELECT * FROM users WHERE id IN (SELECT user_id FROM orders WHERE amount > 100)",
+                    "mysqlVersion": "8.0"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully generated visual explanation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "visualization": {
+                      "type": "object",
+                      "description": "The visual representation data of the query execution plan",
+                      "properties": {
+                        "nodes": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string"
+                              },
+                              "type": {
+                                "type": "string"
+                              },
+                              "table": {
+                                "type": "string"
+                              },
+                              "selectType": {
+                                "type": "string"
+                              },
+                              "accessType": {
+                                "type": "string"
+                              },
+                              "possibleKeys": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              },
+                              "key": {
+                                "type": "string"
+                              },
+                              "keyLen": {
+                                "type": "string"
+                              },
+                              "ref": {
+                                "type": "string"
+                              },
+                              "rows": {
+                                "type": "integer"
+                              },
+                              "filtered": {
+                                "type": "number"
+                              },
+                              "extra": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        },
+                        "edges": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "from": {
+                                "type": "string"
+                              },
+                              "to": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "explainOutput": {
+                      "type": "object",
+                      "description": "Raw EXPLAIN output from MySQL"
+                    },
+                    "recommendations": {
+                      "type": "array",
+                      "description": "Performance optimization recommendations",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "severity": {
+                            "type": "string",
+                            "enum": [
+                              "critical",
+                              "warning",
+                              "info"
+                            ]
+                          },
+                          "message": {
+                            "type": "string"
+                          },
+                          "suggestion": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid SQL query or request format",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Invalid SQL syntax"
+                    },
+                    "details": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Failed to generate explanation"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/version": {
+      "get": {
+        "summary": "Get MySQL Version",
+        "description": "Retrieves the MySQL version information, similar to executing SELECT VERSION() command. This helps determine compatibility and available features.",
+        "operationId": "getMySQLVersion",
+        "tags": [
+          "System Info"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved MySQL version",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "version": {
+                      "type": "string",
+                      "description": "MySQL version string",
+                      "example": "8.0.29"
+                    },
+                    "versionComment": {
+                      "type": "string",
+                      "description": "Additional version information",
+                      "example": "MySQL Community Server - GPL"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Failed to retrieve version information"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Query Analysis",
+      "description": "Endpoints for analyzing and visualizing MySQL query execution plans"
+    },
+    {
+      "name": "System Info",
+      "description": "Endpoints for retrieving system and version information"
+    }
+  ]
+}

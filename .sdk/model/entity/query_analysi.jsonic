@@ -1,0 +1,58 @@
+# Entity: query_analysi
+
+main: kit: entity: query_analysi: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "explain_output"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "mysql_version"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "query"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "recommendation"
+      req: false
+      type: "`$ARRAY`"
+    }
+    {
+      name: "visualization"
+      req: false
+      type: "`$OBJECT`"
+    }
+  ]
+
+  name: "query_analysi"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          method: "POST"
+          orig: "/api/explain"
+          parts: [
+            "api"
+            "explain"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

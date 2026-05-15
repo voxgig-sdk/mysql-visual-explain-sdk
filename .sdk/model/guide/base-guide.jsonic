@@ -1,0 +1,20 @@
+# Guide
+
+guide: {
+  metrics: count: entity: 2
+  metrics: count: path: 2
+  metrics: count: method: 2
+
+  entity: query_analysi: {
+    path: "/api/explain": {
+      op: create: method: *POST
+    }
+  }
+
+  entity: system_info: {
+    path: "/api/version": {
+      op: load: method: *GET
+    }
+  }
+
+}

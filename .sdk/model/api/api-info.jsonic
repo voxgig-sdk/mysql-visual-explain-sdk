@@ -1,0 +1,23 @@
+# API Information
+
+
+main: {
+  kit: {
+    info: {
+      contact: {
+        url: "https://mysqlexplain.com/"
+      }
+      description: "This API provides a visualization tool that helps users understand and optimize their MySQL queries through easy-to-read graphical outputs. It transforms the cryptic output of MySQL's EXPLAIN command into interactive graphics, assisting users in identifying performance issues and understanding complex query plans."
+      servers: [
+        {
+          description: "Production server"
+          url: "https://mysqlexplain.com"
+        }
+      ]
+      title: "MySQL Visual Explain"
+      version: "1.0.0"
+    }
+  }
+}
+
+}

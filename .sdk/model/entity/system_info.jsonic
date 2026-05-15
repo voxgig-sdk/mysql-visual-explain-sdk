@@ -1,0 +1,43 @@
+# Entity: system_info
+
+main: kit: entity: system_info: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "version"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "version_comment"
+      req: false
+      type: "`$STRING`"
+    }
+  ]
+
+  name: "system_info"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          method: "GET"
+          orig: "/api/version"
+          parts: [
+            "api"
+            "version"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

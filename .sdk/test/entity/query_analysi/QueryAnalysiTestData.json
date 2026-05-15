@@ -1,0 +1,38 @@
+{
+  "existing": {
+    "query_analysi": {
+      "QUERY_ANALYSI00": {
+        "explain_output": {},
+        "mysql_version": "s33",
+        "query": "s34",
+        "recommendation": [],
+        "visualization": {}
+      },
+      "QUERY_ANALYSI01": {
+        "explain_output": {},
+        "mysql_version": "s65",
+        "query": "s66",
+        "recommendation": [],
+        "visualization": {}
+      },
+      "QUERY_ANALYSI02": {
+        "explain_output": {},
+        "mysql_version": "s97",
+        "query": "s98",
+        "recommendation": [],
+        "visualization": {}
+      }
+    }
+  },
+  "new": {
+    "query_analysi": {
+      "query_analysi_ref01": {
+        "explain_output": {},
+        "mysql_version": "sc9",
+        "query": "sca",
+        "recommendation": [],
+        "visualization": {}
+      }
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "existing": {
+    "system_info": {
+      "SYSTEM_INFO00": {
+        "version": "s14",
+        "version_comment": "s15"
+      },
+      "SYSTEM_INFO01": {
+        "version": "s28",
+        "version_comment": "s29"
+      },
+      "SYSTEM_INFO02": {
+        "version": "s3c",
+        "version_comment": "s3d"
+      }
+    }
+  },
+  "new": {
+    "system_info": {
+      "system_info_ref01": {
+        "version": "s50",
+        "version_comment": "s51"
+      }
+    }
+  }
+}
