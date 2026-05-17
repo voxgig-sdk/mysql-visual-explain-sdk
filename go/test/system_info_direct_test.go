@@ -6,8 +6,8 @@ import (
 	"strings"
 	"testing"
 
-	sdk "github.com/voxgig-sdk/mysql-visual-explain-sdk"
-	"github.com/voxgig-sdk/mysql-visual-explain-sdk/core"
+	sdk "github.com/voxgig-sdk/mysql-visual-explain-sdk/go"
+	"github.com/voxgig-sdk/mysql-visual-explain-sdk/go/core"
 )
 
 func TestSystemInfoDirect(t *testing.T) {

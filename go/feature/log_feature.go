@@ -4,7 +4,7 @@ import (
 	"log/slog"
 	"os"
 
-	"github.com/voxgig-sdk/mysql-visual-explain-sdk/core"
+	"github.com/voxgig-sdk/mysql-visual-explain-sdk/go/core"
 )
 
 type LogFeature struct {

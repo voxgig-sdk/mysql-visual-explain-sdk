@@ -3,15 +3,18 @@
     "system_info": {
       "SYSTEM_INFO00": {
         "version": "s14",
-        "version_comment": "s15"
+        "version_comment": "s15",
+        "id": "SYSTEM_INFO00"
       },
       "SYSTEM_INFO01": {
         "version": "s28",
-        "version_comment": "s29"
+        "version_comment": "s29",
+        "id": "SYSTEM_INFO01"
       },
       "SYSTEM_INFO02": {
         "version": "s3c",
-        "version_comment": "s3d"
+        "version_comment": "s3d",
+        "id": "SYSTEM_INFO02"
       }
     }
   },

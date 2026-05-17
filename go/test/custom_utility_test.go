@@ -3,7 +3,7 @@ package sdktest
 import (
 	"testing"
 
-	sdk "github.com/voxgig-sdk/mysql-visual-explain-sdk"
+	sdk "github.com/voxgig-sdk/mysql-visual-explain-sdk/go"
 )
 
 func TestCustomUtility(t *testing.T) {

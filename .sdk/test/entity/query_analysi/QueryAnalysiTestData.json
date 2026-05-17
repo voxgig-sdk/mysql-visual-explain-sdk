@@ -6,21 +6,24 @@
         "mysql_version": "s33",
         "query": "s34",
         "recommendation": [],
-        "visualization": {}
+        "visualization": {},
+        "id": "QUERY_ANALYSI00"
       },
       "QUERY_ANALYSI01": {
         "explain_output": {},
         "mysql_version": "s65",
         "query": "s66",
         "recommendation": [],
-        "visualization": {}
+        "visualization": {},
+        "id": "QUERY_ANALYSI01"
       },
       "QUERY_ANALYSI02": {
         "explain_output": {},
         "mysql_version": "s97",
         "query": "s98",
         "recommendation": [],
-        "visualization": {}
+        "visualization": {},
+        "id": "QUERY_ANALYSI02"
       }
     }
   },

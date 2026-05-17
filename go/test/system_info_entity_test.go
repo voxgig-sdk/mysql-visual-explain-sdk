@@ -9,10 +9,10 @@ import (
 	"testing"
 	"time"
 
-	sdk "github.com/voxgig-sdk/mysql-visual-explain-sdk"
-	"github.com/voxgig-sdk/mysql-visual-explain-sdk/core"
+	sdk "github.com/voxgig-sdk/mysql-visual-explain-sdk/go"
+	"github.com/voxgig-sdk/mysql-visual-explain-sdk/go/core"
 
-	vs "github.com/voxgig/struct"
+	vs "github.com/voxgig-sdk/mysql-visual-explain-sdk/go/utility/struct"
 )
 
 func TestSystemInfoEntity(t *testing.T) {

@@ -1,9 +1,9 @@
 package entity
 
 import (
-	"github.com/voxgig-sdk/mysql-visual-explain-sdk/core"
+	"github.com/voxgig-sdk/mysql-visual-explain-sdk/go/core"
 
-	vs "github.com/voxgig/struct"
+	vs "github.com/voxgig-sdk/mysql-visual-explain-sdk/go/utility/struct"
 )
 
 type SystemInfoEntity struct {
