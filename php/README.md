@@ -20,9 +20,7 @@ loading a specific record.
 <?php
 require_once 'mysqlvisualexplain_sdk.php';
 
-$client = new MysqlVisualExplainSDK([
-    "apikey" => getenv("MYSQL-VISUAL-EXPLAIN_APIKEY"),
-]);
+$client = new MysqlVisualExplainSDK([]);
 ```
 
 ### 4. Create, update, and remove
@@ -113,7 +111,6 @@ Create a `.env.local` file at the project root:
 
 ```
 MYSQL-VISUAL-EXPLAIN_TEST_LIVE=TRUE
-MYSQL-VISUAL-EXPLAIN_APIKEY=<your-key>
 ```
 
 Then run:
@@ -136,7 +133,6 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `string` | API key for authentication. |
 | `base` | `string` | Base URL of the API server. |
 | `prefix` | `string` | URL path prefix prepended to all requests. |
 | `suffix` | `string` | URL path suffix appended to all requests. |

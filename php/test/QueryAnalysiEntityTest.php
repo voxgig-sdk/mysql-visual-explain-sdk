@@ -80,7 +80,6 @@ function query_analysi_basic_setup($extra)
         "MYSQLVISUALEXPLAIN_TEST_QUERY_ANALYSI_ENTID" => $idmap,
         "MYSQLVISUALEXPLAIN_TEST_LIVE" => "FALSE",
         "MYSQLVISUALEXPLAIN_TEST_EXPLAIN" => "FALSE",
-        "MYSQLVISUALEXPLAIN_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -92,7 +91,6 @@ function query_analysi_basic_setup($extra)
     if ($env["MYSQLVISUALEXPLAIN_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["MYSQLVISUALEXPLAIN_APIKEY"],
             ],
             $extra ?? [],
         ]);

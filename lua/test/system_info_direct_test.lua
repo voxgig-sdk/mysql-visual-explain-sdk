@@ -62,14 +62,12 @@ function system_info_direct_setup(mockres)
   local env = runner.env_override({
     ["MYSQLVISUALEXPLAIN_TEST_SYSTEM_INFO_ENTID"] = {},
     ["MYSQLVISUALEXPLAIN_TEST_LIVE"] = "FALSE",
-    ["MYSQLVISUALEXPLAIN_APIKEY"] = "NONE",
   })
 
   local live = env["MYSQLVISUALEXPLAIN_TEST_LIVE"] == "TRUE"
 
   if live then
     local merged_opts = {
-      apikey = env["MYSQLVISUALEXPLAIN_APIKEY"],
     }
     local client = sdk.new(merged_opts)
     return {

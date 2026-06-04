@@ -31,9 +31,7 @@ loading a specific record.
 ```ruby
 require_relative "MysqlVisualExplain_sdk"
 
-client = MysqlVisualExplainSDK.new({
-  "apikey" => ENV["MYSQL-VISUAL-EXPLAIN_APIKEY"],
-})
+client = MysqlVisualExplainSDK.new({})
 ```
 
 ### 4. Create, update, and remove
@@ -121,7 +119,6 @@ Create a `.env.local` file at the project root:
 
 ```
 MYSQL-VISUAL-EXPLAIN_TEST_LIVE=TRUE
-MYSQL-VISUAL-EXPLAIN_APIKEY=<your-key>
 ```
 
 Then run:
@@ -144,7 +141,6 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `String` | API key for authentication. |
 | `base` | `String` | Base URL of the API server. |
 | `prefix` | `String` | URL path prefix prepended to all requests. |
 | `suffix` | `String` | URL path suffix appended to all requests. |

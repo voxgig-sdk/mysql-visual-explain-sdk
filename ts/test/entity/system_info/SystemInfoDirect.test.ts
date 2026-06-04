@@ -74,14 +74,12 @@ function directSetup(mockres?: any) {
   const env = envOverride({
     'MYSQLVISUALEXPLAIN_TEST_SYSTEM_INFO_ENTID': {},
     'MYSQLVISUALEXPLAIN_TEST_LIVE': 'FALSE',
-    'MYSQLVISUALEXPLAIN_APIKEY': 'NONE',
   })
 
   const live = 'TRUE' === env.MYSQLVISUALEXPLAIN_TEST_LIVE
 
   if (live) {
     const client = new MysqlVisualExplainSDK({
-      apikey: env.MYSQLVISUALEXPLAIN_APIKEY,
     })
 
     let idmap: any = env['MYSQLVISUALEXPLAIN_TEST_SYSTEM_INFO_ENTID']

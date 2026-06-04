@@ -20,9 +20,6 @@ class MysqlVisualExplainConfig
             ],
             "options" => [
                 "base" => "https://mysqlexplain.com",
-                "auth" => [
-                    "prefix" => "Bearer",
-                ],
                 "headers" => [
           'content-type' => 'application/json',
         ],

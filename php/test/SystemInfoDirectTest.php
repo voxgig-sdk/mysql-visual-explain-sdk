@@ -67,14 +67,12 @@ function system_info_direct_setup($mockres)
     $env = Runner::env_override([
         "MYSQLVISUALEXPLAIN_TEST_SYSTEM_INFO_ENTID" => [],
         "MYSQLVISUALEXPLAIN_TEST_LIVE" => "FALSE",
-        "MYSQLVISUALEXPLAIN_APIKEY" => "NONE",
     ]);
 
     $live = $env["MYSQLVISUALEXPLAIN_TEST_LIVE"] === "TRUE";
 
     if ($live) {
         $merged_opts = [
-            "apikey" => $env["MYSQLVISUALEXPLAIN_APIKEY"],
         ];
         $client = new MysqlVisualExplainSDK($merged_opts);
         return [

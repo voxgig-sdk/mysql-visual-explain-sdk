@@ -16,7 +16,16 @@
           }
         ],
         "title": "MySQL Visual Explain",
-        "version": "1.0.0"
+        "version": "1.0.0",
+        "tagline": "Turn MySQL EXPLAIN output into interactive visual query plans",
+        "homepage": "https://mysqlexplain.com",
+        "docs_url": "https://mysqlexplain.com",
+        "about_md": "[MySQL Visual Explain](https://mysqlexplain.com) is a hosted service that converts the output of MySQL's `EXPLAIN` command into interactive visualisations, making it easier to spot slow joins, missing indexes, and other query-plan issues.\n\nThe API exposes two operations:\n\n- `POST /v2/explains` — submit a MySQL query plan for analysis and receive a sharable visualisation.\n- `GET /v2/oembed.json` — return oEmbed-compatible iframe markup so an EXPLAIN plan can be embedded in a webpage, blog post, or documentation.\n\nThe API is served from `https://api.mysqlexplain.com` and has CORS enabled, so it can be called from browser-based tools. Public documentation does not specify authentication requirements or rate limits.",
+        "entity_desc": {
+          "query_analysi": "Represents a submitted MySQL EXPLAIN plan and its generated visualisation; created via `POST /v2/explains`.",
+          "system_info": "Service-level metadata and oEmbed responses used to embed a rendered query plan, returned by `GET /v2/oembed.json`."
+        },
+        "auth": false
       },
       "config": {
         "auth": {
@@ -24,7 +33,15 @@
         },
         "headers": {
           "content-type": "application/json"
-        }
+        },
+        "docs_order": [
+          "ts",
+          "py",
+          "php",
+          "go",
+          "rb",
+          "lua"
+        ]
       },
       "entity": {
         "query_analysi": {
