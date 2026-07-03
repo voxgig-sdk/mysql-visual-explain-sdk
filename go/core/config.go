@@ -14,6 +14,9 @@ func MakeConfig() map[string]any {
 		},
 		"options": map[string]any{
 			"base": "https://mysqlexplain.com",
+			"auth": map[string]any{
+				"prefix": "Bearer",
+			},
 			"headers": map[string]any{
 				"content-type": "application/json",
 			},
@@ -26,64 +29,64 @@ func MakeConfig() map[string]any {
 			"query_analysi": map[string]any{
 				"fields": []any{
 					map[string]any{
+						"active": true,
 						"name": "explain_output",
 						"req": false,
 						"type": "`$OBJECT`",
-						"active": true,
 						"index$": 0,
 					},
 					map[string]any{
+						"active": true,
 						"name": "mysql_version",
 						"req": false,
 						"type": "`$STRING`",
-						"active": true,
 						"index$": 1,
 					},
 					map[string]any{
+						"active": true,
 						"name": "query",
 						"req": true,
 						"type": "`$STRING`",
-						"active": true,
 						"index$": 2,
 					},
 					map[string]any{
+						"active": true,
 						"name": "recommendation",
 						"req": false,
 						"type": "`$ARRAY`",
-						"active": true,
 						"index$": 3,
 					},
 					map[string]any{
+						"active": true,
 						"name": "visualization",
 						"req": false,
 						"type": "`$OBJECT`",
-						"active": true,
 						"index$": 4,
 					},
 				},
 				"name": "query_analysi",
 				"op": map[string]any{
 					"create": map[string]any{
+						"input": "data",
 						"name": "create",
 						"points": []any{
 							map[string]any{
+								"active": true,
+								"args": map[string]any{},
 								"method": "POST",
 								"orig": "/api/explain",
 								"parts": []any{
 									"api",
 									"explain",
 								},
+								"select": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
-								"active": true,
-								"args": map[string]any{},
-								"select": map[string]any{},
 								"index$": 0,
 							},
 						},
-						"input": "data",
 						"key$": "create",
 					},
 				},
@@ -94,43 +97,43 @@ func MakeConfig() map[string]any {
 			"system_info": map[string]any{
 				"fields": []any{
 					map[string]any{
+						"active": true,
 						"name": "version",
 						"req": false,
 						"type": "`$STRING`",
-						"active": true,
 						"index$": 0,
 					},
 					map[string]any{
+						"active": true,
 						"name": "version_comment",
 						"req": false,
 						"type": "`$STRING`",
-						"active": true,
 						"index$": 1,
 					},
 				},
 				"name": "system_info",
 				"op": map[string]any{
 					"load": map[string]any{
+						"input": "data",
 						"name": "load",
 						"points": []any{
 							map[string]any{
+								"active": true,
+								"args": map[string]any{},
 								"method": "GET",
 								"orig": "/api/version",
 								"parts": []any{
 									"api",
 									"version",
 								},
+								"select": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
-								"active": true,
-								"args": map[string]any{},
-								"select": map[string]any{},
 								"index$": 0,
 							},
 						},
-						"input": "data",
 						"key$": "load",
 					},
 				},

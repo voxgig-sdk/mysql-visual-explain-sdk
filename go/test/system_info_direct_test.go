@@ -99,12 +99,14 @@ func system_infoDirectSetup(mockres any) *system_infoDirectSetupResult {
 	env := envOverride(map[string]any{
 		"MYSQLVISUALEXPLAIN_TEST_SYSTEM_INFO_ENTID": map[string]any{},
 		"MYSQLVISUALEXPLAIN_TEST_LIVE":    "FALSE",
+		"MYSQLVISUALEXPLAIN_APIKEY":       "NONE",
 	})
 
 	live := env["MYSQLVISUALEXPLAIN_TEST_LIVE"] == "TRUE"
 
 	if live {
 		mergedOpts := map[string]any{
+			"apikey": env["MYSQLVISUALEXPLAIN_APIKEY"],
 		}
 		client := sdk.NewMysqlVisualExplainSDK(mergedOpts)
 

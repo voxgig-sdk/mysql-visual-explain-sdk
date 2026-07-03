@@ -1,6 +1,11 @@
 # MysqlVisualExplain Python SDK
 
-The Python SDK for the MysqlVisualExplain API. Provides an entity-oriented interface following Pythonic conventions.
+
+
+The Python SDK for the MysqlVisualExplain API — an entity-oriented client following Pythonic conventions.
+
+> Other languages, the CLI, and MCP server live alongside this one — see
+> the [top-level README](../README.md).
 
 
 ## Install
@@ -23,16 +28,19 @@ loading a specific record.
 ### 1. Create a client
 
 ```python
+import os
 from mysqlvisualexplain_sdk import MysqlVisualExplainSDK
 
-client = MysqlVisualExplainSDK({})
+client = MysqlVisualExplainSDK({
+    "apikey": os.environ.get("MYSQL-VISUAL-EXPLAIN_APIKEY"),
+})
 ```
 
 ### 4. Create, update, and remove
 
 ```python
 # Create
-created, _ = client.QueryAnalysi(None).create({"name": "Example"}, None)
+created, _ = client.QueryAnalysi().create({"name": "Example"})
 
 ```
 
@@ -78,11 +86,9 @@ print(fetchdef["headers"])
 Create a mock client for unit testing — no server required:
 
 ```python
-client = MysqlVisualExplainSDK.test(None, None)
+client = MysqlVisualExplainSDK.test()
 
-result, err = client.MysqlVisualExplain(None).load(
-    {"id": "test01"}, None
-)
+result, err = client.MysqlVisualExplain().load({"id": "test01"})
 # result contains mock response data
 ```
 
@@ -113,6 +119,7 @@ Create a `.env.local` file at the project root:
 
 ```
 MYSQL-VISUAL-EXPLAIN_TEST_LIVE=TRUE
+MYSQL-VISUAL-EXPLAIN_APIKEY=<your-key>
 ```
 
 Then run:
@@ -136,6 +143,7 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
+| `apikey` | `str` | API key for authentication. |
 | `base` | `str` | Base URL of the API server. |
 | `prefix` | `str` | URL path prefix prepended to all requests. |
 | `suffix` | `str` | URL path suffix appended to all requests. |

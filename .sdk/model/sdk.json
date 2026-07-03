@@ -1,38 +1,13 @@
 {
-  "name": "mysql-visual-explain",
-  "origin": "voxgig-sdk",
   "def": "mysql-visual-explain_0.1.0.json",
   "main": {
+    "def": {
+      "desc": ""
+    },
     "kit": {
-      "info": {
-        "contact": {
-          "url": "https://mysqlexplain.com/"
-        },
-        "description": "This API provides a visualization tool that helps users understand and optimize their MySQL queries through easy-to-read graphical outputs. It transforms the cryptic output of MySQL's EXPLAIN command into interactive graphics, assisting users in identifying performance issues and understanding complex query plans.",
-        "servers": [
-          {
-            "description": "Production server",
-            "url": "https://mysqlexplain.com"
-          }
-        ],
-        "title": "MySQL Visual Explain",
-        "version": "1.0.0",
-        "tagline": "Turn MySQL EXPLAIN output into interactive visual query plans",
-        "homepage": "https://mysqlexplain.com",
-        "docs_url": "https://mysqlexplain.com",
-        "about_md": "[MySQL Visual Explain](https://mysqlexplain.com) is a hosted service that converts the output of MySQL's `EXPLAIN` command into interactive visualisations, making it easier to spot slow joins, missing indexes, and other query-plan issues.\n\nThe API exposes two operations:\n\n- `POST /v2/explains` — submit a MySQL query plan for analysis and receive a sharable visualisation.\n- `GET /v2/oembed.json` — return oEmbed-compatible iframe markup so an EXPLAIN plan can be embedded in a webpage, blog post, or documentation.\n\nThe API is served from `https://api.mysqlexplain.com` and has CORS enabled, so it can be called from browser-based tools. Public documentation does not specify authentication requirements or rate limits.",
-        "entity_desc": {
-          "query_analysi": "Represents a submitted MySQL EXPLAIN plan and its generated visualisation; created via `POST /v2/explains`.",
-          "system_info": "Service-level metadata and oEmbed responses used to embed a rendered query plan, returned by `GET /v2/oembed.json`."
-        },
-        "auth": false
-      },
       "config": {
         "auth": {
           "prefix": "Bearer"
-        },
-        "headers": {
-          "content-type": "application/json"
         },
         "docs_order": [
           "ts",
@@ -41,117 +16,120 @@
           "go",
           "rb",
           "lua"
-        ]
+        ],
+        "headers": {
+          "content-type": "application/json"
+        }
       },
       "entity": {
         "query_analysi": {
+          "active": true,
           "alias": {
             "field": {}
           },
           "fields": [
             {
+              "active": true,
               "name": "explain_output",
               "req": false,
-              "type": "`$OBJECT`",
-              "active": true
+              "type": "`$OBJECT`"
             },
             {
+              "active": true,
               "name": "mysql_version",
               "req": false,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             },
             {
+              "active": true,
               "name": "query",
               "req": true,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             },
             {
+              "active": true,
               "name": "recommendation",
               "req": false,
-              "type": "`$ARRAY`",
-              "active": true
+              "type": "`$ARRAY`"
             },
             {
+              "active": true,
               "name": "visualization",
               "req": false,
-              "type": "`$OBJECT`",
-              "active": true
+              "type": "`$OBJECT`"
             }
           ],
           "name": "query_analysi",
           "op": {
             "create": {
+              "input": "data",
               "name": "create",
               "points": [
                 {
+                  "active": true,
+                  "args": {},
                   "method": "POST",
                   "orig": "/api/explain",
                   "parts": [
                     "api",
                     "explain"
                   ],
+                  "select": {},
                   "transform": {
                     "req": "`reqdata`",
                     "res": "`body`"
-                  },
-                  "active": true,
-                  "args": {},
-                  "select": {}
+                  }
                 }
-              ],
-              "input": "data"
+              ]
             }
           },
-          "active": true,
           "relations": {
             "ancestors": []
           }
         },
         "system_info": {
+          "active": true,
           "alias": {
             "field": {}
           },
           "fields": [
             {
+              "active": true,
               "name": "version",
               "req": false,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             },
             {
+              "active": true,
               "name": "version_comment",
               "req": false,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             }
           ],
           "name": "system_info",
           "op": {
             "load": {
+              "input": "data",
               "name": "load",
               "points": [
                 {
+                  "active": true,
+                  "args": {},
                   "method": "GET",
                   "orig": "/api/version",
                   "parts": [
                     "api",
                     "version"
                   ],
+                  "select": {},
                   "transform": {
                     "req": "`reqdata`",
                     "res": "`body`"
-                  },
-                  "active": true,
-                  "args": {},
-                  "select": {}
+                  }
                 }
-              ],
-              "input": "data"
+              ]
             }
           },
-          "active": true,
           "relations": {
             "ancestors": []
           }
@@ -159,9 +137,6 @@
       },
       "feature": {
         "test": {
-          "name": "test",
-          "title": "In-memory mock transport for testing without a live server",
-          "version": "0.0.1",
           "active": true,
           "config": {
             "options": {
@@ -169,6 +144,14 @@
             }
           },
           "hook": {
+            "GetData": {
+              "active": true,
+              "await": false
+            },
+            "GetMatch": {
+              "active": true,
+              "await": false
+            },
             "PostConstruct": {
               "active": true,
               "await": false
@@ -177,25 +160,11 @@
               "active": true,
               "await": false
             },
-            "SetData": {
-              "active": true,
-              "await": false
-            },
-            "GetData": {
-              "active": true,
-              "await": false
-            },
-            "SetMatch": {
-              "active": true
-            },
-            "GetMatch": {
-              "active": true,
+            "PostOperation": {
+              "active": false,
               "await": false
             },
             "PrePoint": {
-              "active": true
-            },
-            "PreSpec": {
               "active": true,
               "await": false
             },
@@ -211,20 +180,32 @@
               "active": true,
               "await": false
             },
+            "PreSpec": {
+              "active": true,
+              "await": false
+            },
             "PreTarget": {
               "active": false,
               "await": false
             },
-            "PostOperation": {
-              "active": false,
+            "SetData": {
+              "active": true,
+              "await": false
+            },
+            "SetMatch": {
+              "active": true,
               "await": false
             }
           },
+          "name": "test",
           "target": {
-            "ts": {
+            "go": {
               "deps": {}
             },
-            "go": {
+            "go-cli": {
+              "deps": {}
+            },
+            "go-mcp": {
               "deps": {}
             },
             "lua": {
@@ -239,49 +220,55 @@
             "rb": {
               "deps": {}
             },
-            "go-cli": {
-              "deps": {}
-            },
-            "go-mcp": {
+            "ts": {
               "deps": {}
             }
-          }
+          },
+          "title": "In-memory mock transport for testing without a live server",
+          "version": "0.0.1"
         }
       },
       "flow": {
         "BasicQueryAnalysiFlow": {
+          "active": true,
           "entity": "query_analysi",
+          "key$": "BasicQueryAnalysiFlow",
           "kind": "basic",
           "name": "BasicQueryAnalysiFlow",
+          "param": {},
           "step": [
             {
+              "active": true,
+              "data": {},
               "input": {
                 "ref": "query_analysi_ref01"
               },
-              "op": "create",
-              "active": true,
               "match": {},
-              "data": {},
+              "op": "create",
               "spec": [],
               "valid": []
             }
-          ],
-          "key$": "BasicQueryAnalysiFlow",
-          "active": true,
-          "param": {}
+          ]
         },
         "BasicSystemInfoFlow": {
+          "active": true,
           "entity": "system_info",
+          "key$": "BasicSystemInfoFlow",
           "kind": "basic",
           "name": "BasicSystemInfoFlow",
+          "param": {},
           "step": [
             {
+              "active": true,
+              "data": {},
               "input": {
                 "ref": "system_info_ref01",
                 "srcdatavar": "system_info_ref01_data",
                 "suffix": "_dt0"
               },
+              "match": {},
               "op": "load",
+              "spec": [],
               "valid": [
                 {
                   "apply": "TextFieldMark",
@@ -289,28 +276,52 @@
                     "mark": "Mark01-system_info_ref01"
                   }
                 }
-              ],
-              "active": true,
-              "match": {},
-              "data": {},
-              "spec": []
+              ]
             }
-          ],
-          "key$": "BasicSystemInfoFlow",
-          "active": true,
-          "param": {}
+          ]
         }
       },
+      "info": {
+        "contact": {
+          "url": "https://mysqlexplain.com/"
+        },
+        "description": "This API provides a visualization tool that helps users understand and optimize their MySQL queries through easy-to-read graphical outputs. It transforms the cryptic output of MySQL's EXPLAIN command into interactive graphics, assisting users in identifying performance issues and understanding complex query plans.",
+        "servers": [
+          {
+            "description": "Production server",
+            "url": "https://mysqlexplain.com"
+          }
+        ],
+        "title": "MySQL Visual Explain",
+        "version": "1.0.0"
+      },
+      "option": {},
       "target": {
-        "go-cli": {
-          "title": "Go CLI",
-          "ext": "go",
+        "go": {
+          "active": true,
           "comment": {
             "line": "//"
           },
+          "deps": {},
+          "ext": "go",
           "module": {
             "name": "mysql-visual-explain"
           },
+          "name": "go",
+          "srcfeature": false,
+          "title": "Golang"
+        },
+        "go-cli": {
+          "active": true,
+          "comment": {
+            "line": "//"
+          },
+          "deps": {},
+          "ext": "go",
+          "module": {
+            "name": "mysql-visual-explain"
+          },
+          "name": "go-cli",
           "phase": {
             "entity": {
               "active": false
@@ -325,19 +336,19 @@
               "active": false
             }
           },
-          "deps": {},
-          "name": "go-cli",
-          "active": true
+          "title": "Go CLI"
         },
         "go-mcp": {
-          "title": "Go MCP server",
-          "ext": "go",
+          "active": true,
           "comment": {
             "line": "//"
           },
+          "deps": {},
+          "ext": "go",
           "module": {
             "name": "mysql-visual-explain"
           },
+          "name": "go-mcp",
           "phase": {
             "entity": {
               "active": false
@@ -352,138 +363,120 @@
               "active": false
             }
           },
-          "deps": {},
-          "name": "go-mcp",
-          "active": true
-        },
-        "ts": {
-          "title": "TypeScript",
-          "ext": "ts",
-          "comment": {
-            "line": "//"
-          },
-          "module": {
-            "name": "mysql-visual-explain"
-          },
-          "base": "node_modules/@voxgig/sdkgen/project/.sdk",
-          "deps": {
-            "dotenv": {
-              "active": true,
-              "version": "^17.4.2",
-              "kind": "dev"
-            },
-            "typescript": {
-              "active": true,
-              "version": "^5.9.3",
-              "kind": "dev"
-            },
-            "@types/node": {
-              "active": true,
-              "version": "^25.6.0",
-              "kind": "dev"
-            }
-          },
-          "name": "ts",
-          "active": true
-        },
-        "go": {
-          "title": "Golang",
-          "ext": "go",
-          "comment": {
-            "line": "//"
-          },
-          "module": {
-            "name": "mysql-visual-explain"
-          },
-          "srcfeature": false,
-          "deps": {},
-          "name": "go",
-          "active": true
+          "title": "Go MCP server"
         },
         "lua": {
-          "title": "Lua",
-          "ext": "lua",
+          "active": true,
           "comment": {
             "line": "--"
           },
-          "module": {
-            "name": "mysql-visual-explain"
-          },
-          "srcfeature": false,
           "deps": {
             "dkjson": {
               "active": true,
-              "version": "2.5",
-              "kind": "prod"
+              "kind": "prod",
+              "version": "2.5"
             }
           },
+          "ext": "lua",
+          "module": {
+            "name": "mysql-visual-explain"
+          },
           "name": "lua",
-          "active": true
+          "srcfeature": false,
+          "title": "Lua"
         },
         "php": {
-          "title": "PHP",
-          "ext": "php",
+          "active": true,
           "comment": {
             "line": "//"
           },
+          "deps": {},
+          "ext": "php",
           "module": {
             "name": "mysql-visual-explain"
           },
-          "srcfeature": false,
-          "deps": {},
           "name": "php",
-          "active": true
+          "srcfeature": false,
+          "title": "PHP"
         },
         "py": {
-          "title": "Python",
-          "ext": "py",
+          "active": true,
           "comment": {
             "line": "#"
           },
-          "module": {
-            "name": "mysql-visual-explain"
-          },
-          "srcfeature": false,
           "deps": {
             "requests": {
               "active": true,
-              "version": "2.33",
-              "kind": "prod"
+              "kind": "prod",
+              "version": "2.33"
             }
           },
-          "name": "py",
-          "active": true
-        },
-        "rb": {
-          "title": "Ruby",
-          "ext": "rb",
-          "comment": {
-            "line": "#"
-          },
+          "ext": "py",
           "module": {
             "name": "mysql-visual-explain"
           },
+          "name": "py",
           "srcfeature": false,
+          "title": "Python"
+        },
+        "rb": {
+          "active": true,
+          "comment": {
+            "line": "#"
+          },
           "deps": {
-            "voxgig-struct": {
-              "active": true,
-              "version": "0.0.10",
-              "kind": "prod"
-            },
             "json": {
               "active": true,
-              "version": "0",
-              "kind": "prod"
+              "kind": "prod",
+              "version": "0"
+            },
+            "voxgig-struct": {
+              "active": true,
+              "kind": "prod",
+              "version": "0.0.10"
             }
           },
+          "ext": "rb",
+          "module": {
+            "name": "mysql-visual-explain"
+          },
           "name": "rb",
-          "active": true
+          "srcfeature": false,
+          "title": "Ruby"
+        },
+        "ts": {
+          "active": true,
+          "base": "node_modules/@voxgig/sdkgen/project/.sdk",
+          "comment": {
+            "line": "//"
+          },
+          "deps": {
+            "@types/node": {
+              "active": true,
+              "kind": "dev",
+              "version": "^25.6.0"
+            },
+            "dotenv": {
+              "active": true,
+              "kind": "dev",
+              "version": "^17.4.2"
+            },
+            "typescript": {
+              "active": true,
+              "kind": "dev",
+              "version": "^5.9.3"
+            }
+          },
+          "ext": "ts",
+          "module": {
+            "name": "mysql-visual-explain"
+          },
+          "name": "ts",
+          "title": "TypeScript"
         }
-      },
-      "option": {}
-    },
-    "def": {
-      "desc": ""
+      }
     }
-  }
+  },
+  "name": "mysql-visual-explain",
+  "origin": "voxgig-sdk"
 }

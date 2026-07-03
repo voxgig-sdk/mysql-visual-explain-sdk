@@ -20,6 +20,9 @@ class MysqlVisualExplainConfig
             ],
             "options" => [
                 "base" => "https://mysqlexplain.com",
+                "auth" => [
+                    "prefix" => "Bearer",
+                ],
                 "headers" => [
           'content-type' => 'application/json',
         ],
@@ -32,64 +35,64 @@ class MysqlVisualExplainConfig
         'query_analysi' => [
           'fields' => [
             [
+              'active' => true,
               'name' => 'explain_output',
               'req' => false,
               'type' => '`$OBJECT`',
-              'active' => true,
               'index$' => 0,
             ],
             [
+              'active' => true,
               'name' => 'mysql_version',
               'req' => false,
               'type' => '`$STRING`',
-              'active' => true,
               'index$' => 1,
             ],
             [
+              'active' => true,
               'name' => 'query',
               'req' => true,
               'type' => '`$STRING`',
-              'active' => true,
               'index$' => 2,
             ],
             [
+              'active' => true,
               'name' => 'recommendation',
               'req' => false,
               'type' => '`$ARRAY`',
-              'active' => true,
               'index$' => 3,
             ],
             [
+              'active' => true,
               'name' => 'visualization',
               'req' => false,
               'type' => '`$OBJECT`',
-              'active' => true,
               'index$' => 4,
             ],
           ],
           'name' => 'query_analysi',
           'op' => [
             'create' => [
+              'input' => 'data',
               'name' => 'create',
               'points' => [
                 [
+                  'active' => true,
+                  'args' => [],
                   'method' => 'POST',
                   'orig' => '/api/explain',
                   'parts' => [
                     'api',
                     'explain',
                   ],
+                  'select' => [],
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
                   ],
-                  'active' => true,
-                  'args' => [],
-                  'select' => [],
                   'index$' => 0,
                 ],
               ],
-              'input' => 'data',
               'key$' => 'create',
             ],
           ],
@@ -100,43 +103,43 @@ class MysqlVisualExplainConfig
         'system_info' => [
           'fields' => [
             [
+              'active' => true,
               'name' => 'version',
               'req' => false,
               'type' => '`$STRING`',
-              'active' => true,
               'index$' => 0,
             ],
             [
+              'active' => true,
               'name' => 'version_comment',
               'req' => false,
               'type' => '`$STRING`',
-              'active' => true,
               'index$' => 1,
             ],
           ],
           'name' => 'system_info',
           'op' => [
             'load' => [
+              'input' => 'data',
               'name' => 'load',
               'points' => [
                 [
+                  'active' => true,
+                  'args' => [],
                   'method' => 'GET',
                   'orig' => '/api/version',
                   'parts' => [
                     'api',
                     'version',
                   ],
+                  'select' => [],
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
                   ],
-                  'active' => true,
-                  'args' => [],
-                  'select' => [],
                   'index$' => 0,
                 ],
               ],
-              'input' => 'data',
               'key$' => 'load',
             ],
           ],

@@ -59,12 +59,14 @@ def _system_info_direct_setup(mockres):
     env = runner.env_override({
         "MYSQLVISUALEXPLAIN_TEST_SYSTEM_INFO_ENTID": {},
         "MYSQLVISUALEXPLAIN_TEST_LIVE": "FALSE",
+        "MYSQLVISUALEXPLAIN_APIKEY": "NONE",
     })
 
     live = env.get("MYSQLVISUALEXPLAIN_TEST_LIVE") == "TRUE"
 
     if live:
         merged_opts = {
+            "apikey": env.get("MYSQLVISUALEXPLAIN_APIKEY"),
         }
         client = MysqlVisualExplainSDK(merged_opts)
         return {

@@ -117,6 +117,7 @@ func system_infoBasicSetup(extra map[string]any) *entityTestSetup {
 		"MYSQLVISUALEXPLAIN_TEST_SYSTEM_INFO_ENTID": idmap,
 		"MYSQLVISUALEXPLAIN_TEST_LIVE":      "FALSE",
 		"MYSQLVISUALEXPLAIN_TEST_EXPLAIN":   "FALSE",
+		"MYSQLVISUALEXPLAIN_APIKEY":         "NONE",
 	})
 
 	idmapResolved := core.ToMapAny(env["MYSQLVISUALEXPLAIN_TEST_SYSTEM_INFO_ENTID"])
@@ -127,6 +128,7 @@ func system_infoBasicSetup(extra map[string]any) *entityTestSetup {
 	if env["MYSQLVISUALEXPLAIN_TEST_LIVE"] == "TRUE" {
 		mergedOpts := vs.Merge([]any{
 			map[string]any{
+				"apikey": env["MYSQLVISUALEXPLAIN_APIKEY"],
 			},
 			extra,
 		})

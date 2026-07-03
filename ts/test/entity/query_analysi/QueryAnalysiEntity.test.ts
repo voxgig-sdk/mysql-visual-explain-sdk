@@ -113,6 +113,7 @@ function basicSetup(extra?: any) {
     'MYSQL_VISUAL_EXPLAIN_TEST_QUERY_ANALYSI_ENTID': idmap,
     'MYSQL_VISUAL_EXPLAIN_TEST_LIVE': 'FALSE',
     'MYSQL_VISUAL_EXPLAIN_TEST_EXPLAIN': 'FALSE',
+    'MYSQL_VISUAL_EXPLAIN_APIKEY': 'NONE',
   })
 
   idmap = env['MYSQL_VISUAL_EXPLAIN_TEST_QUERY_ANALYSI_ENTID']
@@ -122,6 +123,7 @@ function basicSetup(extra?: any) {
   if (live) {
     client = new MysqlVisualExplainSDK(merge([
       {
+        apikey: env.MYSQL_VISUAL_EXPLAIN_APIKEY,
       },
       extra
     ]))

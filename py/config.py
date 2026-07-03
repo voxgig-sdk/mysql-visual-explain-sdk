@@ -15,6 +15,9 @@ def make_config():
         },
         "options": {
             "base": "https://mysqlexplain.com",
+            "auth": {
+                "prefix": "Bearer",
+            },
             "headers": {
         "content-type": "application/json",
       },
@@ -27,64 +30,64 @@ def make_config():
       "query_analysi": {
         "fields": [
           {
+            "active": True,
             "name": "explain_output",
             "req": False,
             "type": "`$OBJECT`",
-            "active": True,
             "index$": 0,
           },
           {
+            "active": True,
             "name": "mysql_version",
             "req": False,
             "type": "`$STRING`",
-            "active": True,
             "index$": 1,
           },
           {
+            "active": True,
             "name": "query",
             "req": True,
             "type": "`$STRING`",
-            "active": True,
             "index$": 2,
           },
           {
+            "active": True,
             "name": "recommendation",
             "req": False,
             "type": "`$ARRAY`",
-            "active": True,
             "index$": 3,
           },
           {
+            "active": True,
             "name": "visualization",
             "req": False,
             "type": "`$OBJECT`",
-            "active": True,
             "index$": 4,
           },
         ],
         "name": "query_analysi",
         "op": {
           "create": {
+            "input": "data",
             "name": "create",
             "points": [
               {
+                "active": True,
+                "args": {},
                 "method": "POST",
                 "orig": "/api/explain",
                 "parts": [
                   "api",
                   "explain",
                 ],
+                "select": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "active": True,
-                "args": {},
-                "select": {},
                 "index$": 0,
               },
             ],
-            "input": "data",
             "key$": "create",
           },
         },
@@ -95,43 +98,43 @@ def make_config():
       "system_info": {
         "fields": [
           {
+            "active": True,
             "name": "version",
             "req": False,
             "type": "`$STRING`",
-            "active": True,
             "index$": 0,
           },
           {
+            "active": True,
             "name": "version_comment",
             "req": False,
             "type": "`$STRING`",
-            "active": True,
             "index$": 1,
           },
         ],
         "name": "system_info",
         "op": {
           "load": {
+            "input": "data",
             "name": "load",
             "points": [
               {
+                "active": True,
+                "args": {},
                 "method": "GET",
                 "orig": "/api/version",
                 "parts": [
                   "api",
                   "version",
                 ],
+                "select": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "active": True,
-                "args": {},
-                "select": {},
                 "index$": 0,
               },
             ],
-            "input": "data",
             "key$": "load",
           },
         },

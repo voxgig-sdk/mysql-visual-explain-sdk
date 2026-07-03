@@ -91,6 +91,7 @@ def _system_info_basic_setup(extra):
         "MYSQLVISUALEXPLAIN_TEST_SYSTEM_INFO_ENTID": idmap,
         "MYSQLVISUALEXPLAIN_TEST_LIVE": "FALSE",
         "MYSQLVISUALEXPLAIN_TEST_EXPLAIN": "FALSE",
+        "MYSQLVISUALEXPLAIN_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -101,6 +102,7 @@ def _system_info_basic_setup(extra):
     if env.get("MYSQLVISUALEXPLAIN_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
+                "apikey": env.get("MYSQLVISUALEXPLAIN_APIKEY"),
             },
             extra or {},
         ])

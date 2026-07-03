@@ -86,6 +86,7 @@ function query_analysi_basic_setup(extra)
     ["MYSQLVISUALEXPLAIN_TEST_QUERY_ANALYSI_ENTID"] = idmap,
     ["MYSQLVISUALEXPLAIN_TEST_LIVE"] = "FALSE",
     ["MYSQLVISUALEXPLAIN_TEST_EXPLAIN"] = "FALSE",
+    ["MYSQLVISUALEXPLAIN_APIKEY"] = "NONE",
   })
 
   local idmap_resolved = helpers.to_map(
@@ -97,6 +98,7 @@ function query_analysi_basic_setup(extra)
   if env["MYSQLVISUALEXPLAIN_TEST_LIVE"] == "TRUE" then
     local merged_opts = vs.merge({
       {
+        apikey = env["MYSQLVISUALEXPLAIN_APIKEY"],
       },
       extra or {},
     })

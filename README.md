@@ -1,19 +1,8 @@
 # MysqlVisualExplain SDK
 
-Turn MySQL EXPLAIN output into interactive visual query plans
+MySQL Visual Explain client, generated from the OpenAPI spec.
 
 > TypeScript, Python, PHP, Golang, Ruby, Lua SDKs, a CLI, an interactive REPL, and an MCP server for AI agents — all generated from one OpenAPI spec by [@voxgig/sdkgen](https://github.com/voxgig/sdkgen).
-
-## About MySQL Visual Explain
-
-[MySQL Visual Explain](https://mysqlexplain.com) is a hosted service that converts the output of MySQL's `EXPLAIN` command into interactive visualisations, making it easier to spot slow joins, missing indexes, and other query-plan issues.
-
-The API exposes two operations:
-
-- `POST /v2/explains` — submit a MySQL query plan for analysis and receive a sharable visualisation.
-- `GET /v2/oembed.json` — return oEmbed-compatible iframe markup so an EXPLAIN plan can be embedded in a webpage, blog post, or documentation.
-
-The API is served from `https://api.mysqlexplain.com` and has CORS enabled, so it can be called from browser-based tools. Public documentation does not specify authentication requirements or rate limits.
 
 ## Try it
 
@@ -47,27 +36,28 @@ gem install mysql-visual-explain-sdk
 luarocks install mysql-visual-explain-sdk
 ```
 
-## 30-second quickstart
+## Quickstart
 
 ### TypeScript
 
 ```ts
 import { MysqlVisualExplainSDK } from 'mysql-visual-explain'
 
-const client = new MysqlVisualExplainSDK({})
+const client = new MysqlVisualExplainSDK({
+  apikey: process.env.MYSQL-VISUAL-EXPLAIN_APIKEY,
+})
 
 ```
 
-See the [TypeScript README](ts/README.md) for the
-full guide, or scroll down for the same example in other languages.
+See the [TypeScript README](ts/README.md) for the full guide.
 
-## What's in the box
+## Surfaces
 
-| Surface | Use it for | Path |
-| --- | --- | --- |
-| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | App integration | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
-| **CLI** | Scripts, CI, ops, one-off API calls | `go-cli/` |
-| **MCP server** | AI agents (Claude, Cursor, Cline) | `go-mcp/` |
+| Surface | Path |
+| --- | --- |
+| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
+| **CLI** | `go-cli/` |
+| **MCP server** | `go-mcp/` |
 
 ## Use it from an AI agent (MCP)
 
@@ -97,8 +87,8 @@ The API exposes 2 entities:
 
 | Entity | Description | API path |
 | --- | --- | --- |
-| **QueryAnalysi** | Represents a submitted MySQL EXPLAIN plan and its generated visualisation; created via `POST /v2/explains`. | `/api/explain` |
-| **SystemInfo** | Service-level metadata and oEmbed responses used to embed a rendered query plan, returned by `GET /v2/oembed.json`. | `/api/version` |
+| **QueryAnalysi** |  | `/api/explain` |
+| **SystemInfo** |  | `/api/version` |
 
 Each entity supports the following operations where available: **load**,
 **list**, **create**, **update**, and **remove**.
@@ -108,9 +98,12 @@ Each entity supports the following operations where available: **load**,
 ### Python
 
 ```python
+import os
 from mysqlvisualexplain_sdk import MysqlVisualExplainSDK
 
-client = MysqlVisualExplainSDK({})
+client = MysqlVisualExplainSDK({
+    "apikey": os.environ.get("MYSQL-VISUAL-EXPLAIN_APIKEY"),
+})
 
 ```
 
@@ -120,7 +113,9 @@ client = MysqlVisualExplainSDK({})
 <?php
 require_once 'mysqlvisualexplain_sdk.php';
 
-$client = new MysqlVisualExplainSDK([]);
+$client = new MysqlVisualExplainSDK([
+    "apikey" => getenv("MYSQL-VISUAL-EXPLAIN_APIKEY"),
+]);
 
 ```
 
@@ -129,7 +124,9 @@ $client = new MysqlVisualExplainSDK([]);
 ```go
 import sdk "github.com/voxgig-sdk/mysql-visual-explain-sdk/go"
 
-client := sdk.NewMysqlVisualExplainSDK(map[string]any{})
+client := sdk.NewMysqlVisualExplainSDK(map[string]any{
+    "apikey": os.Getenv("MYSQL-VISUAL-EXPLAIN_APIKEY"),
+})
 
 ```
 
@@ -138,7 +135,9 @@ client := sdk.NewMysqlVisualExplainSDK(map[string]any{})
 ```ruby
 require_relative "MysqlVisualExplain_sdk"
 
-client = MysqlVisualExplainSDK.new({})
+client = MysqlVisualExplainSDK.new({
+  "apikey" => ENV["MYSQL-VISUAL-EXPLAIN_APIKEY"],
+})
 
 ```
 
@@ -147,7 +146,9 @@ client = MysqlVisualExplainSDK.new({})
 ```lua
 local sdk = require("mysql-visual-explain_sdk")
 
-local client = sdk.new({})
+local client = sdk.new({
+  apikey = os.getenv("MYSQL-VISUAL-EXPLAIN_APIKEY"),
+})
 
 ```
 
@@ -167,25 +168,21 @@ const result = await client.QueryAnalysi().load({ id: 'test01' })
 ### Python
 
 ```python
-client = MysqlVisualExplainSDK.test(None, None)
-result, err = client.QueryAnalysi(None).load(
-    {"id": "test01"}, None
-)
+client = MysqlVisualExplainSDK.test()
+result, err = client.QueryAnalysi().load({"id": "test01"})
 ```
 
 ### PHP
 
 ```php
-$client = MysqlVisualExplainSDK::test(null, null);
-[$result, $err] = $client->QueryAnalysi(null)->load(
-    ["id" => "test01"], null
-);
+$client = MysqlVisualExplainSDK::test();
+[$result, $err] = $client->QueryAnalysi()->load(["id" => "test01"]);
 ```
 
 ### Golang
 
 ```go
-client := sdk.TestSDK(nil, nil)
+client := sdk.Test()
 result, err := client.QueryAnalysi(nil).Load(
     map[string]any{"id": "test01"}, nil,
 )
@@ -194,19 +191,15 @@ result, err := client.QueryAnalysi(nil).Load(
 ### Ruby
 
 ```ruby
-client = MysqlVisualExplainSDK.test(nil, nil)
-result, err = client.QueryAnalysi(nil).load(
-  { "id" => "test01" }, nil
-)
+client = MysqlVisualExplainSDK.test
+result, err = client.QueryAnalysi().load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
-local client = sdk.test(nil, nil)
-local result, err = client:QueryAnalysi(nil):load(
-  { id = "test01" }, nil
-)
+local client = sdk.test()
+local result, err = client:QueryAnalysi():load({ id = "test01" })
 ```
 
 ## How it works
@@ -310,10 +303,6 @@ local result, err = client:direct({
 - [Golang](go/README.md)
 - [Ruby](rb/README.md)
 - [Lua](lua/README.md)
-
-## Using the MySQL Visual Explain
-
-- Upstream: [https://mysqlexplain.com](https://mysqlexplain.com)
 
 ---
 
