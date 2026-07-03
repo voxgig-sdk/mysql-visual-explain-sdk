@@ -10,7 +10,7 @@ The Lua SDK for the MysqlVisualExplain API — an entity-oriented client using L
 
 ## Install
 ```bash
-luarocks install mysql-visual-explain-sdk
+luarocks install voxgig-sdk-mysql-visual-explain
 ```
 
 If the module is not yet published, add the source directory to

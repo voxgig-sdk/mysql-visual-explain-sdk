@@ -10,7 +10,7 @@ The Python SDK for the MysqlVisualExplain API — an entity-oriented client foll
 
 ## Install
 ```bash
-pip install mysql-visual-explain-sdk
+pip install voxgig-sdk-mysql-visual-explain
 ```
 
 Or install from source:

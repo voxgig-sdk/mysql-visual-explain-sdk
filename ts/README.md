@@ -10,7 +10,7 @@ The TypeScript SDK for the MysqlVisualExplain API — a type-safe, entity-orient
 
 ## Install
 ```bash
-npm install mysql-visual-explain
+npm install @voxgig-sdk/mysql-visual-explain
 ```
 ## Tutorial: your first API call
 

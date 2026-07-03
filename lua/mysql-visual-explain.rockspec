@@ -8,12 +8,14 @@ source = {
   dir = "mysql-visual-explain-sdk/lua"
 }
 description = {
-  summary = "MysqlVisualExplain SDK for Lua",
-  license = "MIT"
+  summary = "Unofficial generated Lua SDK for the MySQL Visual Explain public API. Not affiliated with or endorsed by the upstream API provider.",
+  homepage = "https://github.com/voxgig-sdk/mysql-visual-explain-sdk",
+  issues_url = "https://github.com/voxgig-sdk/mysql-visual-explain-sdk/issues",
+  license = "MIT",
+  labels = { "voxgig", "sdk", "generated-sdk", "openapi", "api-client", "mysql-visual-explain" }
 }
 dependencies = {
   "lua >= 5.3",
-  "dkjson >= 2.5",
   "dkjson >= 2.5",
 }
 build = {

@@ -10,13 +10,13 @@ The Ruby SDK for the MysqlVisualExplain API — an entity-oriented client using 
 
 ## Install
 ```bash
-gem install mysql-visual-explain-sdk
+gem install voxgig-sdk-mysql-visual-explain
 ```
 
 Or add to your `Gemfile`:
 
 ```ruby
-gem "mysql-visual-explain-sdk"
+gem "voxgig-sdk-mysql-visual-explain"
 ```
 
 Then run:

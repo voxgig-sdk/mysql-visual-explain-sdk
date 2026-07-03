@@ -10,7 +10,7 @@ The PHP SDK for the MysqlVisualExplain API — an entity-oriented client using P
 
 ## Install
 ```bash
-composer require voxgig/mysql-visual-explain-sdk
+composer require voxgig-sdk/mysql-visual-explain
 ```
 
 
