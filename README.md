@@ -129,22 +129,27 @@ in-memory mock, so unit tests run offline.
 
 ```ts
 const client = MysqlVisualExplainSDK.test()
-const result = await client.queryanalysi.load({ id: 'test01' })
-// result.ok === true, result.data contains mock data
+const queryanalysi = await client.QueryAnalysi().load({ id: 'test01' })
+// queryanalysi is a bare QueryAnalysi populated with mock data
+console.log(queryanalysi)
 ```
 
 ### Python
 
 ```python
 client = MysqlVisualExplainSDK.test()
-result = client.queryanalysi.load({"id": "test01"})
+queryanalysi = client.QueryAnalysi().load({"id": "test01"})
+print(queryanalysi)
 ```
 
 ### PHP
 
 ```php
-$client = MysqlVisualExplainSDK::test();
-$result = $client->queryanalysi()->load(["id" => "test01"]);
+// Seed fixture data so offline calls resolve without a live server.
+$client = MysqlVisualExplainSDK::test([
+    "entity" => ["queryanalysi" => ["test01" => ["id" => "test01"]]],
+]);
+$queryanalysi = $client->QueryAnalysi()->load(["id" => "test01"]);
 ```
 
 ### Golang
@@ -159,15 +164,18 @@ result, err := client.QueryAnalysi(nil).Load(
 ### Ruby
 
 ```ruby
-client = MysqlVisualExplainSDK.test
-result = client.queryanalysi.load({ "id" => "test01" })
+# Seed fixture data so offline calls resolve without a live server.
+client = MysqlVisualExplainSDK.test({
+  "entity" => { "queryanalysi" => { "test01" => { "id" => "test01" } } },
+})
+queryanalysi = client.QueryAnalysi.load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
 local client = sdk.test()
-local result, err = client:queryanalysi():load({ id = "test01" })
+local result, err = client:QueryAnalysi():load({ id = "test01" })
 ```
 
 ## How it works
@@ -215,6 +223,9 @@ const result = await client.direct({
   method: 'GET',
   params: { id: 'example' },
 })
+if (result instanceof Error) {
+  throw result
+}
 console.log(result.data)
 ```
 

@@ -31,8 +31,8 @@ const client = new MysqlVisualExplainSDK()
 ### 4. Create, update, and remove
 
 ```ts
-// Create
-const created = await client.queryanalysi.create({
+// Create — returns the created QueryAnalysi
+const created = await client.QueryAnalysi().create({
   name: 'Example',
 })
 
@@ -52,6 +52,9 @@ const result = await client.direct({
   params: { id: 'example' },
 })
 
+if (result instanceof Error) {
+  throw result
+}
 if (result.ok) {
   console.log(result.status)  // 200
   console.log(result.data)    // response body
@@ -80,9 +83,9 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = MysqlVisualExplainSDK.test()
 
-const result = await client.queryanalysi.load({ id: 'test01' })
-// result.ok === true
-// result.data contains mock response data
+const queryanalysi = await client.QueryAnalysi().load({ id: 'test01' })
+// queryanalysi is a bare entity populated with mock response data
+console.log(queryanalysi)
 ```
 
 You can also use the instance method:
@@ -97,7 +100,7 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.queryanalysi
+const entity = client.QueryAnalysi()
 
 // First call sets internal match
 await entity.load({ id: 'example' })
@@ -193,29 +196,30 @@ All entities share the same interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `load` | `load(reqmatch?, ctrl?): Promise<Result>` | Load a single entity by match criteria. |
-| `list` | `list(reqmatch?, ctrl?): Promise<Result>` | List entities matching the criteria. |
-| `create` | `create(reqdata?, ctrl?): Promise<Result>` | Create a new entity. |
-| `update` | `update(reqdata?, ctrl?): Promise<Result>` | Update an existing entity. |
-| `remove` | `remove(reqmatch?, ctrl?): Promise<Result>` | Remove an entity. |
+| `load` | `load(reqmatch?, ctrl?): Promise<Entity>` | Load a single entity by match criteria. |
+| `list` | `list(reqmatch?, ctrl?): Promise<Entity[]>` | List entities matching the criteria. |
+| `create` | `create(reqdata?, ctrl?): Promise<Entity>` | Create a new entity. |
+| `update` | `update(reqdata?, ctrl?): Promise<Entity>` | Update an existing entity. |
+| `remove` | `remove(reqmatch?, ctrl?): Promise<void>` | Remove an entity. |
 | `data` | `data(data?): any` | Get or set entity data. |
 | `match` | `match(match?): any` | Get or set entity match criteria. |
 | `make` | `make(): Entity` | Create a new instance with the same options. |
 | `client` | `client(): MysqlVisualExplainSDK` | Return the parent SDK client. |
 | `entopts` | `entopts(): object` | Return a copy of the entity options. |
 
-#### Result shape
+#### Return values
 
-All entity operations return a Result object:
+Entity operations resolve to the entity data directly — there is no
+result envelope:
 
-```ts
-{
-  ok: boolean      // true if the HTTP status is 2xx
-  status: number   // HTTP status code
-  headers: object  // response headers
-  data: any        // parsed JSON response body
-}
-```
+- `load`, `create` and `update` resolve to a single entity object.
+- `list` resolves to an **array** of entity objects (iterate it directly;
+  there is no `.data` and no `.ok`).
+- `remove` resolves to `void`.
+
+On a failed request these methods **throw**, so wrap calls in
+`try`/`catch` to handle errors. Only `direct()` returns the result
+envelope described below.
 
 ### DirectResult shape
 
@@ -279,7 +283,7 @@ API path: `/api/version`
 
 ### QueryAnalysi
 
-Create an instance: `const query_analysi = client.query_analysi`
+Create an instance: `const query_analysi = client.QueryAnalysi()`
 
 #### Operations
 
@@ -300,7 +304,7 @@ Create an instance: `const query_analysi = client.query_analysi`
 #### Example: Create
 
 ```ts
-const query_analysi = await client.query_analysi.create({
+const query_analysi = await client.QueryAnalysi().create({
   query: /* `$STRING` */,
 })
 ```
@@ -308,7 +312,7 @@ const query_analysi = await client.query_analysi.create({
 
 ### SystemInfo
 
-Create an instance: `const system_info = client.system_info`
+Create an instance: `const system_info = client.SystemInfo()`
 
 #### Operations
 
@@ -326,7 +330,7 @@ Create an instance: `const system_info = client.system_info`
 #### Example: Load
 
 ```ts
-const system_info = await client.system_info.load({ id: 'system_info_id' })
+const system_info = await client.SystemInfo().load({ id: 'system_info_id' })
 ```
 
 
@@ -397,7 +401,7 @@ stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const queryanalysi = client.queryanalysi
+const queryanalysi = client.QueryAnalysi()
 await queryanalysi.load({ id: "example_id" })
 
 // queryanalysi.data() now returns the loaded queryanalysi data

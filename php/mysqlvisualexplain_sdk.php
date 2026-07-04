@@ -233,10 +233,10 @@ class MysqlVisualExplainSDK
 
     private $_query_analysi = null;
 
-    // Idiomatic facade: $client->query_analysi()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias QueryAnalysi() (PHP method
-    // names are case-insensitive).
-    public function query_analysi($data = null)
+    // Canonical facade: $client->QueryAnalysi()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->query_analysi()
+    // resolves here too.
+    public function QueryAnalysi($data = null)
     {
         require_once __DIR__ . '/entity/query_analysi_entity.php';
         if ($data === null) {
@@ -251,10 +251,10 @@ class MysqlVisualExplainSDK
 
     private $_system_info = null;
 
-    // Idiomatic facade: $client->system_info()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias SystemInfo() (PHP method
-    // names are case-insensitive).
-    public function system_info($data = null)
+    // Canonical facade: $client->SystemInfo()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->system_info()
+    // resolves here too.
+    public function SystemInfo($data = null)
     {
         require_once __DIR__ . '/entity/system_info_entity.php';
         if ($data === null) {

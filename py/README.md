@@ -34,8 +34,8 @@ client = MysqlVisualExplainSDK()
 ### 4. Create, update, and remove
 
 ```python
-# Create
-created = client.queryanalysi.create({"name": "Example"})
+# Create — returns the bare created record (a dict)
+created = client.QueryAnalysi().create({"name": "Example"})
 
 ```
 
@@ -82,8 +82,9 @@ Create a mock client for unit testing — no server required:
 ```python
 client = MysqlVisualExplainSDK.test()
 
-result = client.queryanalysi.load({"id": "test01"})
-# result contains mock response data
+# Entity ops return the bare record and raise on error.
+queryanalysi = client.QueryAnalysi().load({"id": "test01"})
+# queryanalysi contains the mock response record
 ```
 
 ### Use a custom fetch function
@@ -232,7 +233,7 @@ API path: `/api/version`
 
 ### QueryAnalysi
 
-Create an instance: `const query_analysi = client.query_analysi`
+Create an instance: `query_analysi = client.QueryAnalysi()`
 
 #### Operations
 
@@ -252,16 +253,16 @@ Create an instance: `const query_analysi = client.query_analysi`
 
 #### Example: Create
 
-```ts
-const query_analysi = await client.query_analysi.create({
-  query: /* `$STRING` */,
+```python
+query_analysi = client.QueryAnalysi().create({
+    "query": ...,  # `$STRING`
 })
 ```
 
 
 ### SystemInfo
 
-Create an instance: `const system_info = client.system_info`
+Create an instance: `system_info = client.SystemInfo()`
 
 #### Operations
 
@@ -278,8 +279,8 @@ Create an instance: `const system_info = client.system_info`
 
 #### Example: Load
 
-```ts
-const system_info = await client.system_info.load({ id: 'system_info_id' })
+```python
+system_info = client.SystemInfo().load({"id": "system_info_id"})
 ```
 
 
@@ -353,7 +354,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```python
-queryanalysi = client.queryanalysi
+queryanalysi = client.QueryAnalysi()
 queryanalysi.load({"id": "example_id"})
 
 # queryanalysi.data_get() now returns the loaded queryanalysi data

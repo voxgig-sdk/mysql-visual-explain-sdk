@@ -90,7 +90,7 @@ same parameters as `direct()`. Raises on error.
 ## QueryAnalysiEntity
 
 ```ruby
-query_analysi = client.query_analysi
+query_analysi = client.QueryAnalysi
 ```
 
 ### Fields
@@ -110,7 +110,7 @@ query_analysi = client.query_analysi
 Create a new entity with the given data. Raises on error.
 
 ```ruby
-result = client.query_analysi.create({
+result = client.QueryAnalysi.create({
   "query" => # `$STRING`,
 })
 ```
@@ -148,7 +148,7 @@ Return the entity name.
 ## SystemInfoEntity
 
 ```ruby
-system_info = client.system_info
+system_info = client.SystemInfo
 ```
 
 ### Fields
@@ -165,7 +165,7 @@ system_info = client.system_info
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.system_info.load({ "id" => "system_info_id" })
+result = client.SystemInfo.load({ "id" => "system_info_id" })
 ```
 
 ### Common Methods

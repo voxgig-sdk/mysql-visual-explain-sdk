@@ -220,41 +220,21 @@ class MysqlVisualExplainSDK:
         }
 
 
-    @property
-    def query_analysi(self):
-        """Idiomatic facade: client.query_analysi.list() / client.query_analysi.load({"id": ...})."""
-        from entity.query_analysi_entity import QueryAnalysiEntity
-        cached = getattr(self, "_query_analysi", None)
-        if cached is None:
-            cached = QueryAnalysiEntity(self, None)
-            self._query_analysi = cached
-        return cached
-
-    def QueryAnalysi(self, data=None):
-        # Deprecated: use client.query_analysi instead.
+    def QueryAnalysi(self, data=None) -> "QueryAnalysiEntity":
+        """Entity factory: client.QueryAnalysi().list({}) / client.QueryAnalysi().load({"id": ...})."""
         from entity.query_analysi_entity import QueryAnalysiEntity
         return QueryAnalysiEntity(self, data)
 
 
-    @property
-    def system_info(self):
-        """Idiomatic facade: client.system_info.list() / client.system_info.load({"id": ...})."""
-        from entity.system_info_entity import SystemInfoEntity
-        cached = getattr(self, "_system_info", None)
-        if cached is None:
-            cached = SystemInfoEntity(self, None)
-            self._system_info = cached
-        return cached
-
-    def SystemInfo(self, data=None):
-        # Deprecated: use client.system_info instead.
+    def SystemInfo(self, data=None) -> "SystemInfoEntity":
+        """Entity factory: client.SystemInfo().list({}) / client.SystemInfo().load({"id": ...})."""
         from entity.system_info_entity import SystemInfoEntity
         return SystemInfoEntity(self, data)
 
 
 
     @classmethod
-    def test(cls, testopts=None, sdkopts=None):
+    def test(cls, testopts=None, sdkopts=None) -> "MysqlVisualExplainSDK":
         if sdkopts is None:
             sdkopts = {}
         sdkopts = vs.clone(sdkopts)
@@ -274,3 +254,10 @@ class MysqlVisualExplainSDK:
         sdk.mode = "test"
 
         return sdk
+
+
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from entity.query_analysi_entity import QueryAnalysiEntity
+    from entity.system_info_entity import SystemInfoEntity

@@ -208,26 +208,14 @@ class MysqlVisualExplainSDK
   end
 
 
-  # Idiomatic facade: client.query_analysi.list / client.query_analysi.load({ "id" => ... })
-  def query_analysi
-    require_relative 'entity/query_analysi_entity'
-    @query_analysi ||= QueryAnalysiEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.query_analysi instead.
+  # Canonical facade: client.QueryAnalysi.list / client.QueryAnalysi.load({ "id" => ... })
   def QueryAnalysi(data = nil)
     require_relative 'entity/query_analysi_entity'
     QueryAnalysiEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.system_info.list / client.system_info.load({ "id" => ... })
-  def system_info
-    require_relative 'entity/system_info_entity'
-    @system_info ||= SystemInfoEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.system_info instead.
+  # Canonical facade: client.SystemInfo.list / client.SystemInfo.load({ "id" => ... })
   def SystemInfo(data = nil)
     require_relative 'entity/system_info_entity'
     SystemInfoEntity.new(self, data)

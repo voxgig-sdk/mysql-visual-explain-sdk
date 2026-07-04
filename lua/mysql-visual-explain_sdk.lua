@@ -244,8 +244,9 @@ end
 
 
 
--- Idiomatic facade: client:query_analysi():list() / client:query_analysi():load({ id = ... })
-function MysqlVisualExplainSDK:query_analysi(data)
+-- Idiomatic facade: client:QueryAnalysi():list() / client:QueryAnalysi():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function MysqlVisualExplainSDK:QueryAnalysi(data)
   local EntityMod = require("entity.query_analysi_entity")
   if data == nil then
     if self._query_analysi == nil then
@@ -256,15 +257,10 @@ function MysqlVisualExplainSDK:query_analysi(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:query_analysi() instead.
-function MysqlVisualExplainSDK:QueryAnalysi(data)
-  local EntityMod = require("entity.query_analysi_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:system_info():list() / client:system_info():load({ id = ... })
-function MysqlVisualExplainSDK:system_info(data)
+-- Idiomatic facade: client:SystemInfo():list() / client:SystemInfo():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function MysqlVisualExplainSDK:SystemInfo(data)
   local EntityMod = require("entity.system_info_entity")
   if data == nil then
     if self._system_info == nil then
@@ -272,12 +268,6 @@ function MysqlVisualExplainSDK:system_info(data)
     end
     return self._system_info
   end
-  return EntityMod.new(self, data)
-end
-
--- Deprecated: use client:system_info() instead.
-function MysqlVisualExplainSDK:SystemInfo(data)
-  local EntityMod = require("entity.system_info_entity")
   return EntityMod.new(self, data)
 end
 

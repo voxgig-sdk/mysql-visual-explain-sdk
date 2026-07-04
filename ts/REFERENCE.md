@@ -121,7 +121,7 @@ Alias for `MysqlVisualExplainSDK.test()`.
 ## QueryAnalysiEntity
 
 ```ts
-const query_analysi = client.query_analysi
+const query_analysi = client.QueryAnalysi()
 ```
 
 ### Fields
@@ -141,7 +141,7 @@ const query_analysi = client.query_analysi
 Create a new entity with the given data.
 
 ```ts
-const result = await client.query_analysi.create({
+const result = await client.QueryAnalysi().create({
   query: /* `$STRING` */,
 })
 ```
@@ -177,7 +177,7 @@ Return a copy of the entity options.
 ## SystemInfoEntity
 
 ```ts
-const system_info = client.system_info
+const system_info = client.SystemInfo()
 ```
 
 ### Fields
@@ -194,7 +194,7 @@ const system_info = client.system_info
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.system_info.load({ id: 'system_info_id' })
+const result = await client.SystemInfo().load({ id: 'system_info_id' })
 ```
 
 ### Common Methods

@@ -84,7 +84,7 @@ Prepare a fetch definition without sending. Returns the `fetchdef` and raises on
 ## QueryAnalysiEntity
 
 ```python
-query_analysi = client.query_analysi
+query_analysi = client.QueryAnalysi()
 ```
 
 ### Fields
@@ -104,8 +104,8 @@ query_analysi = client.query_analysi
 Create a new entity with the given data. Returns the created entity data and raises on error.
 
 ```python
-result = client.query_analysi.create({
-    "query": # `$STRING`,
+result = client.QueryAnalysi().create({
+    "query": ...,  # `$STRING`
 })
 ```
 
@@ -141,7 +141,7 @@ Return the entity name.
 ## SystemInfoEntity
 
 ```python
-system_info = client.system_info
+system_info = client.SystemInfo()
 ```
 
 ### Fields
@@ -158,7 +158,7 @@ system_info = client.system_info
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.system_info.load({"id": "system_info_id"})
+result = client.SystemInfo().load({"id": "system_info_id"})
 ```
 
 ### Common Methods

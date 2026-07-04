@@ -205,28 +205,14 @@ class MysqlVisualExplainSDK {
 
 
 
-  _query_analysi?: QueryAnalysiEntity
-
-  // Idiomatic facade: `client.query_analysi.list()` / `client.query_analysi.load({ id })`.
-  get query_analysi(): QueryAnalysiEntity {
-    return (this._query_analysi ??= new QueryAnalysiEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.query_analysi` instead. */
+  // Entity access: `client.QueryAnalysi().list()` / `client.QueryAnalysi().load({ id })`.
   QueryAnalysi(data?: any) {
     const self = this
     return new QueryAnalysiEntity(self,data)
   }
 
 
-  _system_info?: SystemInfoEntity
-
-  // Idiomatic facade: `client.system_info.list()` / `client.system_info.load({ id })`.
-  get system_info(): SystemInfoEntity {
-    return (this._system_info ??= new SystemInfoEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.system_info` instead. */
+  // Entity access: `client.SystemInfo().list()` / `client.SystemInfo().load({ id })`.
   SystemInfo(data?: any) {
     const self = this
     return new SystemInfoEntity(self,data)

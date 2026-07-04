@@ -87,7 +87,7 @@ same parameters as `direct()`.
 ## QueryAnalysiEntity
 
 ```lua
-local query_analysi = client:query_analysi(nil)
+local query_analysi = client:QueryAnalysi(nil)
 ```
 
 ### Fields
@@ -107,7 +107,7 @@ local query_analysi = client:query_analysi(nil)
 Create a new entity with the given data.
 
 ```lua
-local result, err = client:query_analysi():create({
+local result, err = client:QueryAnalysi():create({
   query = --[[ `$STRING` ]],
 })
 ```
@@ -145,7 +145,7 @@ Return the entity name.
 ## SystemInfoEntity
 
 ```lua
-local system_info = client:system_info(nil)
+local system_info = client:SystemInfo(nil)
 ```
 
 ### Fields
@@ -162,7 +162,7 @@ local system_info = client:system_info(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:system_info():load({ id = "system_info_id" })
+local result, err = client:SystemInfo():load({ id = "system_info_id" })
 ```
 
 ### Common Methods

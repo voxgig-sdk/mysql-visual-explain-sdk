@@ -32,8 +32,8 @@ $client = new MysqlVisualExplainSDK();
 ### 4. Create, update, and remove
 
 ```php
-// Create
-$created = $client->queryanalysi()->create(["name" => "Example"]);
+// create() returns the bare created QueryAnalysi record.
+$created = $client->QueryAnalysi()->create(["name" => "Example"]);
 
 ```
 
@@ -78,13 +78,17 @@ print_r($fetchdef["headers"]);
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required:
+Create a mock client for unit testing — no server required. Seed fixture
+data via the `entity` option so offline calls resolve without a live server:
 
 ```php
-$client = MysqlVisualExplainSDK::test();
+$client = MysqlVisualExplainSDK::test([
+    "entity" => ["queryanalysi" => ["test01" => ["id" => "test01"]]],
+]);
 
-$result = $client->queryanalysi()->load(["id" => "test01"]);
-// $result contains mock response data
+// load() returns the bare mock record (throws on error).
+$queryanalysi = $client->QueryAnalysi()->load(["id" => "test01"]);
+print_r($queryanalysi);
 ```
 
 ### Use a custom fetch function
@@ -236,7 +240,7 @@ API path: `/api/version`
 
 ### QueryAnalysi
 
-Create an instance: `const query_analysi = client.query_analysi`
+Create an instance: `$query_analysi = $client->QueryAnalysi();`
 
 #### Operations
 
@@ -256,16 +260,16 @@ Create an instance: `const query_analysi = client.query_analysi`
 
 #### Example: Create
 
-```ts
-const query_analysi = await client.query_analysi.create({
-  query: /* `$STRING` */,
-})
+```php
+$query_analysi = $client->QueryAnalysi()->create([
+    "query" => null, // `$STRING`
+]);
 ```
 
 
 ### SystemInfo
 
-Create an instance: `const system_info = client.system_info`
+Create an instance: `$system_info = $client->SystemInfo();`
 
 #### Operations
 
@@ -282,8 +286,9 @@ Create an instance: `const system_info = client.system_info`
 
 #### Example: Load
 
-```ts
-const system_info = await client.system_info.load({ id: 'system_info_id' })
+```php
+// load() returns the bare SystemInfo record (throws on error).
+$system_info = $client->SystemInfo()->load(["id" => "system_info_id"]);
 ```
 
 
@@ -358,7 +363,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```php
-$queryanalysi = $client->queryanalysi();
+$queryanalysi = $client->QueryAnalysi();
 $queryanalysi->load(["id" => "example_id"]);
 
 // $queryanalysi->dataGet() now returns the loaded queryanalysi data
