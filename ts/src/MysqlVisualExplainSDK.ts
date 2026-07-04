@@ -3,6 +3,8 @@
 import { QueryAnalysiEntity } from './entity/QueryAnalysiEntity'
 import { SystemInfoEntity } from './entity/SystemInfoEntity'
 
+export type * from './MysqlVisualExplainTypes'
+
 
 import { inspect } from 'node:util'
 
@@ -203,12 +205,28 @@ class MysqlVisualExplainSDK {
 
 
 
+  _query_analysi?: QueryAnalysiEntity
+
+  // Idiomatic facade: `client.query_analysi.list()` / `client.query_analysi.load({ id })`.
+  get query_analysi(): QueryAnalysiEntity {
+    return (this._query_analysi ??= new QueryAnalysiEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.query_analysi` instead. */
   QueryAnalysi(data?: any) {
     const self = this
     return new QueryAnalysiEntity(self,data)
   }
 
 
+  _system_info?: SystemInfoEntity
+
+  // Idiomatic facade: `client.system_info.list()` / `client.system_info.load({ id })`.
+  get system_info(): SystemInfoEntity {
+    return (this._system_info ??= new SystemInfoEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.system_info` instead. */
   SystemInfo(data?: any) {
     const self = this
     return new SystemInfoEntity(self,data)

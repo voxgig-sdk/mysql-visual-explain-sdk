@@ -36,8 +36,7 @@ class QueryAnalysiEntityTest < Minitest::Test
     query_analysi_ref01_data = Helpers.to_map(Vs.getprop(
       Vs.getpath(setup[:data], "new.query_analysi"), "query_analysi_ref01"))
 
-    query_analysi_ref01_data_result, err = query_analysi_ref01_ent.create(query_analysi_ref01_data, nil)
-    assert_nil err
+    query_analysi_ref01_data_result = query_analysi_ref01_ent.create(query_analysi_ref01_data, nil)
     query_analysi_ref01_data = Helpers.to_map(query_analysi_ref01_data_result)
     assert !query_analysi_ref01_data.nil?
 
@@ -77,7 +76,6 @@ def query_analysi_basic_setup(extra)
     "MYSQLVISUALEXPLAIN_TEST_QUERY_ANALYSI_ENTID" => idmap,
     "MYSQLVISUALEXPLAIN_TEST_LIVE" => "FALSE",
     "MYSQLVISUALEXPLAIN_TEST_EXPLAIN" => "FALSE",
-    "MYSQLVISUALEXPLAIN_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -89,7 +87,6 @@ def query_analysi_basic_setup(extra)
   if env["MYSQLVISUALEXPLAIN_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["MYSQLVISUALEXPLAIN_APIKEY"],
       },
       extra || {},
     ])

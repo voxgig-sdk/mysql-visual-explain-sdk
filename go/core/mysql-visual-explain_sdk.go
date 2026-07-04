@@ -245,11 +245,17 @@ func (sdk *MysqlVisualExplainSDK) Direct(fetchargs map[string]any) (map[string]a
 }
 
 
+// QueryAnalysi returns a QueryAnalysi entity bound to this client.
+// Idiomatic usage: client.QueryAnalysi(nil).List(nil, nil) or
+// client.QueryAnalysi(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *MysqlVisualExplainSDK) QueryAnalysi(data map[string]any) MysqlVisualExplainEntity {
 	return NewQueryAnalysiEntityFunc(sdk, data)
 }
 
 
+// SystemInfo returns a SystemInfo entity bound to this client.
+// Idiomatic usage: client.SystemInfo(nil).List(nil, nil) or
+// client.SystemInfo(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *MysqlVisualExplainSDK) SystemInfo(data map[string]any) MysqlVisualExplainEntity {
 	return NewSystemInfoEntityFunc(sdk, data)
 }

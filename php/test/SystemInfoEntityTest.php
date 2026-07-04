@@ -49,8 +49,7 @@ class SystemInfoEntityTest extends TestCase
         // LOAD
         $system_info_ref01_ent = $client->SystemInfo(null);
         $system_info_ref01_match_dt0 = [];
-        [$system_info_ref01_data_dt0_loaded, $err] = $system_info_ref01_ent->load($system_info_ref01_match_dt0, null);
-        $this->assertNull($err);
+        $system_info_ref01_data_dt0_loaded = $system_info_ref01_ent->load($system_info_ref01_match_dt0, null);
         $this->assertNotNull($system_info_ref01_data_dt0_loaded);
 
     }
@@ -85,7 +84,6 @@ function system_info_basic_setup($extra)
         "MYSQLVISUALEXPLAIN_TEST_SYSTEM_INFO_ENTID" => $idmap,
         "MYSQLVISUALEXPLAIN_TEST_LIVE" => "FALSE",
         "MYSQLVISUALEXPLAIN_TEST_EXPLAIN" => "FALSE",
-        "MYSQLVISUALEXPLAIN_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -97,7 +95,6 @@ function system_info_basic_setup($extra)
     if ($env["MYSQLVISUALEXPLAIN_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["MYSQLVISUALEXPLAIN_APIKEY"],
             ],
             $extra ?? [],
         ]);

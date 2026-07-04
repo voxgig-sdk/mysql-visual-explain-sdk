@@ -9,9 +9,10 @@ The PHP SDK for the MysqlVisualExplain API — an entity-oriented client using P
 
 
 ## Install
-```bash
-composer require voxgig-sdk/mysql-visual-explain
-```
+This package is not yet published to Packagist. Install it from the
+GitHub release tag (`php/vX.Y.Z`):
+
+- Releases: [https://github.com/voxgig-sdk/mysql-visual-explain-sdk/releases](https://github.com/voxgig-sdk/mysql-visual-explain-sdk/releases)
 
 
 ## Tutorial: your first API call
@@ -25,16 +26,14 @@ loading a specific record.
 <?php
 require_once 'mysqlvisualexplain_sdk.php';
 
-$client = new MysqlVisualExplainSDK([
-    "apikey" => getenv("MYSQL-VISUAL-EXPLAIN_APIKEY"),
-]);
+$client = new MysqlVisualExplainSDK();
 ```
 
 ### 4. Create, update, and remove
 
 ```php
 // Create
-[$created, $_] = $client->QueryAnalysi()->create(["name" => "Example"]);
+$created = $client->queryanalysi()->create(["name" => "Example"]);
 
 ```
 
@@ -46,28 +45,31 @@ $client = new MysqlVisualExplainSDK([
 For endpoints not covered by entity methods:
 
 ```php
-[$result, $err] = $client->direct([
+// direct() is the raw-HTTP escape hatch: it returns a result array
+// (it does not throw). Branch on $result["ok"].
+$result = $client->direct([
     "path" => "/api/resource/{id}",
     "method" => "GET",
     "params" => ["id" => "example"],
 ]);
-if ($err) { throw new \Exception($err); }
 
 if ($result["ok"]) {
     echo $result["status"];  // 200
     print_r($result["data"]);  // response body
+} else {
+    echo "Error: " . $result["err"]->getMessage();
 }
 ```
 
 ### Prepare a request without sending it
 
 ```php
-[$fetchdef, $err] = $client->prepare([
+// prepare() throws on error and returns the fetch definition.
+$fetchdef = $client->prepare([
     "path" => "/api/resource/{id}",
     "method" => "DELETE",
     "params" => ["id" => "example"],
 ]);
-if ($err) { throw new \Exception($err); }
 
 echo $fetchdef["url"];
 echo $fetchdef["method"];
@@ -81,7 +83,7 @@ Create a mock client for unit testing — no server required:
 ```php
 $client = MysqlVisualExplainSDK::test();
 
-[$result, $err] = $client->MysqlVisualExplain()->load(["id" => "test01"]);
+$result = $client->queryanalysi()->load(["id" => "test01"]);
 // $result contains mock response data
 ```
 
@@ -115,8 +117,7 @@ $client = new MysqlVisualExplainSDK([
 Create a `.env.local` file at the project root:
 
 ```
-MYSQL-VISUAL-EXPLAIN_TEST_LIVE=TRUE
-MYSQL-VISUAL-EXPLAIN_APIKEY=<your-key>
+MYSQL_VISUAL_EXPLAIN_TEST_LIVE=TRUE
 ```
 
 Then run:
@@ -139,7 +140,6 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `string` | API key for authentication. |
 | `base` | `string` | Base URL of the API server. |
 | `prefix` | `string` | URL path prefix prepended to all requests. |
 | `suffix` | `string` | URL path suffix appended to all requests. |
@@ -186,8 +186,12 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return `[$result, $err]`. The first value is an
-`array` with these keys:
+Entity operations return the bare result data (an `array` for single-entity
+ops, a `list` for `list`) and throw on error. Wrap calls in
+`try`/`catch` to handle failures.
+
+The `direct()` escape hatch never throws — it returns a result `array`
+you branch on via `$result["ok"]`:
 
 | Key | Type | Description |
 | --- | --- | --- |
@@ -232,7 +236,7 @@ API path: `/api/version`
 
 ### QueryAnalysi
 
-Create an instance: `const query_analysi = client.QueryAnalysi()`
+Create an instance: `const query_analysi = client.query_analysi`
 
 #### Operations
 
@@ -253,7 +257,7 @@ Create an instance: `const query_analysi = client.QueryAnalysi()`
 #### Example: Create
 
 ```ts
-const query_analysi = await client.QueryAnalysi().create({
+const query_analysi = await client.query_analysi.create({
   query: /* `$STRING` */,
 })
 ```
@@ -261,7 +265,7 @@ const query_analysi = await client.QueryAnalysi().create({
 
 ### SystemInfo
 
-Create an instance: `const system_info = client.SystemInfo()`
+Create an instance: `const system_info = client.system_info`
 
 #### Operations
 
@@ -279,7 +283,7 @@ Create an instance: `const system_info = client.SystemInfo()`
 #### Example: Load
 
 ```ts
-const system_info = await client.SystemInfo().load({ id: 'system_info_id' })
+const system_info = await client.system_info.load({ id: 'system_info_id' })
 ```
 
 
@@ -354,11 +358,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```php
-$moon = $client->Moon();
-[$result, $err] = $moon->load(["planet_id" => "earth", "id" => "luna"]);
+$queryanalysi = $client->queryanalysi();
+$queryanalysi->load(["id" => "example_id"]);
 
-// $moon->dataGet() now returns the loaded moon data
-// $moon->matchGet() returns the last match criteria
+// $queryanalysi->dataGet() now returns the loaded queryanalysi data
+// $queryanalysi->matchGet() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

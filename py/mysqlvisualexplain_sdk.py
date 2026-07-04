@@ -144,16 +144,23 @@ class MysqlVisualExplainSDK:
 
         _, err = utility.prepare_auth(ctx)
         if err is not None:
-            return None, err
+            raise err
 
-        return utility.make_fetch_def(ctx)
+        fetchdef, err = utility.make_fetch_def(ctx)
+        if err is not None:
+            raise err
+
+        return fetchdef
 
     def direct(self, fetchargs=None):
         utility = self._utility
 
-        fetchdef, err = self.prepare(fetchargs)
-        if err is not None:
-            return {"ok": False, "err": err}, None
+        try:
+            fetchdef = self.prepare(fetchargs)
+        except Exception as err:
+            # direct() is the raw-HTTP escape hatch: it never raises, it
+            # returns a result object callers branch on via result["ok"].
+            return {"ok": False, "err": err}
 
         if fetchargs is None:
             fetchargs = {}
@@ -170,13 +177,13 @@ class MysqlVisualExplainSDK:
         fetched, fetch_err = utility.fetcher(ctx, url, fetchdef)
 
         if fetch_err is not None:
-            return {"ok": False, "err": fetch_err}, None
+            return {"ok": False, "err": fetch_err}
 
         if fetched is None:
             return {
                 "ok": False,
                 "err": ctx.make_error("direct_no_response", "response: undefined"),
-            }, None
+            }
 
         if isinstance(fetched, dict):
             status = helpers.to_int(vs.getprop(fetched, "status"))
@@ -205,20 +212,42 @@ class MysqlVisualExplainSDK:
                 "status": status,
                 "headers": headers,
                 "data": json_data,
-            }, None
+            }
 
         return {
             "ok": False,
             "err": ctx.make_error("direct_invalid", "invalid response type"),
-        }, None
+        }
 
+
+    @property
+    def query_analysi(self):
+        """Idiomatic facade: client.query_analysi.list() / client.query_analysi.load({"id": ...})."""
+        from entity.query_analysi_entity import QueryAnalysiEntity
+        cached = getattr(self, "_query_analysi", None)
+        if cached is None:
+            cached = QueryAnalysiEntity(self, None)
+            self._query_analysi = cached
+        return cached
 
     def QueryAnalysi(self, data=None):
+        # Deprecated: use client.query_analysi instead.
         from entity.query_analysi_entity import QueryAnalysiEntity
         return QueryAnalysiEntity(self, data)
 
 
+    @property
+    def system_info(self):
+        """Idiomatic facade: client.system_info.list() / client.system_info.load({"id": ...})."""
+        from entity.system_info_entity import SystemInfoEntity
+        cached = getattr(self, "_system_info", None)
+        if cached is None:
+            cached = SystemInfoEntity(self, None)
+            self._system_info = cached
+        return cached
+
     def SystemInfo(self, data=None):
+        # Deprecated: use client.system_info instead.
         from entity.system_info_entity import SystemInfoEntity
         return SystemInfoEntity(self, data)
 

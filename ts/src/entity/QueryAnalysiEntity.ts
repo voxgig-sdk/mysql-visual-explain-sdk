@@ -14,9 +14,13 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  QueryAnalysi,
+  QueryAnalysiCreateData,
+} from '../MysqlVisualExplainTypes'
 
 // TODO: needs Entity superclass
-class QueryAnalysiEntity extends MysqlVisualExplainEntityBase {
+class QueryAnalysiEntity extends MysqlVisualExplainEntityBase<QueryAnalysi> {
 
   constructor(client: MysqlVisualExplainSDK, entopts: any) {
     super(client, entopts)
@@ -34,7 +38,7 @@ class QueryAnalysiEntity extends MysqlVisualExplainEntityBase {
 
 
 
-  async create(this: any, reqdata?: any, ctrl?: Control) {
+  async create(this: any, reqdata?: QueryAnalysiCreateData, ctrl?: Control): Promise<QueryAnalysi> {
 
     const utility = this._utility
     const {
@@ -133,7 +137,9 @@ class QueryAnalysiEntity extends MysqlVisualExplainEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<QueryAnalysi> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

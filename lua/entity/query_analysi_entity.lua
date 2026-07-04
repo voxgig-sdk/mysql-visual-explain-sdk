@@ -83,6 +83,10 @@ end
 
 
 
+---@param reqdata QueryAnalysiCreateData
+---@param ctrl? table
+---@return QueryAnalysi
+---@return string? err
 function QueryAnalysiEntity:create(reqdata, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

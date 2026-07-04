@@ -103,7 +103,7 @@ class MysqlVisualExplainSDK
         return $this->_rootctx;
     }
 
-    public function prepare(array $fetchargs = []): array
+    public function prepare(array $fetchargs = []): mixed
     {
         $utility = $this->_utility;
         $fetchargs = $fetchargs ?? [];
@@ -149,19 +149,27 @@ class MysqlVisualExplainSDK
 
         [$_, $err] = ($utility->prepare_auth)($ctx);
         if ($err) {
-            return [null, $err];
+            return ($utility->make_error)($ctx, $err);
         }
 
-        return ($utility->make_fetch_def)($ctx);
+        [$fetchdef, $fd_err] = ($utility->make_fetch_def)($ctx);
+        if ($fd_err) {
+            return ($utility->make_error)($ctx, $fd_err);
+        }
+        return $fetchdef;
     }
 
-    public function direct(array $fetchargs = []): array
+    public function direct(array $fetchargs = []): mixed
     {
         $utility = $this->_utility;
 
-        [$fetchdef, $err] = $this->prepare($fetchargs);
-        if ($err) {
-            return [["ok" => false, "err" => $err], null];
+        // direct() is the raw-HTTP escape hatch: it never throws, it returns
+        // an {ok, err, ...} dict. prepare() now raises on error, so catch it
+        // and surface the failure through the dict instead.
+        try {
+            $fetchdef = $this->prepare($fetchargs);
+        } catch (\Throwable $err) {
+            return ["ok" => false, "err" => $err];
         }
 
         $fetchargs = $fetchargs ?? [];
@@ -176,14 +184,14 @@ class MysqlVisualExplainSDK
         [$fetched, $fetch_err] = ($utility->fetcher)($ctx, $url, $fetchdef);
 
         if ($fetch_err) {
-            return [["ok" => false, "err" => $fetch_err], null];
+            return ["ok" => false, "err" => $fetch_err];
         }
 
         if ($fetched === null) {
-            return [[
+            return [
                 "ok" => false,
                 "err" => $ctx->make_error("direct_no_response", "response: undefined"),
-            ], null];
+            ];
         }
 
         if (is_array($fetched)) {
@@ -208,31 +216,53 @@ class MysqlVisualExplainSDK
                 }
             }
 
-            return [[
+            return [
                 "ok" => $status >= 200 && $status < 300,
                 "status" => $status,
                 "headers" => Struct::getprop($fetched, "headers"),
                 "data" => $json_data,
-            ], null];
+            ];
         }
 
-        return [[
+        return [
             "ok" => false,
             "err" => $ctx->make_error("direct_invalid", "invalid response type"),
-        ], null];
+        ];
     }
 
 
-    public function QueryAnalysi($data = null)
+    private $_query_analysi = null;
+
+    // Idiomatic facade: $client->query_analysi()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias QueryAnalysi() (PHP method
+    // names are case-insensitive).
+    public function query_analysi($data = null)
     {
         require_once __DIR__ . '/entity/query_analysi_entity.php';
+        if ($data === null) {
+            if ($this->_query_analysi === null) {
+                $this->_query_analysi = new QueryAnalysiEntity($this, null);
+            }
+            return $this->_query_analysi;
+        }
         return new QueryAnalysiEntity($this, $data);
     }
 
 
-    public function SystemInfo($data = null)
+    private $_system_info = null;
+
+    // Idiomatic facade: $client->system_info()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias SystemInfo() (PHP method
+    // names are case-insensitive).
+    public function system_info($data = null)
     {
         require_once __DIR__ . '/entity/system_info_entity.php';
+        if ($data === null) {
+            if ($this->_system_info === null) {
+                $this->_system_info = new SystemInfoEntity($this, null);
+            }
+            return $this->_system_info;
+        }
         return new SystemInfoEntity($this, $data);
     }
 

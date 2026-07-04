@@ -13,6 +13,9 @@ require_relative 'config'
 require_relative 'feature/base_feature'
 require_relative 'features'
 
+# Load typed models (Struct value objects).
+require_relative 'MysqlVisualExplain_types'
+
 
 class MysqlVisualExplainSDK
   attr_accessor :mode, :features, :options
@@ -131,7 +134,7 @@ class MysqlVisualExplainSDK
     end
 
     _, err = utility.prepare_auth.call(ctx)
-    return nil, err if err
+    raise err if err
 
     utility.make_fetch_def.call(ctx)
   end
@@ -139,8 +142,14 @@ class MysqlVisualExplainSDK
   def direct(fetchargs = {})
     utility = @_utility
 
-    fetchdef, err = prepare(fetchargs)
-    return { "ok" => false, "err" => err }, nil if err
+    # direct() is the raw-HTTP escape hatch: it always returns a result hash
+    # ({ "ok" => ..., ... }) and never raises. prepare() raises on error, so
+    # trap that and surface it in the hash.
+    begin
+      fetchdef = prepare(fetchargs)
+    rescue MysqlVisualExplainError => err
+      return { "ok" => false, "err" => err }
+    end
 
     fetchargs ||= {}
     ctrl = MysqlVisualExplainHelpers.to_map(VoxgigStruct.getprop(fetchargs, "ctrl")) || {}
@@ -153,13 +162,13 @@ class MysqlVisualExplainSDK
     url = fetchdef["url"] || ""
     fetched, fetch_err = utility.fetcher.call(ctx, url, fetchdef)
 
-    return { "ok" => false, "err" => fetch_err }, nil if fetch_err
+    return { "ok" => false, "err" => fetch_err } if fetch_err
 
     if fetched.nil?
       return {
         "ok" => false,
         "err" => ctx.make_error("direct_no_response", "response: undefined"),
-      }, nil
+      }
     end
 
     if fetched.is_a?(Hash)
@@ -189,22 +198,36 @@ class MysqlVisualExplainSDK
         "status" => status,
         "headers" => headers,
         "data" => json_data,
-      }, nil
+      }
     end
 
     return {
       "ok" => false,
       "err" => ctx.make_error("direct_invalid", "invalid response type"),
-    }, nil
+    }
   end
 
 
+  # Idiomatic facade: client.query_analysi.list / client.query_analysi.load({ "id" => ... })
+  def query_analysi
+    require_relative 'entity/query_analysi_entity'
+    @query_analysi ||= QueryAnalysiEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.query_analysi instead.
   def QueryAnalysi(data = nil)
     require_relative 'entity/query_analysi_entity'
     QueryAnalysiEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.system_info.list / client.system_info.load({ "id" => ... })
+  def system_info
+    require_relative 'entity/system_info_entity'
+    @system_info ||= SystemInfoEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.system_info instead.
   def SystemInfo(data = nil)
     require_relative 'entity/system_info_entity'
     SystemInfoEntity.new(self, data)

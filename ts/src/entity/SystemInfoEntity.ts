@@ -14,9 +14,13 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  SystemInfo,
+  SystemInfoLoadMatch,
+} from '../MysqlVisualExplainTypes'
 
 // TODO: needs Entity superclass
-class SystemInfoEntity extends MysqlVisualExplainEntityBase {
+class SystemInfoEntity extends MysqlVisualExplainEntityBase<SystemInfo> {
 
   constructor(client: MysqlVisualExplainSDK, entopts: any) {
     super(client, entopts)
@@ -32,7 +36,7 @@ class SystemInfoEntity extends MysqlVisualExplainEntityBase {
 
 
 
-  async load(this: any, reqmatch?: any, ctrl?: Control) {
+  async load(this: any, reqmatch?: SystemInfoLoadMatch, ctrl?: Control): Promise<SystemInfo> {
 
     const utility = this._utility
 
@@ -136,7 +140,9 @@ class SystemInfoEntity extends MysqlVisualExplainEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<SystemInfo> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

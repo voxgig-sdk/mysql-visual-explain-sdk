@@ -44,9 +44,7 @@ class TestQueryAnalysiEntity:
         query_analysi_ref01_data = helpers.to_map(vs.getprop(
             vs.getpath(setup["data"], "new.query_analysi"), "query_analysi_ref01"))
 
-        query_analysi_ref01_data_result, err = query_analysi_ref01_ent.create(query_analysi_ref01_data, None)
-        assert err is None
-        query_analysi_ref01_data = helpers.to_map(query_analysi_ref01_data_result)
+        query_analysi_ref01_data = helpers.to_map(query_analysi_ref01_ent.create(query_analysi_ref01_data, None))
         assert query_analysi_ref01_data is not None
 
 
@@ -87,7 +85,6 @@ def _query_analysi_basic_setup(extra):
         "MYSQLVISUALEXPLAIN_TEST_QUERY_ANALYSI_ENTID": idmap,
         "MYSQLVISUALEXPLAIN_TEST_LIVE": "FALSE",
         "MYSQLVISUALEXPLAIN_TEST_EXPLAIN": "FALSE",
-        "MYSQLVISUALEXPLAIN_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -98,7 +95,6 @@ def _query_analysi_basic_setup(extra):
     if env.get("MYSQLVISUALEXPLAIN_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("MYSQLVISUALEXPLAIN_APIKEY"),
             },
             extra or {},
         ])

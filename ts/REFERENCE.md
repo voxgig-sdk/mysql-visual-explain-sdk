@@ -18,7 +18,6 @@ Create a new SDK client instance.
 | Name | Type | Description |
 | --- | --- | --- |
 | `options` | `object` | SDK configuration options. |
-| `options.apikey` | `string` | API key for authentication. |
 | `options.base` | `string` | Base URL for API requests. |
 | `options.prefix` | `string` | URL prefix appended after base. |
 | `options.suffix` | `string` | URL suffix appended after path. |
@@ -122,7 +121,7 @@ Alias for `MysqlVisualExplainSDK.test()`.
 ## QueryAnalysiEntity
 
 ```ts
-const query_analysi = client.QueryAnalysi()
+const query_analysi = client.query_analysi
 ```
 
 ### Fields
@@ -142,7 +141,7 @@ const query_analysi = client.QueryAnalysi()
 Create a new entity with the given data.
 
 ```ts
-const result = await client.QueryAnalysi().create({
+const result = await client.query_analysi.create({
   query: /* `$STRING` */,
 })
 ```
@@ -178,7 +177,7 @@ Return a copy of the entity options.
 ## SystemInfoEntity
 
 ```ts
-const system_info = client.SystemInfo()
+const system_info = client.system_info
 ```
 
 ### Fields
@@ -195,7 +194,7 @@ const system_info = client.SystemInfo()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.SystemInfo().load({ id: 'system_info_id' })
+const result = await client.system_info.load({ id: 'system_info_id' })
 ```
 
 ### Common Methods

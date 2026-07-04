@@ -9,12 +9,9 @@ The Lua SDK for the MysqlVisualExplain API — an entity-oriented client using L
 
 
 ## Install
-```bash
-luarocks install voxgig-sdk-mysql-visual-explain
-```
-
-If the module is not yet published, add the source directory to
-your `LUA_PATH`:
+This package is not yet published to LuaRocks. Install it from the
+GitHub release tag (`lua/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/mysql-visual-explain-sdk/releases)),
+or add the source directory to your `LUA_PATH`:
 
 ```bash
 export LUA_PATH="path/to/lua/?.lua;path/to/lua/?/init.lua;;"
@@ -31,16 +28,14 @@ loading a specific record.
 ```lua
 local sdk = require("mysql-visual-explain_sdk")
 
-local client = sdk.new({
-  apikey = os.getenv("MYSQL-VISUAL-EXPLAIN_APIKEY"),
-})
+local client = sdk.new()
 ```
 
 ### 4. Create, update, and remove
 
 ```lua
 -- Create
-local created, _ = client:QueryAnalysi():create({ name = "Example" })
+local created, _ = client:queryanalysi():create({ name = "Example" })
 
 ```
 
@@ -87,7 +82,7 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:MysqlVisualExplain():load({ id = "test01" })
+local result, err = client:queryanalysi():load({ id = "test01" })
 -- result contains mock response data
 ```
 
@@ -120,8 +115,7 @@ local client = sdk.new({
 Create a `.env.local` file at the project root:
 
 ```
-MYSQL-VISUAL-EXPLAIN_TEST_LIVE=TRUE
-MYSQL-VISUAL-EXPLAIN_APIKEY=<your-key>
+MYSQL_VISUAL_EXPLAIN_TEST_LIVE=TRUE
 ```
 
 Then run:
@@ -144,7 +138,6 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `string` | API key for authentication. |
 | `base` | `string` | Base URL of the API server. |
 | `prefix` | `string` | URL path prefix prepended to all requests. |
 | `suffix` | `string` | URL path suffix appended to all requests. |
@@ -237,7 +230,7 @@ API path: `/api/version`
 
 ### QueryAnalysi
 
-Create an instance: `const query_analysi = client.QueryAnalysi()`
+Create an instance: `const query_analysi = client.query_analysi`
 
 #### Operations
 
@@ -258,7 +251,7 @@ Create an instance: `const query_analysi = client.QueryAnalysi()`
 #### Example: Create
 
 ```ts
-const query_analysi = await client.QueryAnalysi().create({
+const query_analysi = await client.query_analysi.create({
   query: /* `$STRING` */,
 })
 ```
@@ -266,7 +259,7 @@ const query_analysi = await client.QueryAnalysi().create({
 
 ### SystemInfo
 
-Create an instance: `const system_info = client.SystemInfo()`
+Create an instance: `const system_info = client.system_info`
 
 #### Operations
 
@@ -284,7 +277,7 @@ Create an instance: `const system_info = client.SystemInfo()`
 #### Example: Load
 
 ```ts
-const system_info = await client.SystemInfo().load({ id: 'system_info_id' })
+const system_info = await client.system_info.load({ id: 'system_info_id' })
 ```
 
 
@@ -359,11 +352,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local moon = client:Moon(nil)
-moon:load({ planet_id = "earth", id = "luna" }, nil)
+local queryanalysi = client:queryanalysi()
+queryanalysi:load({ id = "example_id" })
 
--- moon:data_get() now returns the loaded moon data
--- moon:match_get() returns the last match criteria
+-- queryanalysi:data_get() now returns the loaded queryanalysi data
+-- queryanalysi:match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

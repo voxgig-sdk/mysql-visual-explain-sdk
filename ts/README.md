@@ -9,9 +9,12 @@ The TypeScript SDK for the MysqlVisualExplain API — a type-safe, entity-orient
 
 
 ## Install
-```bash
-npm install @voxgig-sdk/mysql-visual-explain
-```
+This package is not yet published to npm. Install it from the GitHub
+release tag (`ts/vX.Y.Z`):
+
+- Releases: [https://github.com/voxgig-sdk/mysql-visual-explain-sdk/releases](https://github.com/voxgig-sdk/mysql-visual-explain-sdk/releases)
+
+
 ## Tutorial: your first API call
 
 This tutorial walks through creating a client, listing entities, and
@@ -20,18 +23,16 @@ loading a specific record.
 ### 1. Create a client
 
 ```ts
-import { MysqlVisualExplainSDK } from 'mysql-visual-explain'
+import { MysqlVisualExplainSDK } from '@voxgig-sdk/mysql-visual-explain'
 
-const client = new MysqlVisualExplainSDK({
-  apikey: process.env.MYSQL-VISUAL-EXPLAIN_APIKEY,
-})
+const client = new MysqlVisualExplainSDK()
 ```
 
 ### 4. Create, update, and remove
 
 ```ts
 // Create
-const created = await client.QueryAnalysi().create({
+const created = await client.queryanalysi.create({
   name: 'Example',
 })
 
@@ -79,7 +80,7 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = MysqlVisualExplainSDK.test()
 
-const result = await client.Planet().load({ id: 'test01' })
+const result = await client.queryanalysi.load({ id: 'test01' })
 // result.ok === true
 // result.data contains mock response data
 ```
@@ -87,7 +88,7 @@ const result = await client.Planet().load({ id: 'test01' })
 You can also use the instance method:
 
 ```ts
-const client = new MysqlVisualExplainSDK({ apikey: '...' })
+const client = new MysqlVisualExplainSDK()
 const testClient = client.tester()
 ```
 
@@ -96,7 +97,7 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.Planet()
+const entity = client.queryanalysi
 
 // First call sets internal match
 await entity.load({ id: 'example' })
@@ -123,7 +124,6 @@ const logger = {
 }
 
 const client = new MysqlVisualExplainSDK({
-  apikey: '...',
   extend: [logger],
 })
 ```
@@ -133,8 +133,7 @@ const client = new MysqlVisualExplainSDK({
 Create a `.env.local` file at the project root:
 
 ```
-MYSQL-VISUAL-EXPLAIN_TEST_LIVE=TRUE
-MYSQL-VISUAL-EXPLAIN_APIKEY=<your-key>
+MYSQL_VISUAL_EXPLAIN_TEST_LIVE=TRUE
 ```
 
 Then run:
@@ -152,7 +151,6 @@ cd ts && npm test
 
 ```ts
 new MysqlVisualExplainSDK(options?: {
-  apikey?: string
   base?: string
   prefix?: string
   suffix?: string
@@ -163,7 +161,6 @@ new MysqlVisualExplainSDK(options?: {
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `string` | API key for authentication. |
 | `base` | `string` | Base URL of the API server. |
 | `prefix` | `string` | URL path prefix prepended to all requests. |
 | `suffix` | `string` | URL path suffix appended to all requests. |
@@ -282,7 +279,7 @@ API path: `/api/version`
 
 ### QueryAnalysi
 
-Create an instance: `const query_analysi = client.QueryAnalysi()`
+Create an instance: `const query_analysi = client.query_analysi`
 
 #### Operations
 
@@ -303,7 +300,7 @@ Create an instance: `const query_analysi = client.QueryAnalysi()`
 #### Example: Create
 
 ```ts
-const query_analysi = await client.QueryAnalysi().create({
+const query_analysi = await client.query_analysi.create({
   query: /* `$STRING` */,
 })
 ```
@@ -311,7 +308,7 @@ const query_analysi = await client.QueryAnalysi().create({
 
 ### SystemInfo
 
-Create an instance: `const system_info = client.SystemInfo()`
+Create an instance: `const system_info = client.system_info`
 
 #### Operations
 
@@ -329,7 +326,7 @@ Create an instance: `const system_info = client.SystemInfo()`
 #### Example: Load
 
 ```ts
-const system_info = await client.SystemInfo().load({ id: 'system_info_id' })
+const system_info = await client.system_info.load({ id: 'system_info_id' })
 ```
 
 
@@ -390,7 +387,7 @@ mysql-visual-explain/
 Import the SDK from the package root:
 
 ```ts
-import { MysqlVisualExplainSDK } from 'mysql-visual-explain'
+import { MysqlVisualExplainSDK } from '@voxgig-sdk/mysql-visual-explain'
 ```
 
 ### Entity state
@@ -400,11 +397,11 @@ stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const moon = client.Moon()
-await moon.load({ planet_id: 'earth', id: 'luna' })
+const queryanalysi = client.queryanalysi
+await queryanalysi.load({ id: "example_id" })
 
-// moon.data() now returns the loaded moon data
-// moon.match() returns { planet_id: 'earth', id: 'luna' }
+// queryanalysi.data() now returns the loaded queryanalysi data
+// queryanalysi.match() returns { id: "example_id" }
 ```
 
 Call `make()` to create a fresh instance with the same configuration

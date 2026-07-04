@@ -42,8 +42,7 @@ class SystemInfoEntityTest < Minitest::Test
     # LOAD
     system_info_ref01_ent = client.SystemInfo(nil)
     system_info_ref01_match_dt0 = {}
-    system_info_ref01_data_dt0_loaded, err = system_info_ref01_ent.load(system_info_ref01_match_dt0, nil)
-    assert_nil err
+    system_info_ref01_data_dt0_loaded = system_info_ref01_ent.load(system_info_ref01_match_dt0, nil)
     assert !system_info_ref01_data_dt0_loaded.nil?
 
   end
@@ -82,7 +81,6 @@ def system_info_basic_setup(extra)
     "MYSQLVISUALEXPLAIN_TEST_SYSTEM_INFO_ENTID" => idmap,
     "MYSQLVISUALEXPLAIN_TEST_LIVE" => "FALSE",
     "MYSQLVISUALEXPLAIN_TEST_EXPLAIN" => "FALSE",
-    "MYSQLVISUALEXPLAIN_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -94,7 +92,6 @@ def system_info_basic_setup(extra)
   if env["MYSQLVISUALEXPLAIN_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["MYSQLVISUALEXPLAIN_APIKEY"],
       },
       extra || {},
     ])
