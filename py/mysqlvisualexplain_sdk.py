@@ -221,13 +221,13 @@ class MysqlVisualExplainSDK:
 
 
     def QueryAnalysi(self, data=None) -> "QueryAnalysiEntity":
-        """Entity factory: client.QueryAnalysi().list({}) / client.QueryAnalysi().load({"id": ...})."""
+        """Entity factory: client.QueryAnalysi().list() / client.QueryAnalysi().load({"id": ...})."""
         from entity.query_analysi_entity import QueryAnalysiEntity
         return QueryAnalysiEntity(self, data)
 
 
     def SystemInfo(self, data=None) -> "SystemInfoEntity":
-        """Entity factory: client.SystemInfo().list({}) / client.SystemInfo().load({"id": ...})."""
+        """Entity factory: client.SystemInfo().list() / client.SystemInfo().load({"id": ...})."""
         from entity.system_info_entity import SystemInfoEntity
         return SystemInfoEntity(self, data)
 

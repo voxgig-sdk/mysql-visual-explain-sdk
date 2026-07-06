@@ -128,11 +128,11 @@ const query_analysi = client.QueryAnalysi()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `explain_output` | ``$OBJECT`` | No |  |
-| `mysql_version` | ``$STRING`` | No |  |
-| `query` | ``$STRING`` | Yes |  |
-| `recommendation` | ``$ARRAY`` | No |  |
-| `visualization` | ``$OBJECT`` | No |  |
+| `explain_output` | `Record<string, any>` | No |  |
+| `mysql_version` | `string` | No |  |
+| `query` | `string` | Yes |  |
+| `recommendation` | `any[]` | No |  |
+| `visualization` | `Record<string, any>` | No |  |
 
 ### Operations
 
@@ -142,7 +142,7 @@ Create a new entity with the given data.
 
 ```ts
 const result = await client.QueryAnalysi().create({
-  query: /* `$STRING` */,
+  query: /* string */,
 })
 ```
 
@@ -184,8 +184,8 @@ const system_info = client.SystemInfo()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `version` | ``$STRING`` | No |  |
-| `version_comment` | ``$STRING`` | No |  |
+| `version` | `string` | No |  |
+| `version_comment` | `string` | No |  |
 
 ### Operations
 
@@ -194,7 +194,7 @@ const system_info = client.SystemInfo()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.SystemInfo().load({ id: 'system_info_id' })
+const result = await client.SystemInfo().load()
 ```
 
 ### Common Methods

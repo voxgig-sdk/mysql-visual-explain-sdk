@@ -94,11 +94,11 @@ local query_analysi = client:QueryAnalysi(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `explain_output` | ``$OBJECT`` | No |  |
-| `mysql_version` | ``$STRING`` | No |  |
-| `query` | ``$STRING`` | Yes |  |
-| `recommendation` | ``$ARRAY`` | No |  |
-| `visualization` | ``$OBJECT`` | No |  |
+| `explain_output` | `table` | No |  |
+| `mysql_version` | `string` | No |  |
+| `query` | `string` | Yes |  |
+| `recommendation` | `table` | No |  |
+| `visualization` | `table` | No |  |
 
 ### Operations
 
@@ -108,7 +108,7 @@ Create a new entity with the given data.
 
 ```lua
 local result, err = client:QueryAnalysi():create({
-  query = --[[ `$STRING` ]],
+  query = --[[ string ]],
 })
 ```
 
@@ -152,8 +152,8 @@ local system_info = client:SystemInfo(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `version` | ``$STRING`` | No |  |
-| `version_comment` | ``$STRING`` | No |  |
+| `version` | `string` | No |  |
+| `version_comment` | `string` | No |  |
 
 ### Operations
 
@@ -162,7 +162,7 @@ local system_info = client:SystemInfo(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:SystemInfo():load({ id = "system_info_id" })
+local result, err = client:SystemInfo():load()
 ```
 
 ### Common Methods

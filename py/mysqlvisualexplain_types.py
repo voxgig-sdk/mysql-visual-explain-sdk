@@ -27,10 +27,13 @@ class QueryAnalysi(QueryAnalysiRequired, total=False):
     visualization: dict
 
 
-class QueryAnalysiCreateData(TypedDict, total=False):
+class QueryAnalysiCreateDataRequired(TypedDict):
+    query: str
+
+
+class QueryAnalysiCreateData(QueryAnalysiCreateDataRequired, total=False):
     explain_output: dict
     mysql_version: str
-    query: str
     recommendation: list
     visualization: dict
 

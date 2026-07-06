@@ -8,7 +8,7 @@ Complete API reference for the MysqlVisualExplain Python SDK.
 ### Constructor
 
 ```python
-from mysql-visual-explain_sdk import MysqlVisualExplainSDK
+from mysqlvisualexplain_sdk import MysqlVisualExplainSDK
 
 client = MysqlVisualExplainSDK(options)
 ```
@@ -91,11 +91,11 @@ query_analysi = client.QueryAnalysi()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `explain_output` | ``$OBJECT`` | No |  |
-| `mysql_version` | ``$STRING`` | No |  |
-| `query` | ``$STRING`` | Yes |  |
-| `recommendation` | ``$ARRAY`` | No |  |
-| `visualization` | ``$OBJECT`` | No |  |
+| `explain_output` | `dict` | No |  |
+| `mysql_version` | `str` | No |  |
+| `query` | `str` | Yes |  |
+| `recommendation` | `list` | No |  |
+| `visualization` | `dict` | No |  |
 
 ### Operations
 
@@ -105,7 +105,7 @@ Create a new entity with the given data. Returns the created entity data and rai
 
 ```python
 result = client.QueryAnalysi().create({
-    "query": ...,  # `$STRING`
+    "query": "example",  # str
 })
 ```
 
@@ -148,8 +148,8 @@ system_info = client.SystemInfo()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `version` | ``$STRING`` | No |  |
-| `version_comment` | ``$STRING`` | No |  |
+| `version` | `str` | No |  |
+| `version_comment` | `str` | No |  |
 
 ### Operations
 
@@ -158,7 +158,7 @@ system_info = client.SystemInfo()
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.SystemInfo().load({"id": "system_info_id"})
+result = client.SystemInfo().load()
 ```
 
 ### Common Methods

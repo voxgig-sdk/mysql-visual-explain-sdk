@@ -101,11 +101,11 @@ query_analysi := client.QueryAnalysi(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `explain_output` | ``$OBJECT`` | No |  |
-| `mysql_version` | ``$STRING`` | No |  |
-| `query` | ``$STRING`` | Yes |  |
-| `recommendation` | ``$ARRAY`` | No |  |
-| `visualization` | ``$OBJECT`` | No |  |
+| `explain_output` | `map[string]any` | No |  |
+| `mysql_version` | `string` | No |  |
+| `query` | `string` | Yes |  |
+| `recommendation` | `[]any` | No |  |
+| `visualization` | `map[string]any` | No |  |
 
 ### Operations
 
@@ -115,7 +115,7 @@ Create a new entity with the given data.
 
 ```go
 result, err := client.QueryAnalysi(nil).Create(map[string]any{
-    "query": /* `$STRING` */,
+    "query": /* string */,
 }, nil)
 ```
 
@@ -153,8 +153,8 @@ system_info := client.SystemInfo(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `version` | ``$STRING`` | No |  |
-| `version_comment` | ``$STRING`` | No |  |
+| `version` | `string` | No |  |
+| `version_comment` | `string` | No |  |
 
 ### Operations
 
@@ -163,7 +163,7 @@ system_info := client.SystemInfo(nil)
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.SystemInfo(nil).Load(map[string]any{"id": "system_info_id"}, nil)
+result, err := client.SystemInfo(nil).Load(nil, nil)
 ```
 
 ### Common Methods

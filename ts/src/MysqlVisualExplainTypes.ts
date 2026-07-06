@@ -13,12 +13,21 @@ export interface QueryAnalysi {
   visualization?: Record<string, any>
 }
 
-export type QueryAnalysiCreateData = Partial<QueryAnalysi>
+export interface QueryAnalysiCreateData {
+  explain_output?: Record<string, any>
+  mysql_version?: string
+  query: string
+  recommendation?: any[]
+  visualization?: Record<string, any>
+}
 
 export interface SystemInfo {
   version?: string
   version_comment?: string
 }
 
-export type SystemInfoLoadMatch = Partial<SystemInfo>
+export interface SystemInfoLoadMatch {
+  version?: string
+  version_comment?: string
+}
 

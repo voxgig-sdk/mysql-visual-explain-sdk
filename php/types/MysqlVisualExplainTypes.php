@@ -22,12 +22,12 @@ class QueryAnalysi
     public ?array $visualization = null;
 }
 
-/** Match filter for QueryAnalysi#create (any subset of QueryAnalysi fields). */
+/** Request payload for QueryAnalysi#create. */
 class QueryAnalysiCreateData
 {
     public ?array $explain_output = null;
     public ?string $mysql_version = null;
-    public ?string $query = null;
+    public string $query;
     public ?array $recommendation = null;
     public ?array $visualization = null;
 }
@@ -39,7 +39,7 @@ class SystemInfo
     public ?string $version_comment = null;
 }
 
-/** Match filter for SystemInfo#load (any subset of SystemInfo fields). */
+/** Request payload for SystemInfo#load. */
 class SystemInfoLoadMatch
 {
     public ?string $version = null;

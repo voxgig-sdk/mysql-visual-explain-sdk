@@ -16,9 +16,6 @@ go build -o mysql-visual-explain-cli ./...
 
 ```sh
 # One-shot: arguments form a single AQL expression
-./mysql-visual-explain-cli list query_analysi
-./mysql-visual-explain-cli load 1 query_analysi
-./mysql-visual-explain-cli load '{id:1}' query_analysi
 
 # REPL
 ./mysql-visual-explain-cli
@@ -28,9 +25,7 @@ go build -o mysql-visual-explain-cli ./...
 
 | Word     | Signatures                                   | Description                |
 |----------|----------------------------------------------|----------------------------|
-| `list`   | `[entity]` · `[query entity]`                | List records               |
 | `load`   | `[entity]` · `[query entity]`                | Load a single record       |
-| `update` | `[entity]` · `[query entity]`                | Update a record            |
 
 `query` is either a Map (`{id:1}`) or a Scalar (`1`, treated as `{id:1}`).
 `entity` is one of the SDK's entity names (auto-quoted as an atom).

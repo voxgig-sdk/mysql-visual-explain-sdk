@@ -8,7 +8,7 @@ Complete API reference for the MysqlVisualExplain PHP SDK.
 ### Constructor
 
 ```php
-require_once __DIR__ . '/mysql-visual-explain_sdk.php';
+require_once __DIR__ . '/mysqlvisualexplain_sdk.php';
 
 $client = new MysqlVisualExplainSDK($options);
 ```
@@ -49,11 +49,11 @@ Create a new `QueryAnalysiEntity` instance. Pass `null` for no initial data.
 
 Create a new `SystemInfoEntity` instance. Pass `null` for no initial data.
 
-#### `optionsMap(): array`
+#### `options_map(): array`
 
 Return a deep copy of the current SDK options.
 
-#### `getUtility(): ProjectNameUtility`
+#### `get_utility(): MysqlVisualExplainUtility`
 
 Return a copy of the SDK utility object.
 
@@ -96,11 +96,11 @@ $query_analysi = $client->QueryAnalysi();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `explain_output` | ``$OBJECT`` | No |  |
-| `mysql_version` | ``$STRING`` | No |  |
-| `query` | ``$STRING`` | Yes |  |
-| `recommendation` | ``$ARRAY`` | No |  |
-| `visualization` | ``$OBJECT`` | No |  |
+| `explain_output` | `array` | No |  |
+| `mysql_version` | `string` | No |  |
+| `query` | `string` | Yes |  |
+| `recommendation` | `array` | No |  |
+| `visualization` | `array` | No |  |
 
 ### Operations
 
@@ -110,25 +110,25 @@ Create a new entity with the given data. Throws on error.
 
 ```php
 $result = $client->QueryAnalysi()->create([
-  "query" => /* `$STRING` */,
+  "query" => null, // string
 ]);
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -137,7 +137,7 @@ Set the entity match criteria.
 Create a new `QueryAnalysiEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -154,8 +154,8 @@ $system_info = $client->SystemInfo();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `version` | ``$STRING`` | No |  |
-| `version_comment` | ``$STRING`` | No |  |
+| `version` | `string` | No |  |
+| `version_comment` | `string` | No |  |
 
 ### Operations
 
@@ -164,24 +164,24 @@ $system_info = $client->SystemInfo();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->SystemInfo()->load(["id" => "system_info_id"]);
+$result = $client->SystemInfo()->load();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -190,7 +190,7 @@ Set the entity match criteria.
 Create a new `SystemInfoEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 

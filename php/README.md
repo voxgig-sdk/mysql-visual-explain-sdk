@@ -4,6 +4,8 @@
 
 The PHP SDK for the MysqlVisualExplain API — an entity-oriented client using PHP conventions.
 
+The SDK exposes the API as capitalised, semantic **Entities** — for example `$client->QueryAnalysi()` — with named operations (`load`/`create`) instead of raw URL paths and query strings. Working with resources and verbs keeps call sites self-describing and reduces cognitive load.
+
 > Other languages, the CLI, and MCP server live alongside this one — see
 > the [top-level README](../README.md).
 
@@ -33,8 +35,39 @@ $client = new MysqlVisualExplainSDK();
 
 ```php
 // create() returns the bare created QueryAnalysi record.
-$created = $client->QueryAnalysi()->create(["name" => "Example"]);
+$created = $client->QueryAnalysi()->create(["query" => "example"]);
 
+```
+
+
+## Error handling
+
+Entity operations throw a `\Throwable` on failure, so wrap them in
+`try` / `catch`:
+
+```php
+try {
+    $queryanalysi = $client->QueryAnalysi()->create(["query" => "example"]);
+} catch (\Throwable $err) {
+    echo "Error: " . $err->getMessage();
+}
+```
+
+`direct()` does **not** throw — it returns the result array. Branch on
+`ok`; on failure `status` holds the HTTP status (for error responses) and
+`err` holds a transport error, so read both defensively:
+
+```php
+$result = $client->direct([
+    "path" => "/api/resource/{id}",
+    "method" => "GET",
+    "params" => ["id" => "example_id"],
+]);
+
+if (! $result["ok"]) {
+    $err = $result["err"] ?? null;
+    echo "request failed: " . ($err ? $err->getMessage() : "HTTP " . $result["status"]);
+}
 ```
 
 
@@ -57,7 +90,10 @@ if ($result["ok"]) {
     echo $result["status"];  // 200
     print_r($result["data"]);  // response body
 } else {
-    echo "Error: " . $result["err"]->getMessage();
+    // On an HTTP error status there is no err (only a transport failure sets
+    // it), so fall back to the status code.
+    $err = $result["err"] ?? null;
+    echo "Error: " . ($err ? $err->getMessage() : "HTTP " . $result["status"]);
 }
 ```
 
@@ -78,16 +114,13 @@ print_r($fetchdef["headers"]);
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required. Seed fixture
-data via the `entity` option so offline calls resolve without a live server:
+Create a mock client for unit testing — no server required:
 
 ```php
-$client = MysqlVisualExplainSDK::test([
-    "entity" => ["queryanalysi" => ["test01" => ["id" => "test01"]]],
-]);
+$client = MysqlVisualExplainSDK::test();
 
-// load() returns the bare mock record (throws on error).
-$queryanalysi = $client->QueryAnalysi()->load(["id" => "test01"]);
+// Entity ops return the bare mock record (throws on error).
+$queryanalysi = $client->QueryAnalysi()->create(["query" => "example"]);
 print_r($queryanalysi);
 ```
 
@@ -177,10 +210,7 @@ All entities share the same interface.
 | Method | Signature | Description |
 | --- | --- | --- |
 | `load` | `($reqmatch, $ctrl): array` | Load a single entity by match criteria. |
-| `list` | `($reqmatch, $ctrl): array` | List entities matching the criteria. |
 | `create` | `($reqdata, $ctrl): array` | Create a new entity. |
-| `update` | `($reqdata, $ctrl): array` | Update an existing entity. |
-| `remove` | `($reqmatch, $ctrl): array` | Remove an entity. |
 | `data_get` | `(): array` | Get entity data. |
 | `data_set` | `($data): void` | Set entity data. |
 | `match_get` | `(): array` | Get entity match criteria. |
@@ -252,17 +282,17 @@ Create an instance: `$query_analysi = $client->QueryAnalysi();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `explain_output` | ``$OBJECT`` |  |
-| `mysql_version` | ``$STRING`` |  |
-| `query` | ``$STRING`` |  |
-| `recommendation` | ``$ARRAY`` |  |
-| `visualization` | ``$OBJECT`` |  |
+| `explain_output` | `array` |  |
+| `mysql_version` | `string` |  |
+| `query` | `string` |  |
+| `recommendation` | `array` |  |
+| `visualization` | `array` |  |
 
 #### Example: Create
 
 ```php
 $query_analysi = $client->QueryAnalysi()->create([
-    "query" => null, // `$STRING`
+    "query" => null, // string
 ]);
 ```
 
@@ -281,23 +311,27 @@ Create an instance: `$system_info = $client->SystemInfo();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `version` | ``$STRING`` |  |
-| `version_comment` | ``$STRING`` |  |
+| `version` | `string` |  |
+| `version_comment` | `string` |  |
 
 #### Example: Load
 
 ```php
 // load() returns the bare SystemInfo record (throws on error).
-$system_info = $client->SystemInfo()->load(["id" => "system_info_id"]);
+$system_info = $client->SystemInfo()->load();
 ```
 
 
-## Explanation
+## Advanced
+
+> The sections above cover everyday use. The material below explains the
+> SDK's internals — useful when extending it with custom features, but not
+> needed for normal use.
 
 ### The operation pipeline
 
-Every entity operation (load, list, create, update, remove) follows a
-six-stage pipeline. Each stage fires a feature hook before executing:
+Every entity operation follows a six-stage pipeline. Each stage fires a
+feature hook before executing:
 
 ```
 PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
@@ -314,8 +348,9 @@ PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
 - **PreDone**: Final stage before returning to the caller. Entity
   state (match, data) is updated here.
 
-If any stage returns an error, the pipeline short-circuits and the
-error is returned to the caller as the second element in the return array.
+If any stage errors, the pipeline short-circuits and the error surfaces
+to the caller — see [Error handling](#error-handling) for how that looks
+in this language.
 
 ### Features and hooks
 
@@ -359,15 +394,15 @@ when needed.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `load`, the entity
+Entity instances are stateful. After a successful `create`, the entity
 stores the returned data and match criteria internally.
 
 ```php
 $queryanalysi = $client->QueryAnalysi();
-$queryanalysi->load(["id" => "example_id"]);
+$queryanalysi->create(["query" => "example"]);
 
-// $queryanalysi->dataGet() now returns the loaded queryanalysi data
-// $queryanalysi->matchGet() returns the last match criteria
+// $queryanalysi->data_get() now returns the queryanalysi data from the last create
+// $queryanalysi->match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

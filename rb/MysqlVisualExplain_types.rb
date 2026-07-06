@@ -33,7 +33,7 @@ QueryAnalysi = Struct.new(
   keyword_init: true
 )
 
-# Match filter for QueryAnalysi#create (any subset of QueryAnalysi fields).
+# Request payload for QueryAnalysi#create.
 #
 # @!attribute [rw] explain_output
 #   @return [Hash, nil]
@@ -42,7 +42,7 @@ QueryAnalysi = Struct.new(
 #   @return [String, nil]
 #
 # @!attribute [rw] query
-#   @return [String, nil]
+#   @return [String]
 #
 # @!attribute [rw] recommendation
 #   @return [Array, nil]
@@ -71,7 +71,7 @@ SystemInfo = Struct.new(
   keyword_init: true
 )
 
-# Match filter for SystemInfo#load (any subset of SystemInfo fields).
+# Request payload for SystemInfo#load.
 #
 # @!attribute [rw] version
 #   @return [String, nil]

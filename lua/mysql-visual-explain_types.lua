@@ -14,12 +14,19 @@
 ---@field visualization? table
 
 ---@class QueryAnalysiCreateData
+---@field explain_output? table
+---@field mysql_version? string
+---@field query string
+---@field recommendation? table
+---@field visualization? table
 
 ---@class SystemInfo
 ---@field version? string
 ---@field version_comment? string
 
 ---@class SystemInfoLoadMatch
+---@field version? string
+---@field version_comment? string
 
 local M = {}
 

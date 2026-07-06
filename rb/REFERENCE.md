@@ -8,7 +8,7 @@ Complete API reference for the MysqlVisualExplain Ruby SDK.
 ### Constructor
 
 ```ruby
-require_relative 'mysql-visual-explain_sdk'
+require_relative 'MysqlVisualExplain_sdk'
 
 client = MysqlVisualExplainSDK.new(options)
 ```
@@ -97,11 +97,11 @@ query_analysi = client.QueryAnalysi
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `explain_output` | ``$OBJECT`` | No |  |
-| `mysql_version` | ``$STRING`` | No |  |
-| `query` | ``$STRING`` | Yes |  |
-| `recommendation` | ``$ARRAY`` | No |  |
-| `visualization` | ``$OBJECT`` | No |  |
+| `explain_output` | `Hash` | No |  |
+| `mysql_version` | `String` | No |  |
+| `query` | `String` | Yes |  |
+| `recommendation` | `Array` | No |  |
+| `visualization` | `Hash` | No |  |
 
 ### Operations
 
@@ -111,7 +111,7 @@ Create a new entity with the given data. Raises on error.
 
 ```ruby
 result = client.QueryAnalysi.create({
-  "query" => # `$STRING`,
+  "query" => "example", # String
 })
 ```
 
@@ -155,8 +155,8 @@ system_info = client.SystemInfo
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `version` | ``$STRING`` | No |  |
-| `version_comment` | ``$STRING`` | No |  |
+| `version` | `String` | No |  |
+| `version_comment` | `String` | No |  |
 
 ### Operations
 
@@ -165,7 +165,7 @@ system_info = client.SystemInfo
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.SystemInfo.load({ "id" => "system_info_id" })
+result = client.SystemInfo.load()
 ```
 
 ### Common Methods

@@ -17,12 +17,11 @@ type QueryAnalysi struct {
 	Visualization *map[string]any `json:"visualization,omitempty"`
 }
 
-// QueryAnalysiCreateData mirrors the query_analysi fields as an all-optional match
-// filter (Go analog of Partial<QueryAnalysi>).
+// QueryAnalysiCreateData is the typed request payload for QueryAnalysi.CreateTyped.
 type QueryAnalysiCreateData struct {
 	ExplainOutput *map[string]any `json:"explain_output,omitempty"`
 	MysqlVersion *string `json:"mysql_version,omitempty"`
-	Query *string `json:"query,omitempty"`
+	Query string `json:"query"`
 	Recommendation *[]any `json:"recommendation,omitempty"`
 	Visualization *map[string]any `json:"visualization,omitempty"`
 }
@@ -33,8 +32,7 @@ type SystemInfo struct {
 	VersionComment *string `json:"version_comment,omitempty"`
 }
 
-// SystemInfoLoadMatch mirrors the system_info fields as an all-optional match
-// filter (Go analog of Partial<SystemInfo>).
+// SystemInfoLoadMatch is the typed request payload for SystemInfo.LoadTyped.
 type SystemInfoLoadMatch struct {
 	Version *string `json:"version,omitempty"`
 	VersionComment *string `json:"version_comment,omitempty"`
