@@ -6,9 +6,6 @@
     },
     "kit": {
       "config": {
-        "auth": {
-          "prefix": "Bearer"
-        },
         "docs_order": [
           "ts",
           "py",
@@ -287,14 +284,17 @@
           "url": "https://mysqlexplain.com/"
         },
         "description": "This API provides a visualization tool that helps users understand and optimize their MySQL queries through easy-to-read graphical outputs. It transforms the cryptic output of MySQL's EXPLAIN command into interactive graphics, assisting users in identifying performance issues and understanding complex query plans.",
+        "meta_source": "https://www.freepublicapis.com",
         "servers": [
           {
             "description": "Production server",
             "url": "https://mysqlexplain.com"
           }
         ],
+        "summary": "This API provides a visualization tool that helps users understand and optimize their MySQL queries through easy-to-read graphical outputs.",
         "title": "MySQL Visual Explain",
-        "version": "1.0.0"
+        "version": "1.0.0",
+        "website": "https://mysqlexplain.com"
       },
       "option": {},
       "target": {
@@ -347,6 +347,9 @@
           },
           "name": "go-cli",
           "phase": {
+            "agentguide": {
+              "active": false
+            },
             "entity": {
               "active": false
             },
@@ -397,6 +400,9 @@
           },
           "name": "go-mcp",
           "phase": {
+            "agentguide": {
+              "active": false
+            },
             "entity": {
               "active": false
             },

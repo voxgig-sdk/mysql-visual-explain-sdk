@@ -94,7 +94,8 @@ same parameters as `Direct()`.
 ## QueryAnalysiEntity
 
 ```go
-query_analysi := client.QueryAnalysi(nil)
+queryAnalysi := client.QueryAnalysi(nil)
+fmt.Println(queryAnalysi.GetName()) // "query_analysi"
 ```
 
 ### Fields
@@ -115,8 +116,12 @@ Create a new entity with the given data.
 
 ```go
 result, err := client.QueryAnalysi(nil).Create(map[string]any{
-    "query": /* string */,
+    "query": "example_query",
 }, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -146,7 +151,8 @@ Return the entity name.
 ## SystemInfoEntity
 
 ```go
-system_info := client.SystemInfo(nil)
+systemInfo := client.SystemInfo(nil)
+fmt.Println(systemInfo.GetName()) // "system_info"
 ```
 
 ### Fields
@@ -164,6 +170,10 @@ Load a single entity matching the given criteria.
 
 ```go
 result, err := client.SystemInfo(nil).Load(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods

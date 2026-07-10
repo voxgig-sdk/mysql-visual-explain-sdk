@@ -142,7 +142,7 @@ Create a new entity with the given data.
 
 ```ts
 const result = await client.QueryAnalysi().create({
-  query: /* string */,
+  query: 'example_query',
 })
 ```
 

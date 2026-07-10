@@ -50,10 +50,10 @@ Entity operations reject on failure, so wrap them in `try` / `catch`:
 
 ```ts
 try {
-  const queryanalysi = await client.QueryAnalysi().create({ query: "example" })
-  console.log(queryanalysi)
+  const systeminfo = await client.SystemInfo().load()
+  console.log(systeminfo)
 } catch (err) {
-  console.error('create failed:', err)
+  console.error('load failed:', err)
 }
 ```
 
@@ -117,9 +117,9 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = MysqlVisualExplainSDK.test()
 
-const queryanalysi = await client.QueryAnalysi().create({ query: 'example_query' })
-// queryanalysi is a bare entity populated with mock response data
-console.log(queryanalysi)
+const systeminfo = await client.SystemInfo().load()
+// systeminfo is a bare entity populated with mock response data
+console.log(systeminfo)
 ```
 
 You can also use the instance method:
@@ -134,10 +134,10 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.QueryAnalysi()
+const entity = client.SystemInfo()
 
 // First call runs the operation and stores its result
-await entity.create({ query: 'example_query' })
+await entity.load()
 
 // Subsequent calls reuse the stored state
 const data = entity.data()
@@ -333,7 +333,7 @@ Create an instance: `const query_analysi = client.QueryAnalysi()`
 
 ```ts
 const query_analysi = await client.QueryAnalysi().create({
-  query: /* string */,
+  query: 'example_query',
 })
 ```
 
@@ -426,16 +426,16 @@ import { MysqlVisualExplainSDK } from '@voxgig-sdk/mysql-visual-explain'
 
 ### Entity state
 
-Entity instances are stateful. After a successful `create`, the entity
+Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const queryanalysi = client.QueryAnalysi()
-await queryanalysi.create({ query: "example" })
+const systeminfo = client.SystemInfo()
+await systeminfo.load()
 
-// queryanalysi.data() now returns the queryanalysi data from the last `create`
-// queryanalysi.match() returns the last match criteria
+// systeminfo.data() now returns the systeminfo data from the last `load`
+// systeminfo.match() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

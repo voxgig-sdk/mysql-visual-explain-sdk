@@ -34,7 +34,7 @@ client = MysqlVisualExplainSDK.new
 
 ```ruby
 # create returns the bare created QueryAnalysi record.
-created = client.QueryAnalysi.create({ "query" => "example" })
+created = client.QueryAnalysi.create({ "query" => "example_query" })
 
 ```
 
@@ -45,9 +45,9 @@ Entity operations raise on failure, so rescue them:
 
 ```ruby
 begin
-  queryanalysi = client.QueryAnalysi.create({ "query" => "example" })
+  systeminfo = client.SystemInfo.load()
 rescue => err
-  warn "create failed: #{err}"
+  warn "load failed: #{err}"
 end
 ```
 
@@ -114,8 +114,8 @@ Create a mock client for unit testing — no server required:
 client = MysqlVisualExplainSDK.test
 
 # Entity ops return the bare mock record (raises on error).
-queryanalysi = client.QueryAnalysi.create({ "query" => "example" })
-puts queryanalysi
+systeminfo = client.SystemInfo.load()
+puts systeminfo
 ```
 
 ### Use a custom fetch function
@@ -282,7 +282,7 @@ Create an instance: `query_analysi = client.QueryAnalysi`
 
 ```ruby
 query_analysi = client.QueryAnalysi.create({
-  "query" => "example", # String
+  "query" => "example_query", # String
 })
 ```
 
@@ -384,15 +384,15 @@ when needed.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `create`, the entity
+Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```ruby
-queryanalysi = client.QueryAnalysi
-queryanalysi.create({ "query" => "example" })
+systeminfo = client.SystemInfo
+systeminfo.load()
 
-# queryanalysi.data_get now returns the queryanalysi data from the last create
-# queryanalysi.match_get returns the last match criteria
+# systeminfo.data_get now returns the systeminfo data from the last load
+# systeminfo.match_get returns the last match criteria
 ```
 
 Call `make` to create a fresh instance with the same configuration

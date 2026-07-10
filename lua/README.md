@@ -37,7 +37,7 @@ local client = sdk.new()
 
 ```lua
 -- Create
-local created, err = client:QueryAnalysi():create({ query = "example" })
+local created, err = client:QueryAnalysi():create({ query = "example_query" })
 if err then error(err) end
 
 ```
@@ -49,7 +49,7 @@ Entity operations return `(value, err)`. Check `err` before using
 the value:
 
 ```lua
-local queryanalysi, err = client:QueryAnalysi():create({ query = "example" })
+local systeminfo, err = client:SystemInfo():load()
 if err then error(err) end
 ```
 
@@ -107,7 +107,7 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:QueryAnalysi():create({ query = "example" })
+local result, err = client:SystemInfo():load()
 -- result is the returned data; err is set on failure
 ```
 
@@ -278,7 +278,7 @@ Create an instance: `local query_analysi = client:QueryAnalysi(nil)`
 
 ```lua
 local query_analysi, err = client:QueryAnalysi():create({
-  query = nil, -- string
+  query = "example_query", -- string
 })
 ```
 
@@ -379,15 +379,15 @@ when needed.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `create`, the entity
+Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local queryanalysi = client:QueryAnalysi()
-queryanalysi:create({ query = "example" })
+local systeminfo = client:SystemInfo()
+systeminfo:load()
 
--- queryanalysi:data_get() now returns the queryanalysi data from the last create
--- queryanalysi:match_get() returns the last match criteria
+-- systeminfo:data_get() now returns the systeminfo data from the last load
+-- systeminfo:match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

@@ -50,8 +50,8 @@ import (
 func main() {
     client := sdk.New()
 
-    // Create a queryanalysi.
-    created, err := client.QueryAnalysi(nil).Create(map[string]any{"query": "example"}, nil)
+    // Create a queryAnalysi.
+    created, err := client.QueryAnalysi(nil).Create(map[string]any{"query": "example_query"}, nil)
     if err != nil {
         panic(err)
     }
@@ -66,12 +66,12 @@ Every entity operation returns `(value, error)`. Check `err` before
 using the value — there is no exception to catch:
 
 ```go
-queryanalysi, err := client.QueryAnalysi(nil).Create(map[string]any{"query": "example"}, nil)
+systeminfo, err := client.SystemInfo(nil).Load(nil, nil)
 if err != nil {
     // handle err
     return
 }
-_ = queryanalysi
+_ = systeminfo
 ```
 
 `Direct` follows the same `(value, error)` convention:
@@ -135,13 +135,13 @@ Create a mock client for unit testing — no server required:
 ```go
 client := sdk.Test()
 
-queryanalysi, err := client.QueryAnalysi(nil).Create(
-    map[string]any{"query": "example"}, nil,
+systemInfo, err := client.SystemInfo(nil).Load(
+    nil, nil,
 )
 if err != nil {
     panic(err)
 }
-fmt.Println(queryanalysi) // the returned mock data
+fmt.Println(systemInfo) // the returned mock data
 ```
 
 ### Use a custom fetch function
@@ -247,9 +247,9 @@ Check `err` first, then use the value directly (or the typed
 `...Typed` variants, which return the entity's model struct and a typed
 slice):
 
-    queryanalysi, err := client.QueryAnalysi(nil).Create(map[string]any{/* fields */}, nil)
+    queryAnalysi, err := client.QueryAnalysi(nil).Create(map[string]any{/* fields */}, nil)
     if err != nil { /* handle */ }
-    // queryanalysi is the returned record
+    // queryAnalysi is the returned record
 
 Only `Direct()` returns a response envelope — a `map[string]any` with
 `"ok"`, `"status"`, `"headers"`, and `"data"` keys.
@@ -288,7 +288,7 @@ API path: `/api/version`
 
 ### QueryAnalysi
 
-Create an instance: `query_analysi := client.QueryAnalysi(nil)`
+Create an instance: `queryAnalysi := client.QueryAnalysi(nil)`
 
 #### Operations
 
@@ -310,14 +310,18 @@ Create an instance: `query_analysi := client.QueryAnalysi(nil)`
 
 ```go
 result, err := client.QueryAnalysi(nil).Create(map[string]any{
-    "query": /* string */,
+    "query": "example_query",
 }, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 
 ### SystemInfo
 
-Create an instance: `system_info := client.SystemInfo(nil)`
+Create an instance: `systemInfo := client.SystemInfo(nil)`
 
 #### Operations
 
@@ -335,11 +339,11 @@ Create an instance: `system_info := client.SystemInfo(nil)`
 #### Example: Load
 
 ```go
-system_info, err := client.SystemInfo(nil).Load(nil, nil)
+systemInfo, err := client.SystemInfo(nil).Load(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(system_info) // the loaded record
+fmt.Println(systemInfo) // the loaded record
 ```
 
 
@@ -412,15 +416,15 @@ like `core.ToMapAny`.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `Create`, the entity
+Entity instances are stateful. After a successful `Load`, the entity
 stores the returned data and match criteria internally.
 
 ```go
-queryanalysi := client.QueryAnalysi(nil)
-queryanalysi.Create(map[string]any{"query": "example"}, nil)
+systeminfo := client.SystemInfo(nil)
+systeminfo.Load(nil, nil)
 
-// queryanalysi.Data() now returns the queryanalysi data from the last create
-// queryanalysi.Match() returns the last match criteria
+// systeminfo.Data() now returns the systeminfo data from the last load
+// systeminfo.Match() returns the last match criteria
 ```
 
 Call `Make()` to create a fresh instance with the same configuration

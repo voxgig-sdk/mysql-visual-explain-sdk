@@ -15,9 +15,9 @@ main: {
           url: "https://mysqlexplain.com"
         }
       ]
+      summary: "This API provides a visualization tool that helps users understand and optimize their MySQL queries through easy-to-read graphical outputs."
       title: "MySQL Visual Explain"
       version: "1.0.0"
+      website: "https://mysqlexplain.com"
     }
   }
-}
-

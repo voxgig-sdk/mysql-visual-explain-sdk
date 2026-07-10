@@ -40,7 +40,7 @@ client = MysqlVisualExplainSDK()
 
 ```python
 # Create — returns the bare created record (a dict)
-created = client.QueryAnalysi().create({"query": "example"})
+created = client.QueryAnalysi().create({"query": "example_query"})
 
 ```
 
@@ -51,10 +51,10 @@ Entity operations raise on failure, so wrap them in `try` / `except`:
 
 ```python
 try:
-    queryanalysi = client.QueryAnalysi().create({ "query": "example" })
-    print(queryanalysi)
+    systeminfo = client.SystemInfo().load()
+    print(systeminfo)
 except Exception as err:
-    print(f"create failed: {err}")
+    print(f"load failed: {err}")
 ```
 
 `direct()` does **not** raise — it returns the result envelope. Branch
@@ -119,8 +119,8 @@ Create a mock client for unit testing — no server required:
 client = MysqlVisualExplainSDK.test()
 
 # Entity ops return the bare record and raise on error.
-queryanalysi = client.QueryAnalysi().create({"query": "example"})
-# queryanalysi contains the mock response record
+systeminfo = client.SystemInfo().load()
+# systeminfo contains the mock response record
 ```
 
 ### Use a custom fetch function
@@ -288,7 +288,7 @@ Create an instance: `query_analysi = client.QueryAnalysi()`
 
 ```python
 query_analysi = client.QueryAnalysi().create({
-    "query": "example",  # str
+    "query": "example_query",  # str
 })
 ```
 
@@ -388,15 +388,15 @@ Import entity or utility modules directly only when needed.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `create`, the entity
+Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```python
-queryanalysi = client.QueryAnalysi()
-queryanalysi.create({ "query": "example" })
+systeminfo = client.SystemInfo()
+systeminfo.load()
 
-# queryanalysi.data_get() now returns the queryanalysi data from the last create
-# queryanalysi.match_get() returns the last match criteria
+# systeminfo.data_get() now returns the systeminfo data from the last load
+# systeminfo.match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration
