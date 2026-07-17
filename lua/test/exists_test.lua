@@ -1,4 +1,4 @@
--- ProjectName SDK exists test
+-- MysqlVisualExplain SDK exists test
 
 local sdk = require("mysql-visual-explain_sdk")
 
