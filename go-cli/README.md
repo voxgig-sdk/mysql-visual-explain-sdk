@@ -12,18 +12,21 @@ at `../go`.
 # 1. Build a native binary (-> dist/<os>-<arch>/mysql-visual-explain-cli)
 make build
 
-# 2. Provide credentials once, via the environment
+# 2. See usage (words, entities, env vars)
+./mysql-visual-explain-cli --help
+
+# 3. Provide credentials once, via the environment
 export MYSQL_VISUAL_EXPLAIN_APIKEY=sk_live_xxx
 
-# 3. Each command line is ONE AQL expression, run against the API:
+# 4. Each command line is ONE AQL expression, run against the API:
 
-# 4. Override the API base URL for a single call
-MYSQL_VISUAL_EXPLAIN_BASE=https://api.example.com ./mysql-visual-explain-cli :help
+# 5. Override the API base URL for a single call
+MYSQL_VISUAL_EXPLAIN_BASE=https://api.example.com ./mysql-visual-explain-cli --help
 
-# 5. No arguments -> interactive REPL
+# 6. No arguments -> interactive REPL
 ./mysql-visual-explain-cli
-mysql-visual-explain> :help
-mysql-visual-explain> :quit
+mysql-visual-explain> /help
+mysql-visual-explain> /quit
 ```
 
 > The rest of this guide follows the [Diátaxis](https://diataxis.fr) framework:
@@ -48,11 +51,11 @@ mysql-visual-explain> :quit
    arguments to open the REPL):
 
    ```sh
-   ./dist/*/mysql-visual-explain-cli :help
+   ./dist/*/mysql-visual-explain-cli --help
    ```
 
 4. **Go interactive.** Run the binary with no arguments to open the REPL, then
-   type `:help` for the word and entity lists and `:quit` to leave.
+   type `/help` for the word and entity lists and `/quit` to leave.
 
 That is the whole loop: *build → set key → evaluate AQL expressions*.
 
@@ -65,7 +68,7 @@ Configuration is read from the environment — nothing is written to disk:
 ```sh
 export MYSQL_VISUAL_EXPLAIN_APIKEY=sk_live_xxx            # API key
 export MYSQL_VISUAL_EXPLAIN_BASE=https://api.example.com  # optional: override the API base URL
-./mysql-visual-explain-cli :help
+./mysql-visual-explain-cli --help
 ```
 
 Both are injectable by a secrets vault, so the key never has to be typed inline.
@@ -77,9 +80,8 @@ evaluated as its own AQL expression:
 
 ```text
 $ ./mysql-visual-explain-cli
-mysql-visual-explain> :help
-mysql-visual-explain> :help
-mysql-visual-explain> :quit
+mysql-visual-explain> /help
+mysql-visual-explain> /quit
 ```
 
 ### Cross-compile release binaries
@@ -91,7 +93,7 @@ make build-all   # linux/darwin/windows x amd64/arm64, under dist/<os>-<arch>/
 
 ### Discover the available entities
 
-`:help` in the REPL prints the full entity list, or see [Entities](#entities)
+`/help` in the REPL prints the full entity list, or see [Entities](#entities)
 below — this SDK exposes 2 entities.
 
 ## Reference
@@ -117,10 +119,16 @@ The CLI registers these AQL words, each bound to the SDK:
 
 Unset variables fall back to the SDK's built-in defaults.
 
+### CLI flags
+
+- `--help` / `-h` — print usage (words, entities, env vars) and exit.
+
 ### REPL commands
 
-- `:quit` / `:q` / `:exit` — exit the REPL
-- `:help` / `:h` / `:?`     — show the word list, entity list and meta commands
+Meta-commands use the `/` prefix (everything else on a line is evaluated as AQL):
+
+- `/quit` / `/q` / `/exit` — exit the REPL
+- `/help` / `/h` / `/?`     — show the word list, entity list and meta commands
 
 ### Exit codes
 
