@@ -6,28 +6,28 @@
 // @voxgig/apidef VALID_CANON). Do not edit by hand.
 
 export interface QueryAnalysi {
-  explain_output?: Record<string, any>
-  mysql_version?: string
+  explainOutput?: Record<string, any>
+  mysqlVersion?: string
   query: string
-  recommendation?: any[]
+  recommendations?: any[]
   visualization?: Record<string, any>
 }
 
 export interface QueryAnalysiCreateData {
-  explain_output?: Record<string, any>
-  mysql_version?: string
+  explainOutput?: Record<string, any>
+  mysqlVersion?: string
   query: string
-  recommendation?: any[]
+  recommendations?: any[]
   visualization?: Record<string, any>
 }
 
 export interface SystemInfo {
   version?: string
-  version_comment?: string
+  versionComment?: string
 }
 
 export interface SystemInfoLoadMatch {
   version?: string
-  version_comment?: string
+  versionComment?: string
 }
 

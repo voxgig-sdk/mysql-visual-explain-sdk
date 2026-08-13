@@ -6,12 +6,12 @@ main: kit: entity: query_analysi: {
 
   fields: [
     {
-      name: "explain_output"
+      name: "explainOutput"
       req: false
       type: "`$OBJECT`"
     }
     {
-      name: "mysql_version"
+      name: "mysqlVersion"
       req: false
       type: "`$STRING`"
     }
@@ -21,7 +21,7 @@ main: kit: entity: query_analysi: {
       type: "`$STRING`"
     }
     {
-      name: "recommendation"
+      name: "recommendations"
       req: false
       type: "`$ARRAY`"
     }

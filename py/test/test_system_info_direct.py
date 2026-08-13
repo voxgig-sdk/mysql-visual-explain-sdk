@@ -3,9 +3,9 @@
 import json
 import pytest
 
-from utility.voxgig_struct import voxgig_struct as vs
+from mysqlvisualexplain_sdk.utility.voxgig_struct import voxgig_struct as vs
 from mysqlvisualexplain_sdk import MysqlVisualExplainSDK
-from core import helpers
+from mysqlvisualexplain_sdk.core import helpers
 from test import runner
 
 
@@ -56,11 +56,11 @@ def _system_info_direct_setup(mockres):
     calls = []
 
     env = runner.env_override({
-        "MYSQLVISUALEXPLAIN_TEST_SYSTEM_INFO_ENTID": {},
-        "MYSQLVISUALEXPLAIN_TEST_LIVE": "FALSE",
+        "MYSQL_VISUAL_EXPLAIN_TEST_SYSTEM_INFO_ENTID": {},
+        "MYSQL_VISUAL_EXPLAIN_TEST_LIVE": "FALSE",
     })
 
-    live = env.get("MYSQLVISUALEXPLAIN_TEST_LIVE") == "TRUE"
+    live = env.get("MYSQL_VISUAL_EXPLAIN_TEST_LIVE") == "TRUE"
 
     if live:
         merged_opts = {

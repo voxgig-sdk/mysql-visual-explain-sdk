@@ -23,8 +23,8 @@ module MysqlVisualExplainTestRunner
   end
 
   def self.env_override(m)
-    live = getenv("MYSQLVISUALEXPLAIN_TEST_LIVE")
-    override = getenv("MYSQLVISUALEXPLAIN_TEST_OVERRIDE")
+    live = getenv("MYSQL_VISUAL_EXPLAIN_TEST_LIVE")
+    override = getenv("MYSQL_VISUAL_EXPLAIN_TEST_OVERRIDE")
 
     if live == "TRUE" || override == "TRUE"
       m.each_key do |key|
@@ -44,8 +44,8 @@ module MysqlVisualExplainTestRunner
       end
     end
 
-    explain = getenv("MYSQLVISUALEXPLAIN_TEST_EXPLAIN")
-    m["MYSQLVISUALEXPLAIN_TEST_EXPLAIN"] = explain if explain && !explain.empty?
+    explain = getenv("MYSQL_VISUAL_EXPLAIN_TEST_EXPLAIN")
+    m["MYSQL_VISUAL_EXPLAIN_TEST_EXPLAIN"] = explain if explain && !explain.empty?
 
     m
   end

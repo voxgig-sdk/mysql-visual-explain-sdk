@@ -26,8 +26,8 @@ import {
 describe('SystemInfoEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when MYSQLVISUALEXPLAIN_TEST_LIVE=TRUE.
-  afterEach(liveDelay('MYSQLVISUALEXPLAIN_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when MYSQL_VISUAL_EXPLAIN_TEST_LIVE=TRUE.
+  afterEach(liveDelay('MYSQL_VISUAL_EXPLAIN_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = MysqlVisualExplainSDK.test()
@@ -62,7 +62,7 @@ describe('SystemInfoEntity', async () => {
     // LOAD
     const system_info_ref01_ent = client.SystemInfo()
     const system_info_ref01_match_dt0: any = {}
-    const system_info_ref01_data_dt0 = await system_info_ref01_ent.load(system_info_ref01_match_dt0)
+    const system_info_ref01_data_dt0 = (await system_info_ref01_ent.load(system_info_ref01_match_dt0)).data()
     assert(null != system_info_ref01_data_dt0)
 
 

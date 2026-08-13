@@ -26,8 +26,8 @@ import {
 describe('QueryAnalysiEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when MYSQLVISUALEXPLAIN_TEST_LIVE=TRUE.
-  afterEach(liveDelay('MYSQLVISUALEXPLAIN_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when MYSQL_VISUAL_EXPLAIN_TEST_LIVE=TRUE.
+  afterEach(liveDelay('MYSQL_VISUAL_EXPLAIN_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = MysqlVisualExplainSDK.test()
@@ -62,7 +62,7 @@ describe('QueryAnalysiEntity', async () => {
     const query_analysi_ref01_ent = client.QueryAnalysi()
     let query_analysi_ref01_data = setup.data.new.query_analysi['query_analysi_ref01']
 
-    query_analysi_ref01_data = await query_analysi_ref01_ent.create(query_analysi_ref01_data)
+    query_analysi_ref01_data = (await query_analysi_ref01_ent.create(query_analysi_ref01_data)).data()
     assert(null != query_analysi_ref01_data)
 
 

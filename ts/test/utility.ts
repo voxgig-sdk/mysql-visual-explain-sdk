@@ -62,8 +62,8 @@ function makeCtrl(explain: boolean) {
 // Overrides configuration values with environment variables if available
 function envOverride(m: Record<string, any>) {
   if (
-    'TRUE' === process.env.MYSQLVISUALEXPLAIN_TEST_LIVE ||
-    'TRUE' === process.env.MYSQLVISUALEXPLAIN_TEST_OVERRIDE
+    'TRUE' === process.env.MYSQL_VISUAL_EXPLAIN_TEST_LIVE ||
+    'TRUE' === process.env.MYSQL_VISUAL_EXPLAIN_TEST_OVERRIDE
   ) {
     Object.entries(m).map(n => {
       let envval = process.env[n[0]]
@@ -74,7 +74,7 @@ function envOverride(m: Record<string, any>) {
     })
   }
 
-  m.MYSQLVISUALEXPLAIN_TEST_EXPLAIN = process.env.MYSQLVISUALEXPLAIN_TEST_EXPLAIN || m.MYSQLVISUALEXPLAIN_TEST_EXPLAIN
+  m.MYSQL_VISUAL_EXPLAIN_TEST_EXPLAIN = process.env.MYSQL_VISUAL_EXPLAIN_TEST_EXPLAIN || m.MYSQL_VISUAL_EXPLAIN_TEST_EXPLAIN
 
   return m
 }

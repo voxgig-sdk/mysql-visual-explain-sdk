@@ -94,10 +94,10 @@ local query_analysi = client:QueryAnalysi(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `explain_output` | `table` | No |  |
-| `mysql_version` | `string` | No |  |
+| `explainOutput` | `table` | No |  |
+| `mysqlVersion` | `string` | No |  |
 | `query` | `string` | Yes |  |
-| `recommendation` | `table` | No |  |
+| `recommendations` | `table` | No |  |
 | `visualization` | `table` | No |  |
 
 ### Operations
@@ -153,7 +153,7 @@ local system_info = client:SystemInfo(nil)
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `version` | `string` | No |  |
-| `version_comment` | `string` | No |  |
+| `versionComment` | `string` | No |  |
 
 ### Operations
 

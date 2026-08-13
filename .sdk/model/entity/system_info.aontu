@@ -11,7 +11,7 @@ main: kit: entity: system_info: {
       type: "`$STRING`"
     }
     {
-      name: "version_comment"
+      name: "versionComment"
       req: false
       type: "`$STRING`"
     }

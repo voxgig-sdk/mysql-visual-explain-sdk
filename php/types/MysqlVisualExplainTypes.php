@@ -15,20 +15,20 @@ declare(strict_types=1);
 /** QueryAnalysi entity data model. */
 class QueryAnalysi
 {
-    public ?array $explain_output = null;
-    public ?string $mysql_version = null;
+    public ?array $explainOutput = null;
+    public ?string $mysqlVersion = null;
     public string $query;
-    public ?array $recommendation = null;
+    public ?array $recommendations = null;
     public ?array $visualization = null;
 }
 
 /** Request payload for QueryAnalysi#create. */
 class QueryAnalysiCreateData
 {
-    public ?array $explain_output = null;
-    public ?string $mysql_version = null;
+    public ?array $explainOutput = null;
+    public ?string $mysqlVersion = null;
     public string $query;
-    public ?array $recommendation = null;
+    public ?array $recommendations = null;
     public ?array $visualization = null;
 }
 
@@ -36,13 +36,13 @@ class QueryAnalysiCreateData
 class SystemInfo
 {
     public ?string $version = null;
-    public ?string $version_comment = null;
+    public ?string $versionComment = null;
 }
 
 /** Request payload for SystemInfo#load. */
 class SystemInfoLoadMatch
 {
     public ?string $version = null;
-    public ?string $version_comment = null;
+    public ?string $versionComment = null;
 }
 

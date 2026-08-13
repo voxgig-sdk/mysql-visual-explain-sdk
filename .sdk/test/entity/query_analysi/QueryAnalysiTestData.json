@@ -2,26 +2,26 @@
   "existing": {
     "query_analysi": {
       "QUERY_ANALYSI00": {
-        "explain_output": {},
-        "mysql_version": "s33",
+        "explainOutput": {},
+        "mysqlVersion": "s33",
         "query": "s34",
-        "recommendation": [],
+        "recommendations": [],
         "visualization": {},
         "id": "QUERY_ANALYSI00"
       },
       "QUERY_ANALYSI01": {
-        "explain_output": {},
-        "mysql_version": "s65",
+        "explainOutput": {},
+        "mysqlVersion": "s65",
         "query": "s66",
-        "recommendation": [],
+        "recommendations": [],
         "visualization": {},
         "id": "QUERY_ANALYSI01"
       },
       "QUERY_ANALYSI02": {
-        "explain_output": {},
-        "mysql_version": "s97",
+        "explainOutput": {},
+        "mysqlVersion": "s97",
         "query": "s98",
-        "recommendation": [],
+        "recommendations": [],
         "visualization": {},
         "id": "QUERY_ANALYSI02"
       }
@@ -30,10 +30,10 @@
   "new": {
     "query_analysi": {
       "query_analysi_ref01": {
-        "explain_output": {},
-        "mysql_version": "sc9",
+        "explainOutput": {},
+        "mysqlVersion": "sc9",
         "query": "sca",
-        "recommendation": [],
+        "recommendations": [],
         "visualization": {}
       }
     }

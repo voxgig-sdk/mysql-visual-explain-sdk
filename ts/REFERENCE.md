@@ -128,10 +128,10 @@ const query_analysi = client.QueryAnalysi()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `explain_output` | `Record<string, any>` | No |  |
-| `mysql_version` | `string` | No |  |
+| `explainOutput` | `Record<string, any>` | No |  |
+| `mysqlVersion` | `string` | No |  |
 | `query` | `string` | Yes |  |
-| `recommendation` | `any[]` | No |  |
+| `recommendations` | `any[]` | No |  |
 | `visualization` | `Record<string, any>` | No |  |
 
 ### Operations
@@ -185,7 +185,7 @@ const system_info = client.SystemInfo()
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `version` | `string` | No |  |
-| `version_comment` | `string` | No |  |
+| `versionComment` | `string` | No |  |
 
 ### Operations
 

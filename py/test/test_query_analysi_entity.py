@@ -6,9 +6,9 @@ import time
 
 import pytest
 
-from utility.voxgig_struct import voxgig_struct as vs
+from mysqlvisualexplain_sdk.utility.voxgig_struct import voxgig_struct as vs
 from mysqlvisualexplain_sdk import MysqlVisualExplainSDK
-from core import helpers
+from mysqlvisualexplain_sdk.core import helpers
 
 _TEST_DIR = os.path.dirname(os.path.abspath(__file__))
 from test import runner
@@ -36,7 +36,7 @@ class TestQueryAnalysiEntity:
         # without an *_ENTID env override, those IDs hit the live API and 4xx.
         if setup.get("synthetic_only"):
             pytest.skip("live entity test uses synthetic IDs from fixture — "
-                        "set MYSQLVISUALEXPLAIN_TEST_QUERY_ANALYSI_ENTID JSON to run live")
+                        "set MYSQL_VISUAL_EXPLAIN_TEST_QUERY_ANALYSI_ENTID JSON to run live")
         client = setup["client"]
 
         # CREATE
@@ -44,7 +44,7 @@ class TestQueryAnalysiEntity:
         query_analysi_ref01_data = helpers.to_map(vs.getprop(
             vs.getpath(setup["data"], "new.query_analysi"), "query_analysi_ref01"))
 
-        query_analysi_ref01_data = helpers.to_map(query_analysi_ref01_ent.create(query_analysi_ref01_data, None))
+        query_analysi_ref01_data = helpers.to_map(runner.entity_data(query_analysi_ref01_ent.create(query_analysi_ref01_data, None)))
         assert query_analysi_ref01_data is not None
 
 
@@ -78,21 +78,21 @@ def _query_analysi_basic_setup(extra):
     # mode is on without a real override, the basic test runs against synthetic
     # IDs from the fixture and 4xx's. We surface this so the test can skip.
     _entid_env_raw = os.environ.get(
-        "MYSQLVISUALEXPLAIN_TEST_QUERY_ANALYSI_ENTID")
+        "MYSQL_VISUAL_EXPLAIN_TEST_QUERY_ANALYSI_ENTID")
     _idmap_overridden = _entid_env_raw is not None and _entid_env_raw.strip().startswith("{")
 
     env = runner.env_override({
-        "MYSQLVISUALEXPLAIN_TEST_QUERY_ANALYSI_ENTID": idmap,
-        "MYSQLVISUALEXPLAIN_TEST_LIVE": "FALSE",
-        "MYSQLVISUALEXPLAIN_TEST_EXPLAIN": "FALSE",
+        "MYSQL_VISUAL_EXPLAIN_TEST_QUERY_ANALYSI_ENTID": idmap,
+        "MYSQL_VISUAL_EXPLAIN_TEST_LIVE": "FALSE",
+        "MYSQL_VISUAL_EXPLAIN_TEST_EXPLAIN": "FALSE",
     })
 
     idmap_resolved = helpers.to_map(
-        env.get("MYSQLVISUALEXPLAIN_TEST_QUERY_ANALYSI_ENTID"))
+        env.get("MYSQL_VISUAL_EXPLAIN_TEST_QUERY_ANALYSI_ENTID"))
     if idmap_resolved is None:
         idmap_resolved = helpers.to_map(idmap)
 
-    if env.get("MYSQLVISUALEXPLAIN_TEST_LIVE") == "TRUE":
+    if env.get("MYSQL_VISUAL_EXPLAIN_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
             },
@@ -100,13 +100,13 @@ def _query_analysi_basic_setup(extra):
         ])
         client = MysqlVisualExplainSDK(helpers.to_map(merged_opts))
 
-    _live = env.get("MYSQLVISUALEXPLAIN_TEST_LIVE") == "TRUE"
+    _live = env.get("MYSQL_VISUAL_EXPLAIN_TEST_LIVE") == "TRUE"
     return {
         "client": client,
         "data": entity_data,
         "idmap": idmap_resolved,
         "env": env,
-        "explain": env.get("MYSQLVISUALEXPLAIN_TEST_EXPLAIN") == "TRUE",
+        "explain": env.get("MYSQL_VISUAL_EXPLAIN_TEST_EXPLAIN") == "TRUE",
         "live": _live,
         "synthetic_only": _live and not _idmap_overridden,
         "now": int(time.time() * 1000),

@@ -91,10 +91,10 @@ query_analysi = client.QueryAnalysi()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `explain_output` | `dict` | No |  |
-| `mysql_version` | `str` | No |  |
+| `explainOutput` | `dict` | No |  |
+| `mysqlVersion` | `str` | No |  |
 | `query` | `str` | Yes |  |
-| `recommendation` | `list` | No |  |
+| `recommendations` | `list` | No |  |
 | `visualization` | `dict` | No |  |
 
 ### Operations
@@ -149,7 +149,7 @@ system_info = client.SystemInfo()
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `version` | `str` | No |  |
-| `version_comment` | `str` | No |  |
+| `versionComment` | `str` | No |  |
 
 ### Operations
 

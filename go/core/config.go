@@ -27,14 +27,14 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"active": true,
-						"name": "explain_output",
+						"name": "explainOutput",
 						"req": false,
 						"type": "`$OBJECT`",
 						"index$": 0,
 					},
 					map[string]any{
 						"active": true,
-						"name": "mysql_version",
+						"name": "mysqlVersion",
 						"req": false,
 						"type": "`$STRING`",
 						"index$": 1,
@@ -48,7 +48,7 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"active": true,
-						"name": "recommendation",
+						"name": "recommendations",
 						"req": false,
 						"type": "`$ARRAY`",
 						"index$": 3,
@@ -70,6 +70,7 @@ func MakeConfig() map[string]any {
 							map[string]any{
 								"active": true,
 								"args": map[string]any{},
+								"kind": "http",
 								"method": "POST",
 								"orig": "/api/explain",
 								"parts": []any{
@@ -84,7 +85,6 @@ func MakeConfig() map[string]any {
 								"index$": 0,
 							},
 						},
-						"key$": "create",
 					},
 				},
 				"relations": map[string]any{
@@ -102,7 +102,7 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"active": true,
-						"name": "version_comment",
+						"name": "versionComment",
 						"req": false,
 						"type": "`$STRING`",
 						"index$": 1,
@@ -117,6 +117,7 @@ func MakeConfig() map[string]any {
 							map[string]any{
 								"active": true,
 								"args": map[string]any{},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/api/version",
 								"parts": []any{
@@ -131,7 +132,6 @@ func MakeConfig() map[string]any {
 								"index$": 0,
 							},
 						},
-						"key$": "load",
 					},
 				},
 				"relations": map[string]any{

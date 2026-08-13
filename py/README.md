@@ -39,7 +39,7 @@ client = MysqlVisualExplainSDK()
 ### 4. Create, update, and remove
 
 ```python
-# Create — returns the bare created record (a dict)
+# Create — returns the ENTITY (call data_get() for the record)
 created = client.QueryAnalysi().create({"query": "example_query"})
 
 ```
@@ -118,7 +118,8 @@ Create a mock client for unit testing — no server required:
 ```python
 client = MysqlVisualExplainSDK.test()
 
-# Entity ops return the bare record and raise on error.
+# Entity ops return the ENTITY and raises on error;
+# call data_get() for the record.
 systeminfo = client.SystemInfo().load()
 # systeminfo contains the mock response record
 ```
@@ -216,7 +217,7 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the bare result data (a `dict` for single-entity
+Entity operations return the ENTITY (call data_get() for the record) (a `dict` for single-entity
 ops, a `list` for `list`) and raise on error. Wrap calls in
 `try`/`except` to handle failures.
 
@@ -238,10 +239,10 @@ On error, `ok` is `False` and `err` contains the error value.
 
 | Field | Description |
 | --- | --- |
-| `explain_output` |  |
-| `mysql_version` |  |
+| `explainOutput` |  |
+| `mysqlVersion` |  |
 | `query` |  |
-| `recommendation` |  |
+| `recommendations` |  |
 | `visualization` |  |
 
 Operations: Create.
@@ -253,7 +254,7 @@ API path: `/api/explain`
 | Field | Description |
 | --- | --- |
 | `version` |  |
-| `version_comment` |  |
+| `versionComment` |  |
 
 Operations: Load.
 
@@ -278,10 +279,10 @@ Create an instance: `query_analysi = client.QueryAnalysi()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `explain_output` | `dict` |  |
-| `mysql_version` | `str` |  |
+| `explainOutput` | `dict` |  |
+| `mysqlVersion` | `str` |  |
 | `query` | `str` |  |
-| `recommendation` | `list` |  |
+| `recommendations` | `list` |  |
 | `visualization` | `dict` |  |
 
 #### Example: Create
@@ -308,7 +309,7 @@ Create an instance: `system_info = client.SystemInfo()`
 | Field | Type | Description |
 | --- | --- | --- |
 | `version` | `str` |  |
-| `version_comment` | `str` |  |
+| `versionComment` | `str` |  |
 
 #### Example: Load
 

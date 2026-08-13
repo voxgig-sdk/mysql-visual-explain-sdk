@@ -14,12 +14,12 @@ from __future__ import annotations
 
 from urllib.parse import quote
 
-from config import make_config
-from features import _make_feature
-from core.control import MysqlVisualExplainControl
-from core.error import MysqlVisualExplainError
-from core.result import MysqlVisualExplainResult
-from core.spec import MysqlVisualExplainSpec
+from mysqlvisualexplain_sdk.config import make_config
+from mysqlvisualexplain_sdk.features import _make_feature
+from mysqlvisualexplain_sdk.core.control import MysqlVisualExplainControl
+from mysqlvisualexplain_sdk.core.error import MysqlVisualExplainError
+from mysqlvisualexplain_sdk.core.result import MysqlVisualExplainResult
+from mysqlvisualexplain_sdk.core.spec import MysqlVisualExplainSpec
 
 
 # True when this SDK was generated with the named feature.

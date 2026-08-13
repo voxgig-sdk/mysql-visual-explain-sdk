@@ -16,11 +16,11 @@
 import pytest
 
 from mysqlvisualexplain_sdk import MysqlVisualExplainSDK
-from core.error import MysqlVisualExplainError
-from core.result import MysqlVisualExplainResult
-from core.response import MysqlVisualExplainResponse
-from core.spec import MysqlVisualExplainSpec
-from feature.base_feature import MysqlVisualExplainBaseFeature
+from mysqlvisualexplain_sdk.core.error import MysqlVisualExplainError
+from mysqlvisualexplain_sdk.core.result import MysqlVisualExplainResult
+from mysqlvisualexplain_sdk.core.response import MysqlVisualExplainResponse
+from mysqlvisualexplain_sdk.core.spec import MysqlVisualExplainSpec
+from mysqlvisualexplain_sdk.feature.base_feature import MysqlVisualExplainBaseFeature
 
 
 def _client():

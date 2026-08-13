@@ -59,11 +59,11 @@ def system_info_direct_setup(mockres)
   calls = []
 
   env = Runner.env_override({
-    "MYSQLVISUALEXPLAIN_TEST_SYSTEM_INFO_ENTID" => {},
-    "MYSQLVISUALEXPLAIN_TEST_LIVE" => "FALSE",
+    "MYSQL_VISUAL_EXPLAIN_TEST_SYSTEM_INFO_ENTID" => {},
+    "MYSQL_VISUAL_EXPLAIN_TEST_LIVE" => "FALSE",
   })
 
-  live = env["MYSQLVISUALEXPLAIN_TEST_LIVE"] == "TRUE"
+  live = env["MYSQL_VISUAL_EXPLAIN_TEST_LIVE"] == "TRUE"
 
   if live
     merged_opts = {

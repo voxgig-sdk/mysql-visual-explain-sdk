@@ -36,7 +36,7 @@ const client = new MysqlVisualExplainSDK()
 ### 4. Create, update, and remove
 
 ```ts
-// Create — returns the created QueryAnalysi
+// Create — returns the created QueryAnalysi ENTITY (.data() for the record)
 const created = await client.QueryAnalysi().create({
   query: 'example_query',
 })
@@ -118,7 +118,8 @@ Create a mock client for unit testing — no server required:
 const client = MysqlVisualExplainSDK.test()
 
 const systeminfo = await client.SystemInfo().load()
-// systeminfo is a bare entity populated with mock response data
+// systeminfo is the entity, populated with mock response data
+// — call systeminfo.data() for the record itself
 console.log(systeminfo)
 ```
 
@@ -283,10 +284,10 @@ The `prepare()` method returns:
 
 | Field | Description |
 | --- | --- |
-| `explain_output` |  |
-| `mysql_version` |  |
+| `explainOutput` |  |
+| `mysqlVersion` |  |
 | `query` |  |
-| `recommendation` |  |
+| `recommendations` |  |
 | `visualization` |  |
 
 Operations: create.
@@ -298,7 +299,7 @@ API path: `/api/explain`
 | Field | Description |
 | --- | --- |
 | `version` |  |
-| `version_comment` |  |
+| `versionComment` |  |
 
 Operations: load.
 
@@ -323,10 +324,10 @@ Create an instance: `const query_analysi = client.QueryAnalysi()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `explain_output` | `Record<string, any>` |  |
-| `mysql_version` | `string` |  |
+| `explainOutput` | `Record<string, any>` |  |
+| `mysqlVersion` | `string` |  |
 | `query` | `string` |  |
-| `recommendation` | `any[]` |  |
+| `recommendations` | `any[]` |  |
 | `visualization` | `Record<string, any>` |  |
 
 #### Example: Create
@@ -353,7 +354,7 @@ Create an instance: `const system_info = client.SystemInfo()`
 | Field | Type | Description |
 | --- | --- | --- |
 | `version` | `string` |  |
-| `version_comment` | `string` |  |
+| `versionComment` | `string` |  |
 
 #### Example: Load
 

@@ -27,14 +27,14 @@ local function make_config()
         ["fields"] = {
           {
             ["active"] = true,
-            ["name"] = "explain_output",
+            ["name"] = "explainOutput",
             ["req"] = false,
             ["type"] = "`$OBJECT`",
             ["index$"] = 0,
           },
           {
             ["active"] = true,
-            ["name"] = "mysql_version",
+            ["name"] = "mysqlVersion",
             ["req"] = false,
             ["type"] = "`$STRING`",
             ["index$"] = 1,
@@ -48,7 +48,7 @@ local function make_config()
           },
           {
             ["active"] = true,
-            ["name"] = "recommendation",
+            ["name"] = "recommendations",
             ["req"] = false,
             ["type"] = "`$ARRAY`",
             ["index$"] = 3,
@@ -70,6 +70,7 @@ local function make_config()
               {
                 ["active"] = true,
                 ["args"] = {},
+                ["kind"] = "http",
                 ["method"] = "POST",
                 ["orig"] = "/api/explain",
                 ["parts"] = {
@@ -102,7 +103,7 @@ local function make_config()
           },
           {
             ["active"] = true,
-            ["name"] = "version_comment",
+            ["name"] = "versionComment",
             ["req"] = false,
             ["type"] = "`$STRING`",
             ["index$"] = 1,
@@ -117,6 +118,7 @@ local function make_config()
               {
                 ["active"] = true,
                 ["args"] = {},
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/version",
                 ["parts"] = {

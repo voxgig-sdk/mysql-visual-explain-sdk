@@ -96,10 +96,10 @@ $query_analysi = $client->QueryAnalysi();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `explain_output` | `array` | No |  |
-| `mysql_version` | `string` | No |  |
+| `explainOutput` | `array` | No |  |
+| `mysqlVersion` | `string` | No |  |
 | `query` | `string` | Yes |  |
-| `recommendation` | `array` | No |  |
+| `recommendations` | `array` | No |  |
 | `visualization` | `array` | No |  |
 
 ### Operations
@@ -155,7 +155,7 @@ $system_info = $client->SystemInfo();
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `version` | `string` | No |  |
-| `version_comment` | `string` | No |  |
+| `versionComment` | `string` | No |  |
 
 ### Operations
 

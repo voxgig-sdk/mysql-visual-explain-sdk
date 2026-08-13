@@ -97,10 +97,10 @@ query_analysi = client.QueryAnalysi
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `explain_output` | `Hash` | No |  |
-| `mysql_version` | `String` | No |  |
+| `explainOutput` | `Hash` | No |  |
+| `mysqlVersion` | `String` | No |  |
 | `query` | `String` | Yes |  |
-| `recommendation` | `Array` | No |  |
+| `recommendations` | `Array` | No |  |
 | `visualization` | `Hash` | No |  |
 
 ### Operations
@@ -156,7 +156,7 @@ system_info = client.SystemInfo
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `version` | `String` | No |  |
-| `version_comment` | `String` | No |  |
+| `versionComment` | `String` | No |  |
 
 ### Operations
 

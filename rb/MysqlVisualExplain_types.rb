@@ -10,50 +10,50 @@
 
 # QueryAnalysi entity data model.
 #
-# @!attribute [rw] explain_output
+# @!attribute [rw] explainOutput
 #   @return [Hash, nil]
 #
-# @!attribute [rw] mysql_version
+# @!attribute [rw] mysqlVersion
 #   @return [String, nil]
 #
 # @!attribute [rw] query
 #   @return [String]
 #
-# @!attribute [rw] recommendation
+# @!attribute [rw] recommendations
 #   @return [Array, nil]
 #
 # @!attribute [rw] visualization
 #   @return [Hash, nil]
 QueryAnalysi = Struct.new(
-  :explain_output,
-  :mysql_version,
+  :explainOutput,
+  :mysqlVersion,
   :query,
-  :recommendation,
+  :recommendations,
   :visualization,
   keyword_init: true
 )
 
 # Request payload for QueryAnalysi#create.
 #
-# @!attribute [rw] explain_output
+# @!attribute [rw] explainOutput
 #   @return [Hash, nil]
 #
-# @!attribute [rw] mysql_version
+# @!attribute [rw] mysqlVersion
 #   @return [String, nil]
 #
 # @!attribute [rw] query
 #   @return [String]
 #
-# @!attribute [rw] recommendation
+# @!attribute [rw] recommendations
 #   @return [Array, nil]
 #
 # @!attribute [rw] visualization
 #   @return [Hash, nil]
 QueryAnalysiCreateData = Struct.new(
-  :explain_output,
-  :mysql_version,
+  :explainOutput,
+  :mysqlVersion,
   :query,
-  :recommendation,
+  :recommendations,
   :visualization,
   keyword_init: true
 )
@@ -63,11 +63,11 @@ QueryAnalysiCreateData = Struct.new(
 # @!attribute [rw] version
 #   @return [String, nil]
 #
-# @!attribute [rw] version_comment
+# @!attribute [rw] versionComment
 #   @return [String, nil]
 SystemInfo = Struct.new(
   :version,
-  :version_comment,
+  :versionComment,
   keyword_init: true
 )
 
@@ -76,11 +76,11 @@ SystemInfo = Struct.new(
 # @!attribute [rw] version
 #   @return [String, nil]
 #
-# @!attribute [rw] version_comment
+# @!attribute [rw] versionComment
 #   @return [String, nil]
 SystemInfoLoadMatch = Struct.new(
   :version,
-  :version_comment,
+  :versionComment,
   keyword_init: true
 )
 

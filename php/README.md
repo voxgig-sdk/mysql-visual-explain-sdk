@@ -34,7 +34,7 @@ $client = new MysqlVisualExplainSDK();
 ### 4. Create, update, and remove
 
 ```php
-// create() returns the bare created QueryAnalysi record.
+// create() returns the ENTITY — call data_get() for the created QueryAnalysi record.
 $created = $client->QueryAnalysi()->create(["query" => "example_query"]);
 
 ```
@@ -119,7 +119,8 @@ Create a mock client for unit testing — no server required:
 ```php
 $client = MysqlVisualExplainSDK::test();
 
-// Entity ops return the bare mock record (throws on error).
+// Entity ops return the ENTITY (throws on error);
+// call data_get() for the mock record.
 $systeminfo = $client->SystemInfo()->load();
 print_r($systeminfo);
 ```
@@ -220,7 +221,7 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the bare result data (an `array` for single-entity
+Entity operations return the ENTITY (call data_get() for the record) (an `array` for single-entity
 ops, a `list` for `list`) and throw on error. Wrap calls in
 `try`/`catch` to handle failures.
 
@@ -242,10 +243,10 @@ On error, `ok` is `false` and `$err` contains the error value.
 
 | Field | Description |
 | --- | --- |
-| `explain_output` |  |
-| `mysql_version` |  |
+| `explainOutput` |  |
+| `mysqlVersion` |  |
 | `query` |  |
-| `recommendation` |  |
+| `recommendations` |  |
 | `visualization` |  |
 
 Operations: Create.
@@ -257,7 +258,7 @@ API path: `/api/explain`
 | Field | Description |
 | --- | --- |
 | `version` |  |
-| `version_comment` |  |
+| `versionComment` |  |
 
 Operations: Load.
 
@@ -282,10 +283,10 @@ Create an instance: `$query_analysi = $client->QueryAnalysi();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `explain_output` | `array` |  |
-| `mysql_version` | `string` |  |
+| `explainOutput` | `array` |  |
+| `mysqlVersion` | `string` |  |
 | `query` | `string` |  |
-| `recommendation` | `array` |  |
+| `recommendations` | `array` |  |
 | `visualization` | `array` |  |
 
 #### Example: Create
@@ -312,12 +313,12 @@ Create an instance: `$system_info = $client->SystemInfo();`
 | Field | Type | Description |
 | --- | --- | --- |
 | `version` | `string` |  |
-| `version_comment` | `string` |  |
+| `versionComment` | `string` |  |
 
 #### Example: Load
 
 ```php
-// load() returns the bare SystemInfo record (throws on error).
+// load() returns the ENTITY — call data_get() for the SystemInfo record (throws on error).
 $system_info = $client->SystemInfo()->load();
 ```
 

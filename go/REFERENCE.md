@@ -102,10 +102,10 @@ fmt.Println(queryAnalysi.GetName()) // "query_analysi"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `explain_output` | `map[string]any` | No |  |
-| `mysql_version` | `string` | No |  |
+| `explainOutput` | `map[string]any` | No |  |
+| `mysqlVersion` | `string` | No |  |
 | `query` | `string` | Yes |  |
-| `recommendation` | `[]any` | No |  |
+| `recommendations` | `[]any` | No |  |
 | `visualization` | `map[string]any` | No |  |
 
 ### Operations
@@ -160,7 +160,7 @@ fmt.Println(systemInfo.GetName()) // "system_info"
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `version` | `string` | No |  |
-| `version_comment` | `string` | No |  |
+| `versionComment` | `string` | No |  |
 
 ### Operations
 

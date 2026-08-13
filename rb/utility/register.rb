@@ -24,6 +24,7 @@ require_relative 'prepare_method'
 require_relative 'prepare_params'
 require_relative 'prepare_path'
 require_relative 'prepare_query'
+require_relative 'graphql'
 require_relative 'result_basic'
 require_relative 'result_body'
 require_relative 'result_headers'
@@ -55,6 +56,8 @@ MysqlVisualExplainUtility.registrar = ->(u) {
   u.prepare_params = MysqlVisualExplainUtilities::PrepareParams
   u.prepare_path = MysqlVisualExplainUtilities::PreparePath
   u.prepare_query = MysqlVisualExplainUtilities::PrepareQuery
+  u.graphql_body = MysqlVisualExplainUtilities::GraphqlBody
+  u.graphql_errors = MysqlVisualExplainUtilities::GraphqlErrors
   u.result_basic = MysqlVisualExplainUtilities::ResultBasic
   u.result_body = MysqlVisualExplainUtilities::ResultBody
   u.result_headers = MysqlVisualExplainUtilities::ResultHeaders

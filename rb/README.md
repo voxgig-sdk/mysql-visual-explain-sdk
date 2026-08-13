@@ -33,7 +33,7 @@ client = MysqlVisualExplainSDK.new
 ### 4. Create, update, and remove
 
 ```ruby
-# create returns the bare created QueryAnalysi record.
+# create returns the ENTITY — call data_get for the created QueryAnalysi record.
 created = client.QueryAnalysi.create({ "query" => "example_query" })
 
 ```
@@ -113,7 +113,8 @@ Create a mock client for unit testing — no server required:
 ```ruby
 client = MysqlVisualExplainSDK.test
 
-# Entity ops return the bare mock record (raises on error).
+# Entity ops return the ENTITY (raises on error);
+# call data_get for the mock record.
 systeminfo = client.SystemInfo.load()
 puts systeminfo
 ```
@@ -232,10 +233,10 @@ returns a result `Hash` with these keys:
 
 | Field | Description |
 | --- | --- |
-| `explain_output` |  |
-| `mysql_version` |  |
+| `explainOutput` |  |
+| `mysqlVersion` |  |
 | `query` |  |
-| `recommendation` |  |
+| `recommendations` |  |
 | `visualization` |  |
 
 Operations: Create.
@@ -247,7 +248,7 @@ API path: `/api/explain`
 | Field | Description |
 | --- | --- |
 | `version` |  |
-| `version_comment` |  |
+| `versionComment` |  |
 
 Operations: Load.
 
@@ -272,10 +273,10 @@ Create an instance: `query_analysi = client.QueryAnalysi`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `explain_output` | `Hash` |  |
-| `mysql_version` | `String` |  |
+| `explainOutput` | `Hash` |  |
+| `mysqlVersion` | `String` |  |
 | `query` | `String` |  |
-| `recommendation` | `Array` |  |
+| `recommendations` | `Array` |  |
 | `visualization` | `Hash` |  |
 
 #### Example: Create
@@ -302,12 +303,12 @@ Create an instance: `system_info = client.SystemInfo`
 | Field | Type | Description |
 | --- | --- | --- |
 | `version` | `String` |  |
-| `version_comment` | `String` |  |
+| `versionComment` | `String` |  |
 
 #### Example: Load
 
 ```ruby
-# load returns the bare SystemInfo record (raises on error).
+# load returns the ENTITY — call data_get for the SystemInfo record (raises on error).
 system_info = client.SystemInfo.load()
 ```
 

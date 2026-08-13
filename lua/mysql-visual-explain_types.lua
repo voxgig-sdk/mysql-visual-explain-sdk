@@ -7,26 +7,26 @@
 -- edit by hand.
 
 ---@class QueryAnalysi
----@field explain_output? table
----@field mysql_version? string
+---@field explainOutput? table
+---@field mysqlVersion? string
 ---@field query string
----@field recommendation? table
+---@field recommendations? table
 ---@field visualization? table
 
 ---@class QueryAnalysiCreateData
----@field explain_output? table
----@field mysql_version? string
+---@field explainOutput? table
+---@field mysqlVersion? string
 ---@field query string
----@field recommendation? table
+---@field recommendations? table
 ---@field visualization? table
 
 ---@class SystemInfo
 ---@field version? string
----@field version_comment? string
+---@field versionComment? string
 
 ---@class SystemInfoLoadMatch
 ---@field version? string
----@field version_comment? string
+---@field versionComment? string
 
 local M = {}
 

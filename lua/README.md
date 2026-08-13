@@ -215,9 +215,9 @@ data **directly** — there is no wrapper:
 
 Check `err` first (it is non-`nil` on failure), then use `value`:
 
-    local query_analysi, err = client:QueryAnalysi():load()
+    local system_info, err = client:SystemInfo():load()
     if err then error(err) end
-    -- query_analysi is the loaded record
+    -- system_info is the loaded record
 
 Only `direct()` returns a response envelope — a `table` with `ok`,
 `status`, `headers`, and `data` keys.
@@ -228,10 +228,10 @@ Only `direct()` returns a response envelope — a `table` with `ok`,
 
 | Field | Description |
 | --- | --- |
-| `explain_output` |  |
-| `mysql_version` |  |
+| `explainOutput` |  |
+| `mysqlVersion` |  |
 | `query` |  |
-| `recommendation` |  |
+| `recommendations` |  |
 | `visualization` |  |
 
 Operations: Create.
@@ -243,7 +243,7 @@ API path: `/api/explain`
 | Field | Description |
 | --- | --- |
 | `version` |  |
-| `version_comment` |  |
+| `versionComment` |  |
 
 Operations: Load.
 
@@ -268,10 +268,10 @@ Create an instance: `local query_analysi = client:QueryAnalysi(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `explain_output` | `table` |  |
-| `mysql_version` | `string` |  |
+| `explainOutput` | `table` |  |
+| `mysqlVersion` | `string` |  |
 | `query` | `string` |  |
-| `recommendation` | `table` |  |
+| `recommendations` | `table` |  |
 | `visualization` | `table` |  |
 
 #### Example: Create
@@ -298,7 +298,7 @@ Create an instance: `local system_info = client:SystemInfo(nil)`
 | Field | Type | Description |
 | --- | --- | --- |
 | `version` | `string` |  |
-| `version_comment` | `string` |  |
+| `versionComment` | `string` |  |
 
 #### Example: Load
 

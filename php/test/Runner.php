@@ -43,8 +43,8 @@ class MysqlVisualExplainTestRunner
 
     public static function env_override(array $m): array
     {
-        $live = self::getenv('MYSQLVISUALEXPLAIN_TEST_LIVE');
-        $override = self::getenv('MYSQLVISUALEXPLAIN_TEST_OVERRIDE');
+        $live = self::getenv('MYSQL_VISUAL_EXPLAIN_TEST_LIVE');
+        $override = self::getenv('MYSQL_VISUAL_EXPLAIN_TEST_OVERRIDE');
 
         if ($live === 'TRUE' || $override === 'TRUE') {
             foreach (array_keys($m) as $key) {
@@ -63,9 +63,9 @@ class MysqlVisualExplainTestRunner
             }
         }
 
-        $explain = self::getenv('MYSQLVISUALEXPLAIN_TEST_EXPLAIN');
+        $explain = self::getenv('MYSQL_VISUAL_EXPLAIN_TEST_EXPLAIN');
         if ($explain !== null && $explain !== '') {
-            $m['MYSQLVISUALEXPLAIN_TEST_EXPLAIN'] = $explain;
+            $m['MYSQL_VISUAL_EXPLAIN_TEST_EXPLAIN'] = $explain;
         }
 
         return $m;

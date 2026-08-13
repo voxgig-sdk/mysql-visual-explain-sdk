@@ -260,10 +260,10 @@ Only `Direct()` returns a response envelope — a `map[string]any` with
 
 | Field | Description |
 | --- | --- |
-| `"explain_output"` |  |
-| `"mysql_version"` |  |
+| `"explainOutput"` |  |
+| `"mysqlVersion"` |  |
 | `"query"` |  |
-| `"recommendation"` |  |
+| `"recommendations"` |  |
 | `"visualization"` |  |
 
 Operations: Create.
@@ -275,7 +275,7 @@ API path: `/api/explain`
 | Field | Description |
 | --- | --- |
 | `"version"` |  |
-| `"version_comment"` |  |
+| `"versionComment"` |  |
 
 Operations: Load.
 
@@ -300,10 +300,10 @@ Create an instance: `queryAnalysi := client.QueryAnalysi(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `explain_output` | `map[string]any` |  |
-| `mysql_version` | `string` |  |
+| `explainOutput` | `map[string]any` |  |
+| `mysqlVersion` | `string` |  |
 | `query` | `string` |  |
-| `recommendation` | `[]any` |  |
+| `recommendations` | `[]any` |  |
 | `visualization` | `map[string]any` |  |
 
 #### Example: Create
@@ -334,7 +334,7 @@ Create an instance: `systemInfo := client.SystemInfo(nil)`
 | Field | Type | Description |
 | --- | --- | --- |
 | `version` | `string` |  |
-| `version_comment` | `string` |  |
+| `versionComment` | `string` |  |
 
 #### Example: Load
 

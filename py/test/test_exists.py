@@ -1,4 +1,4 @@
-# ProjectName SDK exists test
+# MysqlVisualExplain SDK exists test
 
 import pytest
 from mysqlvisualexplain_sdk import MysqlVisualExplainSDK
