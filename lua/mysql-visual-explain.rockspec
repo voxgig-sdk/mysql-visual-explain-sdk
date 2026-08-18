@@ -23,6 +23,7 @@ build = {
   modules = {
     ["mysql-visual-explain_sdk"] = "mysql-visual-explain_sdk.lua",
     ["config"] = "config.lua",
+    ["config_shared"] = "config_shared.lua",
     ["features"] = "features.lua",
   }
 }

@@ -40,7 +40,7 @@ class MysqlVisualExplainSDK
         $utility = new MysqlVisualExplainUtility();
         $this->_utility = $utility;
 
-        $config = MysqlVisualExplainConfig::make_config();
+        $config = MysqlVisualExplainConfig::shared_config();
 
         $this->_rootctx = ($utility->make_context)([
             "client" => $this,

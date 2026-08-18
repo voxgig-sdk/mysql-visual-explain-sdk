@@ -28,7 +28,7 @@ class MysqlVisualExplainSDK
     utility = MysqlVisualExplainUtility.new
     @_utility = utility
 
-    config = MysqlVisualExplainConfig.make_config
+    config = MysqlVisualExplainConfig.shared_config
 
     @_rootctx = utility.make_context.call({
       "client" => self,
