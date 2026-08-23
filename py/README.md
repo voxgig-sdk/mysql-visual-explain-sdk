@@ -239,11 +239,11 @@ On error, `ok` is `False` and `err` contains the error value.
 
 | Field | Description |
 | --- | --- |
-| `explainOutput` |  |
-| `mysqlVersion` |  |
-| `query` |  |
-| `recommendations` |  |
-| `visualization` |  |
+| `explainOutput` | Raw EXPLAIN output from MySQL |
+| `mysqlVersion` | MySQL version for compatibility (e.g., 8.0, 5.7) |
+| `query` | The SQL query to analyze and visualize |
+| `recommendations` | Performance optimization recommendations |
+| `visualization` | The visual representation data of the query execution plan |
 
 Operations: Create.
 
@@ -253,8 +253,8 @@ API path: `/api/explain`
 
 | Field | Description |
 | --- | --- |
-| `version` |  |
-| `versionComment` |  |
+| `version` | MySQL version string |
+| `versionComment` | Additional version information |
 
 Operations: Load.
 
@@ -279,11 +279,11 @@ Create an instance: `query_analysi = client.QueryAnalysi()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `explainOutput` | `dict` |  |
-| `mysqlVersion` | `str` |  |
-| `query` | `str` |  |
-| `recommendations` | `list` |  |
-| `visualization` | `dict` |  |
+| `explainOutput` | `dict` | Raw EXPLAIN output from MySQL |
+| `mysqlVersion` | `str` | MySQL version for compatibility (e.g., 8.0, 5.7) |
+| `query` | `str` | The SQL query to analyze and visualize |
+| `recommendations` | `list` | Performance optimization recommendations |
+| `visualization` | `dict` | The visual representation data of the query execution plan |
 
 #### Example: Create
 
@@ -308,8 +308,8 @@ Create an instance: `system_info = client.SystemInfo()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `version` | `str` |  |
-| `versionComment` | `str` |  |
+| `version` | `str` | MySQL version string |
+| `versionComment` | `str` | Additional version information |
 
 #### Example: Load
 

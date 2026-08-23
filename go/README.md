@@ -6,7 +6,7 @@ The Golang SDK for the MysqlVisualExplain API — an entity-oriented client usin
 
 It exposes the API as capitalised, semantic **Entities** — e.g. `client.QueryAnalysi(nil)` — each with the same small set of operations (`Load`, `Create`) instead of raw URL paths and query strings. You call meaning, not endpoints, which keeps the cognitive load low.
 
-> Other languages, the CLI, and MCP server live alongside this one — see
+> Also generated from this model: `go-cli`, `go-mcp`, `lua`, `php`, `py`, `rb`, `ts` — see
 > the [top-level README](../README.md).
 
 
@@ -260,11 +260,11 @@ Only `Direct()` returns a response envelope — a `map[string]any` with
 
 | Field | Description |
 | --- | --- |
-| `"explainOutput"` |  |
-| `"mysqlVersion"` |  |
-| `"query"` |  |
-| `"recommendations"` |  |
-| `"visualization"` |  |
+| `"explainOutput"` | Raw EXPLAIN output from MySQL |
+| `"mysqlVersion"` | MySQL version for compatibility (e.g., 8.0, 5.7) |
+| `"query"` | The SQL query to analyze and visualize |
+| `"recommendations"` | Performance optimization recommendations |
+| `"visualization"` | The visual representation data of the query execution plan |
 
 Operations: Create.
 
@@ -274,8 +274,8 @@ API path: `/api/explain`
 
 | Field | Description |
 | --- | --- |
-| `"version"` |  |
-| `"versionComment"` |  |
+| `"version"` | MySQL version string |
+| `"versionComment"` | Additional version information |
 
 Operations: Load.
 
@@ -300,11 +300,11 @@ Create an instance: `queryAnalysi := client.QueryAnalysi(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `explainOutput` | `map[string]any` |  |
-| `mysqlVersion` | `string` |  |
-| `query` | `string` |  |
-| `recommendations` | `[]any` |  |
-| `visualization` | `map[string]any` |  |
+| `explainOutput` | `map[string]any` | Raw EXPLAIN output from MySQL |
+| `mysqlVersion` | `string` | MySQL version for compatibility (e.g., 8.0, 5.7) |
+| `query` | `string` | The SQL query to analyze and visualize |
+| `recommendations` | `[]any` | Performance optimization recommendations |
+| `visualization` | `map[string]any` | The visual representation data of the query execution plan |
 
 #### Example: Create
 
@@ -333,8 +333,8 @@ Create an instance: `systemInfo := client.SystemInfo(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `version` | `string` |  |
-| `versionComment` | `string` |  |
+| `version` | `string` | MySQL version string |
+| `versionComment` | `string` | Additional version information |
 
 #### Example: Load
 

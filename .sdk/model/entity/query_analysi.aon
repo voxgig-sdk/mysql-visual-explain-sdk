@@ -8,26 +8,31 @@ main: kit: entity: query_analysi: {
     {
       name: "explainOutput"
       req: false
+      short: "Raw EXPLAIN output from MySQL"
       type: "`$OBJECT`"
     }
     {
       name: "mysqlVersion"
       req: false
+      short: "MySQL version for compatibility (e.g., 8.0, 5.7)"
       type: "`$STRING`"
     }
     {
       name: "query"
       req: true
+      short: "The SQL query to analyze and visualize"
       type: "`$STRING`"
     }
     {
       name: "recommendations"
       req: false
+      short: "Performance optimization recommendations"
       type: "`$ARRAY`"
     }
     {
       name: "visualization"
       req: false
+      short: "The visual representation data of the query execution plan"
       type: "`$OBJECT`"
     }
   ]

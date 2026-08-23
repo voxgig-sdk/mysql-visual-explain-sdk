@@ -228,11 +228,11 @@ Only `direct()` returns a response envelope — a `table` with `ok`,
 
 | Field | Description |
 | --- | --- |
-| `explainOutput` |  |
-| `mysqlVersion` |  |
-| `query` |  |
-| `recommendations` |  |
-| `visualization` |  |
+| `explainOutput` | Raw EXPLAIN output from MySQL |
+| `mysqlVersion` | MySQL version for compatibility (e.g., 8.0, 5.7) |
+| `query` | The SQL query to analyze and visualize |
+| `recommendations` | Performance optimization recommendations |
+| `visualization` | The visual representation data of the query execution plan |
 
 Operations: Create.
 
@@ -242,8 +242,8 @@ API path: `/api/explain`
 
 | Field | Description |
 | --- | --- |
-| `version` |  |
-| `versionComment` |  |
+| `version` | MySQL version string |
+| `versionComment` | Additional version information |
 
 Operations: Load.
 
@@ -268,11 +268,11 @@ Create an instance: `local query_analysi = client:QueryAnalysi(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `explainOutput` | `table` |  |
-| `mysqlVersion` | `string` |  |
-| `query` | `string` |  |
-| `recommendations` | `table` |  |
-| `visualization` | `table` |  |
+| `explainOutput` | `table` | Raw EXPLAIN output from MySQL |
+| `mysqlVersion` | `string` | MySQL version for compatibility (e.g., 8.0, 5.7) |
+| `query` | `string` | The SQL query to analyze and visualize |
+| `recommendations` | `table` | Performance optimization recommendations |
+| `visualization` | `table` | The visual representation data of the query execution plan |
 
 #### Example: Create
 
@@ -297,8 +297,8 @@ Create an instance: `local system_info = client:SystemInfo(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `version` | `string` |  |
-| `versionComment` | `string` |  |
+| `version` | `string` | MySQL version string |
+| `versionComment` | `string` | Additional version information |
 
 #### Example: Load
 

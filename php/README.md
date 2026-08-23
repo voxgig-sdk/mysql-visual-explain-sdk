@@ -243,11 +243,11 @@ On error, `ok` is `false` and `$err` contains the error value.
 
 | Field | Description |
 | --- | --- |
-| `explainOutput` |  |
-| `mysqlVersion` |  |
-| `query` |  |
-| `recommendations` |  |
-| `visualization` |  |
+| `explainOutput` | Raw EXPLAIN output from MySQL |
+| `mysqlVersion` | MySQL version for compatibility (e.g., 8.0, 5.7) |
+| `query` | The SQL query to analyze and visualize |
+| `recommendations` | Performance optimization recommendations |
+| `visualization` | The visual representation data of the query execution plan |
 
 Operations: Create.
 
@@ -257,8 +257,8 @@ API path: `/api/explain`
 
 | Field | Description |
 | --- | --- |
-| `version` |  |
-| `versionComment` |  |
+| `version` | MySQL version string |
+| `versionComment` | Additional version information |
 
 Operations: Load.
 
@@ -283,11 +283,11 @@ Create an instance: `$query_analysi = $client->QueryAnalysi();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `explainOutput` | `array` |  |
-| `mysqlVersion` | `string` |  |
-| `query` | `string` |  |
-| `recommendations` | `array` |  |
-| `visualization` | `array` |  |
+| `explainOutput` | `array` | Raw EXPLAIN output from MySQL |
+| `mysqlVersion` | `string` | MySQL version for compatibility (e.g., 8.0, 5.7) |
+| `query` | `string` | The SQL query to analyze and visualize |
+| `recommendations` | `array` | Performance optimization recommendations |
+| `visualization` | `array` | The visual representation data of the query execution plan |
 
 #### Example: Create
 
@@ -312,8 +312,8 @@ Create an instance: `$system_info = $client->SystemInfo();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `version` | `string` |  |
-| `versionComment` | `string` |  |
+| `version` | `string` | MySQL version string |
+| `versionComment` | `string` | Additional version information |
 
 #### Example: Load
 

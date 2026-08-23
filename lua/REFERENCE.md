@@ -94,11 +94,11 @@ local query_analysi = client:QueryAnalysi(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `explainOutput` | `table` | No |  |
-| `mysqlVersion` | `string` | No |  |
-| `query` | `string` | Yes |  |
-| `recommendations` | `table` | No |  |
-| `visualization` | `table` | No |  |
+| `explainOutput` | `table` | No | Raw EXPLAIN output from MySQL |
+| `mysqlVersion` | `string` | No | MySQL version for compatibility (e.g., 8.0, 5.7) |
+| `query` | `string` | Yes | The SQL query to analyze and visualize |
+| `recommendations` | `table` | No | Performance optimization recommendations |
+| `visualization` | `table` | No | The visual representation data of the query execution plan |
 
 ### Operations
 
@@ -152,8 +152,8 @@ local system_info = client:SystemInfo(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `version` | `string` | No |  |
-| `versionComment` | `string` | No |  |
+| `version` | `string` | No | MySQL version string |
+| `versionComment` | `string` | No | Additional version information |
 
 ### Operations
 

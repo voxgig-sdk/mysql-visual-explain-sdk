@@ -97,11 +97,11 @@ query_analysi = client.QueryAnalysi
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `explainOutput` | `Hash` | No |  |
-| `mysqlVersion` | `String` | No |  |
-| `query` | `String` | Yes |  |
-| `recommendations` | `Array` | No |  |
-| `visualization` | `Hash` | No |  |
+| `explainOutput` | `Hash` | No | Raw EXPLAIN output from MySQL |
+| `mysqlVersion` | `String` | No | MySQL version for compatibility (e.g., 8.0, 5.7) |
+| `query` | `String` | Yes | The SQL query to analyze and visualize |
+| `recommendations` | `Array` | No | Performance optimization recommendations |
+| `visualization` | `Hash` | No | The visual representation data of the query execution plan |
 
 ### Operations
 
@@ -155,8 +155,8 @@ system_info = client.SystemInfo
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `version` | `String` | No |  |
-| `versionComment` | `String` | No |  |
+| `version` | `String` | No | MySQL version string |
+| `versionComment` | `String` | No | Additional version information |
 
 ### Operations
 

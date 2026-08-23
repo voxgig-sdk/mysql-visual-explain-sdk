@@ -8,11 +8,13 @@ main: kit: entity: system_info: {
     {
       name: "version"
       req: false
+      short: "MySQL version string"
       type: "`$STRING`"
     }
     {
       name: "versionComment"
       req: false
+      short: "Additional version information"
       type: "`$STRING`"
     }
   ]

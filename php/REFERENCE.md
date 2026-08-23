@@ -96,11 +96,11 @@ $query_analysi = $client->QueryAnalysi();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `explainOutput` | `array` | No |  |
-| `mysqlVersion` | `string` | No |  |
-| `query` | `string` | Yes |  |
-| `recommendations` | `array` | No |  |
-| `visualization` | `array` | No |  |
+| `explainOutput` | `array` | No | Raw EXPLAIN output from MySQL |
+| `mysqlVersion` | `string` | No | MySQL version for compatibility (e.g., 8.0, 5.7) |
+| `query` | `string` | Yes | The SQL query to analyze and visualize |
+| `recommendations` | `array` | No | Performance optimization recommendations |
+| `visualization` | `array` | No | The visual representation data of the query execution plan |
 
 ### Operations
 
@@ -154,8 +154,8 @@ $system_info = $client->SystemInfo();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `version` | `string` | No |  |
-| `versionComment` | `string` | No |  |
+| `version` | `string` | No | MySQL version string |
+| `versionComment` | `string` | No | Additional version information |
 
 ### Operations
 

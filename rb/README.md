@@ -233,11 +233,11 @@ returns a result `Hash` with these keys:
 
 | Field | Description |
 | --- | --- |
-| `explainOutput` |  |
-| `mysqlVersion` |  |
-| `query` |  |
-| `recommendations` |  |
-| `visualization` |  |
+| `explainOutput` | Raw EXPLAIN output from MySQL |
+| `mysqlVersion` | MySQL version for compatibility (e.g., 8.0, 5.7) |
+| `query` | The SQL query to analyze and visualize |
+| `recommendations` | Performance optimization recommendations |
+| `visualization` | The visual representation data of the query execution plan |
 
 Operations: Create.
 
@@ -247,8 +247,8 @@ API path: `/api/explain`
 
 | Field | Description |
 | --- | --- |
-| `version` |  |
-| `versionComment` |  |
+| `version` | MySQL version string |
+| `versionComment` | Additional version information |
 
 Operations: Load.
 
@@ -273,11 +273,11 @@ Create an instance: `query_analysi = client.QueryAnalysi`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `explainOutput` | `Hash` |  |
-| `mysqlVersion` | `String` |  |
-| `query` | `String` |  |
-| `recommendations` | `Array` |  |
-| `visualization` | `Hash` |  |
+| `explainOutput` | `Hash` | Raw EXPLAIN output from MySQL |
+| `mysqlVersion` | `String` | MySQL version for compatibility (e.g., 8.0, 5.7) |
+| `query` | `String` | The SQL query to analyze and visualize |
+| `recommendations` | `Array` | Performance optimization recommendations |
+| `visualization` | `Hash` | The visual representation data of the query execution plan |
 
 #### Example: Create
 
@@ -302,8 +302,8 @@ Create an instance: `system_info = client.SystemInfo`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `version` | `String` |  |
-| `versionComment` | `String` |  |
+| `version` | `String` | MySQL version string |
+| `versionComment` | `String` | Additional version information |
 
 #### Example: Load
 

@@ -9,7 +9,7 @@ The API is exposed as capitalised, semantic **Entities** — e.g.
 instead of raw URL paths and query parameters. This keeps the surface
 predictable and low-friction for both humans and AI agents.
 
-> Other languages, the CLI, and MCP server live alongside this one — see
+> Also generated from this model: `go`, `go-cli`, `go-mcp`, `lua`, `php`, `py`, `rb` — see
 > the [top-level README](../README.md).
 
 
@@ -284,11 +284,11 @@ The `prepare()` method returns:
 
 | Field | Description |
 | --- | --- |
-| `explainOutput` |  |
-| `mysqlVersion` |  |
-| `query` |  |
-| `recommendations` |  |
-| `visualization` |  |
+| `explainOutput` | Raw EXPLAIN output from MySQL |
+| `mysqlVersion` | MySQL version for compatibility (e.g., 8.0, 5.7) |
+| `query` | The SQL query to analyze and visualize |
+| `recommendations` | Performance optimization recommendations |
+| `visualization` | The visual representation data of the query execution plan |
 
 Operations: create.
 
@@ -298,8 +298,8 @@ API path: `/api/explain`
 
 | Field | Description |
 | --- | --- |
-| `version` |  |
-| `versionComment` |  |
+| `version` | MySQL version string |
+| `versionComment` | Additional version information |
 
 Operations: load.
 
@@ -324,11 +324,11 @@ Create an instance: `const query_analysi = client.QueryAnalysi()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `explainOutput` | `Record<string, any>` |  |
-| `mysqlVersion` | `string` |  |
-| `query` | `string` |  |
-| `recommendations` | `any[]` |  |
-| `visualization` | `Record<string, any>` |  |
+| `explainOutput` | `Record<string, any>` | Raw EXPLAIN output from MySQL |
+| `mysqlVersion` | `string` | MySQL version for compatibility (e.g., 8.0, 5.7) |
+| `query` | `string` | The SQL query to analyze and visualize |
+| `recommendations` | `any[]` | Performance optimization recommendations |
+| `visualization` | `Record<string, any>` | The visual representation data of the query execution plan |
 
 #### Example: Create
 
@@ -353,8 +353,8 @@ Create an instance: `const system_info = client.SystemInfo()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `version` | `string` |  |
-| `versionComment` | `string` |  |
+| `version` | `string` | MySQL version string |
+| `versionComment` | `string` | Additional version information |
 
 #### Example: Load
 

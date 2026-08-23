@@ -33,6 +33,9 @@ class MysqlVisualExplainConfig
         return [
             "main" => [
                 "name" => "MysqlVisualExplain",
+                "slug" => "mysql-visual-explain",
+                "version" => "0.0.1",
+                "target" => "php",
             ],
             "feature" => [
                 "test" => [
@@ -56,23 +59,28 @@ class MysqlVisualExplainConfig
           'fields' => [
             [
               'name' => 'explainOutput',
+              'short' => 'Raw EXPLAIN output from MySQL',
               'type' => '`$OBJECT`',
             ],
             [
               'name' => 'mysqlVersion',
+              'short' => 'MySQL version for compatibility (e.g., 8.0, 5.7)',
               'type' => '`$STRING`',
             ],
             [
               'name' => 'query',
               'req' => true,
+              'short' => 'The SQL query to analyze and visualize',
               'type' => '`$STRING`',
             ],
             [
               'name' => 'recommendations',
+              'short' => 'Performance optimization recommendations',
               'type' => '`$ARRAY`',
             ],
             [
               'name' => 'visualization',
+              'short' => 'The visual representation data of the query execution plan',
               'type' => '`$OBJECT`',
             ],
           ],
@@ -108,10 +116,12 @@ class MysqlVisualExplainConfig
           'fields' => [
             [
               'name' => 'version',
+              'short' => 'MySQL version string',
               'type' => '`$STRING`',
             ],
             [
               'name' => 'versionComment',
+              'short' => 'Additional version information',
               'type' => '`$STRING`',
             ],
           ],

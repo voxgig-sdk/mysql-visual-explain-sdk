@@ -36,30 +36,35 @@
               "active": true,
               "name": "explainOutput",
               "req": false,
+              "short": "Raw EXPLAIN output from MySQL",
               "type": "`$OBJECT`"
             },
             {
               "active": true,
               "name": "mysqlVersion",
               "req": false,
+              "short": "MySQL version for compatibility (e.g., 8.0, 5.7)",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "query",
               "req": true,
+              "short": "The SQL query to analyze and visualize",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "recommendations",
               "req": false,
+              "short": "Performance optimization recommendations",
               "type": "`$ARRAY`"
             },
             {
               "active": true,
               "name": "visualization",
               "req": false,
+              "short": "The visual representation data of the query execution plan",
               "type": "`$OBJECT`"
             }
           ],
@@ -102,12 +107,14 @@
               "active": true,
               "name": "version",
               "req": false,
+              "short": "MySQL version string",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "versionComment",
               "req": false,
+              "short": "Additional version information",
               "type": "`$STRING`"
             }
           ],

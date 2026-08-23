@@ -128,11 +128,11 @@ const query_analysi = client.QueryAnalysi()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `explainOutput` | `Record<string, any>` | No |  |
-| `mysqlVersion` | `string` | No |  |
-| `query` | `string` | Yes |  |
-| `recommendations` | `any[]` | No |  |
-| `visualization` | `Record<string, any>` | No |  |
+| `explainOutput` | `Record<string, any>` | No | Raw EXPLAIN output from MySQL |
+| `mysqlVersion` | `string` | No | MySQL version for compatibility (e.g., 8.0, 5.7) |
+| `query` | `string` | Yes | The SQL query to analyze and visualize |
+| `recommendations` | `any[]` | No | Performance optimization recommendations |
+| `visualization` | `Record<string, any>` | No | The visual representation data of the query execution plan |
 
 ### Operations
 
@@ -184,8 +184,8 @@ const system_info = client.SystemInfo()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `version` | `string` | No |  |
-| `versionComment` | `string` | No |  |
+| `version` | `string` | No | MySQL version string |
+| `versionComment` | `string` | No | Additional version information |
 
 ### Operations
 

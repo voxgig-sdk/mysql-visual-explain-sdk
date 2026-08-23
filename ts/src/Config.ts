@@ -19,9 +19,20 @@ class Config {
     return fi
   }
 
+  // False for a feature added at runtime via options.extend (station's
+  // adopt path) - the constructor uses this to skip makeFeature for names
+  // no generated class backs.
+  hasFeature(this: any, fn: string) {
+    return null != FEATURE_CLASS[fn]
+  }
+
 
   main = {
     name: 'MysqlVisualExplain',
+        slug: "mysql-visual-explain",
+    version: "0.0.1",
+    target: "ts",
+
   }
 
 
@@ -59,23 +70,28 @@ class Config {
       "fields": [
         {
           "name": "explainOutput",
+          "short": "Raw EXPLAIN output from MySQL",
           "type": "`$OBJECT`"
         },
         {
           "name": "mysqlVersion",
+          "short": "MySQL version for compatibility (e.g., 8.0, 5.7)",
           "type": "`$STRING`"
         },
         {
           "name": "query",
           "req": true,
+          "short": "The SQL query to analyze and visualize",
           "type": "`$STRING`"
         },
         {
           "name": "recommendations",
+          "short": "Performance optimization recommendations",
           "type": "`$ARRAY`"
         },
         {
           "name": "visualization",
+          "short": "The visual representation data of the query execution plan",
           "type": "`$OBJECT`"
         }
       ],
@@ -111,10 +127,12 @@ class Config {
       "fields": [
         {
           "name": "version",
+          "short": "MySQL version string",
           "type": "`$STRING`"
         },
         {
           "name": "versionComment",
+          "short": "Additional version information",
           "type": "`$STRING`"
         }
       ],
