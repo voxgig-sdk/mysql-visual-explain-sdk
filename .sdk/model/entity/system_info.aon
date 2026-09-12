@@ -27,9 +27,13 @@ main: kit: entity: system_info: {
         {
           method: "GET"
           orig: "/api/version"
-          parts: [
-            "api"
-            "version"
+          segments: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "version"
+            }
           ]
           transform: {
             req: "`reqdata`"

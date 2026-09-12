@@ -82,15 +82,23 @@ module MysqlVisualExplainConfig
                   "kind" => "http",
                   "method" => "POST",
                   "orig" => "/api/explain",
-                  "parts" => [
-                    "api",
-                    "explain",
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "explain",
+                    },
                   ],
                   "select" => {},
                   "transform" => {
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "explain",
+                  ],
                 },
               ],
             },
@@ -123,15 +131,23 @@ module MysqlVisualExplainConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/version",
-                  "parts" => [
-                    "api",
-                    "version",
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "version",
+                    },
                   ],
                   "select" => {},
                   "transform" => {
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "version",
+                  ],
                 },
               ],
             },

@@ -45,9 +45,13 @@ main: kit: entity: query_analysi: {
         {
           method: "POST"
           orig: "/api/explain"
-          parts: [
-            "api"
-            "explain"
+          segments: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "explain"
+            }
           ]
           transform: {
             req: "`reqdata`"
