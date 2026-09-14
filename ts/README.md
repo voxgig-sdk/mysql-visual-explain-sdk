@@ -28,7 +28,7 @@ loading a specific record.
 ### 1. Create a client
 
 ```ts
-import { MysqlVisualExplainSDK } from '@voxgig-sdk/mysql-visual-explain'
+import { MysqlVisualExplainSDK } from '@voxgig-sdk/mysql-visual-explain-sdk'
 
 const client = new MysqlVisualExplainSDK()
 ```
@@ -445,7 +445,7 @@ mysql-visual-explain/
 Import the SDK from the package root:
 
 ```ts
-import { MysqlVisualExplainSDK } from '@voxgig-sdk/mysql-visual-explain'
+import { MysqlVisualExplainSDK } from '@voxgig-sdk/mysql-visual-explain-sdk'
 ```
 
 ### Entity state

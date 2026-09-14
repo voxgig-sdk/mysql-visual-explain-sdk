@@ -107,7 +107,7 @@ local result, err = client:SystemInfo():load()
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/mysql-visual-explain` | publish pending — [install from git tag](https://github.com/voxgig-sdk/mysql-visual-explain-sdk/releases) |
+| TypeScript | `@voxgig-sdk/mysql-visual-explain-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/mysql-visual-explain-sdk/releases) |
 | Python | `voxgig-sdk-mysql-visual-explain` | publish pending — [install from git tag](https://github.com/voxgig-sdk/mysql-visual-explain-sdk/releases) |
 | PHP | `voxgig-sdk/mysql-visual-explain` | publish pending — [install from git tag](https://github.com/voxgig-sdk/mysql-visual-explain-sdk/releases) |
 | Golang | `github.com/voxgig-sdk/mysql-visual-explain-sdk/go` | `go get github.com/voxgig-sdk/mysql-visual-explain-sdk/go@latest` |
@@ -121,7 +121,7 @@ local result, err = client:SystemInfo():load()
 ### TypeScript
 
 ```ts
-import { MysqlVisualExplainSDK } from '@voxgig-sdk/mysql-visual-explain'
+import { MysqlVisualExplainSDK } from '@voxgig-sdk/mysql-visual-explain-sdk'
 
 const client = new MysqlVisualExplainSDK()
 
