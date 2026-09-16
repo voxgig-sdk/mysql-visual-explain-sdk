@@ -25,6 +25,12 @@ main: kit: entity: system_info: {
       name: "load"
       points: [
         {
+          contract: {
+            id: "GET /api/version"
+            json: "{\"operationId\":\"getMySQLVersion\",\"parameters\":[],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"version\":{\"description\":\"MySQL version string\",\"example\":\"8.0.29\",\"type\":\"string\"},\"versionComment\":{\"description\":\"Additional version information\",\"example\":\"MySQL Community Server - GPL\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Successfully retrieved MySQL version\"},\"500\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"example\":\"Failed to retrieve version information\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Internal server error\"}},\"securitySource\":\"unspecified\"}"
+            source: "openapi3"
+            version: 1
+          }
           method: "GET"
           orig: "/api/version"
           segments: [

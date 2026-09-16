@@ -1,12 +1,18 @@
 # MysqlVisualExplain SDK feature factory
 
 from mysqlvisualexplain_sdk.feature.base_feature import MysqlVisualExplainBaseFeature
+from mysqlvisualexplain_sdk.feature.ratelimit_feature import MysqlVisualExplainRatelimitFeature
+from mysqlvisualexplain_sdk.feature.retry_feature import MysqlVisualExplainRetryFeature
 from mysqlvisualexplain_sdk.feature.test_feature import MysqlVisualExplainTestFeature
+from mysqlvisualexplain_sdk.feature.timeout_feature import MysqlVisualExplainTimeoutFeature
 
 
 _FEATURES = {
     "base": lambda: MysqlVisualExplainBaseFeature(),
+    "ratelimit": lambda: MysqlVisualExplainRatelimitFeature(),
+    "retry": lambda: MysqlVisualExplainRetryFeature(),
     "test": lambda: MysqlVisualExplainTestFeature(),
+    "timeout": lambda: MysqlVisualExplainTimeoutFeature(),
 }
 
 
