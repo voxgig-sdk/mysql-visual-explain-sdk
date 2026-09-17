@@ -127,12 +127,12 @@ class Config {
 
     entity: {
       
-      query_analysi: {
-      },
-
-      system_info: {
-      },
-
+        query_analysi: {
+        },
+  
+        system_info: {
+        },
+  
     }
   }
 

@@ -107,12 +107,12 @@ local result, err = client:SystemInfo():load()
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/mysql-visual-explain-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/mysql-visual-explain-sdk/releases) |
-| Python | `voxgig-sdk-mysql-visual-explain` | publish pending — [install from git tag](https://github.com/voxgig-sdk/mysql-visual-explain-sdk/releases) |
-| PHP | `voxgig-sdk/mysql-visual-explain` | publish pending — [install from git tag](https://github.com/voxgig-sdk/mysql-visual-explain-sdk/releases) |
+| TypeScript | `@voxgig-sdk/mysql-visual-explain-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/mysql-visual-explain-sdk/tags) |
+| Python | `voxgig-sdk-mysql-visual-explain` | publish pending — [install from git tag](https://github.com/voxgig-sdk/mysql-visual-explain-sdk/tags) |
+| PHP | `voxgig-sdk/mysql-visual-explain` | publish pending — [install from git tag](https://github.com/voxgig-sdk/mysql-visual-explain-sdk/tags) |
 | Golang | `github.com/voxgig-sdk/mysql-visual-explain-sdk/go` | `go get github.com/voxgig-sdk/mysql-visual-explain-sdk/go@latest` |
-| Ruby | `voxgig-sdk-mysql-visual-explain` | publish pending — [install from git tag](https://github.com/voxgig-sdk/mysql-visual-explain-sdk/releases) |
-| Lua | `voxgig-sdk-mysql-visual-explain` | publish pending — [install from git tag](https://github.com/voxgig-sdk/mysql-visual-explain-sdk/releases) |
+| Ruby | `voxgig-sdk-mysql-visual-explain` | publish pending — [install from git tag](https://github.com/voxgig-sdk/mysql-visual-explain-sdk/tags) |
+| Lua | `voxgig-sdk-mysql-visual-explain` | publish pending — [install from git tag](https://github.com/voxgig-sdk/mysql-visual-explain-sdk/tags) |
 | Go CLI | `github.com/voxgig-sdk/mysql-visual-explain-sdk/go-cli` | `go install github.com/voxgig-sdk/mysql-visual-explain-sdk/go-cli/cmd/mysql-visual-explain@latest` |
 | Go MCP server | `github.com/voxgig-sdk/mysql-visual-explain-sdk/go-mcp` | `go get github.com/voxgig-sdk/mysql-visual-explain-sdk/go-mcp@latest` |
 

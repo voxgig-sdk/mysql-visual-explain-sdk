@@ -1,4 +1,4 @@
 # Flows
 
-@"BasicQueryAnalysiFlow.aon"
-@"BasicSystemInfoFlow.aon"
+@"./BasicQueryAnalysiFlow.aon"
+@"./BasicSystemInfoFlow.aon"
