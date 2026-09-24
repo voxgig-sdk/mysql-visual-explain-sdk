@@ -1,0 +1,56 @@
+# Entity: system_info
+
+main: kit: entity: system_info: {
+
+  alias: field: {}
+
+  fields: {
+    version: {
+      h: "Version"
+      n: "version"
+      r: false
+      sh: "MySQL version string"
+      t: "`$STRING`"
+    }
+    versionComment: {
+      h: "Version Comment"
+      n: "versionComment"
+      r: false
+      sh: "Additional version information"
+      t: "`$STRING`"
+    }
+  }
+
+  name: "system_info"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /api/version"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/api/version"
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "version"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

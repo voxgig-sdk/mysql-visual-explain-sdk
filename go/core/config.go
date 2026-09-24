@@ -92,29 +92,34 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "explainOutput",
-						"short": "Raw EXPLAIN output from MySQL",
+						"title": "Explain Output",
 						"type": "`$OBJECT`",
+						"short": "Raw EXPLAIN output from MySQL",
 					},
 					map[string]any{
 						"name": "mysqlVersion",
-						"short": "MySQL version for compatibility (e.g., 8.0, 5.7)",
+						"title": "Mysql Version",
 						"type": "`$STRING`",
+						"short": "MySQL version for compatibility (e.g., 8.0, 5.7)",
 					},
 					map[string]any{
 						"name": "query",
+						"title": "Query",
+						"type": "`$STRING`",
 						"req": true,
 						"short": "The SQL query to analyze and visualize",
-						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "recommendations",
-						"short": "Performance optimization recommendations",
+						"title": "Recommendations",
 						"type": "`$ARRAY`",
+						"short": "Performance optimization recommendations",
 					},
 					map[string]any{
 						"name": "visualization",
-						"short": "The visual representation data of the query execution plan",
+						"title": "Visualization",
 						"type": "`$OBJECT`",
+						"short": "The visual representation data of the query execution plan",
 					},
 				},
 				"name": "query_analysi",
@@ -124,7 +129,6 @@ func MakeConfig() map[string]any {
 						"name": "create",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{},
 								"kind": "http",
 								"method": "POST",
 								"orig": "/api/explain",
@@ -136,15 +140,17 @@ func MakeConfig() map[string]any {
 										"lit": "explain",
 									},
 								},
-								"select": map[string]any{},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body`",
-								},
 								"parts": []any{
 									"api",
 									"explain",
 								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body`",
+								},
+								"args": map[string]any{},
+								"select": map[string]any{},
 							},
 						},
 					},
@@ -157,13 +163,15 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "version",
-						"short": "MySQL version string",
+						"title": "Version",
 						"type": "`$STRING`",
+						"short": "MySQL version string",
 					},
 					map[string]any{
 						"name": "versionComment",
-						"short": "Additional version information",
+						"title": "Version Comment",
 						"type": "`$STRING`",
+						"short": "Additional version information",
 					},
 				},
 				"name": "system_info",
@@ -173,7 +181,6 @@ func MakeConfig() map[string]any {
 						"name": "load",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/api/version",
@@ -185,15 +192,17 @@ func MakeConfig() map[string]any {
 										"lit": "version",
 									},
 								},
-								"select": map[string]any{},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body`",
-								},
 								"parts": []any{
 									"api",
 									"version",
 								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body`",
+								},
+								"args": map[string]any{},
+								"select": map[string]any{},
 							},
 						},
 					},

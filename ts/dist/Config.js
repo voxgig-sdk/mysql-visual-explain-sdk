@@ -11,19 +11,12 @@ const FEATURE_CLASS = {
     test: TestFeature_1.TestFeature,
     timeout: TimeoutFeature_1.TimeoutFeature,
 };
-// Per-feature plugin DEFINITIONS (voxgig/plugin `Definition` values), from
-// the model's active plugin groups. A feature that takes a `plugins` option
-// (secrets over sekreto) reads its own entry; a feature with no plugins has
-// none. Named imports above make each definition statically reachable, so
-// an SDK carries exactly the plugin modules its model selects — the same
-// leanness the old side-effect registry imports bought, without a registry.
 const FEATURE_PLUGINS = {};
 exports.FEATURE_PLUGINS = FEATURE_PLUGINS;
 class Config {
     makeFeature(fn) {
         const fc = FEATURE_CLASS[fn];
         const fi = new fc();
-        // TODO: errors etc
         return fi;
     }
     // False for a feature added at runtime via options.extend (station's
@@ -115,29 +108,34 @@ class Config {
             "fields": [
                 {
                     "name": "explainOutput",
-                    "short": "Raw EXPLAIN output from MySQL",
-                    "type": "`$OBJECT`"
+                    "title": "Explain Output",
+                    "type": "`$OBJECT`",
+                    "short": "Raw EXPLAIN output from MySQL"
                 },
                 {
                     "name": "mysqlVersion",
-                    "short": "MySQL version for compatibility (e.g., 8.0, 5.7)",
-                    "type": "`$STRING`"
+                    "title": "Mysql Version",
+                    "type": "`$STRING`",
+                    "short": "MySQL version for compatibility (e.g., 8.0, 5.7)"
                 },
                 {
                     "name": "query",
+                    "title": "Query",
+                    "type": "`$STRING`",
                     "req": true,
-                    "short": "The SQL query to analyze and visualize",
-                    "type": "`$STRING`"
+                    "short": "The SQL query to analyze and visualize"
                 },
                 {
                     "name": "recommendations",
-                    "short": "Performance optimization recommendations",
-                    "type": "`$ARRAY`"
+                    "title": "Recommendations",
+                    "type": "`$ARRAY`",
+                    "short": "Performance optimization recommendations"
                 },
                 {
                     "name": "visualization",
-                    "short": "The visual representation data of the query execution plan",
-                    "type": "`$OBJECT`"
+                    "title": "Visualization",
+                    "type": "`$OBJECT`",
+                    "short": "The visual representation data of the query execution plan"
                 }
             ],
             "name": "query_analysi",
@@ -147,7 +145,6 @@ class Config {
                     "name": "create",
                     "points": [
                         {
-                            "args": {},
                             "kind": "http",
                             "method": "POST",
                             "orig": "/api/explain",
@@ -159,15 +156,17 @@ class Config {
                                     "lit": "explain"
                                 }
                             ],
-                            "select": {},
+                            "parts": [
+                                "api",
+                                "explain"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "api",
-                                "explain"
-                            ]
+                            "args": {},
+                            "select": {}
                         }
                     ]
                 }
@@ -180,13 +179,15 @@ class Config {
             "fields": [
                 {
                     "name": "version",
-                    "short": "MySQL version string",
-                    "type": "`$STRING`"
+                    "title": "Version",
+                    "type": "`$STRING`",
+                    "short": "MySQL version string"
                 },
                 {
                     "name": "versionComment",
-                    "short": "Additional version information",
-                    "type": "`$STRING`"
+                    "title": "Version Comment",
+                    "type": "`$STRING`",
+                    "short": "Additional version information"
                 }
             ],
             "name": "system_info",
@@ -196,7 +197,6 @@ class Config {
                     "name": "load",
                     "points": [
                         {
-                            "args": {},
                             "kind": "http",
                             "method": "GET",
                             "orig": "/api/version",
@@ -208,15 +208,17 @@ class Config {
                                     "lit": "version"
                                 }
                             ],
-                            "select": {},
+                            "parts": [
+                                "api",
+                                "version"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "api",
-                                "version"
-                            ]
+                            "args": {},
+                            "select": {}
                         }
                     ]
                 }

@@ -1,0 +1,77 @@
+# Entity: query_analysi
+
+main: kit: entity: query_analysi: {
+
+  alias: field: {}
+
+  fields: {
+    explainOutput: {
+      h: "Explain Output"
+      n: "explainOutput"
+      r: false
+      sh: "Raw EXPLAIN output from MySQL"
+      t: "`$OBJECT`"
+    }
+    mysqlVersion: {
+      h: "Mysql Version"
+      n: "mysqlVersion"
+      r: false
+      sh: "MySQL version for compatibility (e.g., 8.0, 5.7)"
+      t: "`$STRING`"
+    }
+    query: {
+      h: "Query"
+      n: "query"
+      r: true
+      sh: "The SQL query to analyze and visualize"
+      t: "`$STRING`"
+    }
+    recommendations: {
+      h: "Recommendations"
+      n: "recommendations"
+      r: false
+      sh: "Performance optimization recommendations"
+      t: "`$ARRAY`"
+    }
+    visualization: {
+      h: "Visualization"
+      n: "visualization"
+      r: false
+      sh: "The visual representation data of the query execution plan"
+      t: "`$OBJECT`"
+    }
+  }
+
+  name: "query_analysi"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /api/explain"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/explain"
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "explain"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

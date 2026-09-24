@@ -1,7 +1,7 @@
 // Typed models for the MysqlVisualExplain SDK.
 //
-// GENERATED from the API model: main.kit.entity.<e>.fields[] and per-op
-// params (op.<name>.points[].args.params[]). Field/param types come from the
+// GENERATED from the API model: main.kit.entity.<e>.fields{} and per-op
+// params (op.<name>.points[].g.params[]). Field/param types come from the
 // canonical type sentinels via @voxgig/sdkgen canonToType (source of truth:
 // @voxgig/apidef VALID_CANON). Do not edit by hand.
 package entity
@@ -14,11 +14,6 @@ import (
 
 // QueryAnalysi is the typed data model for the query_analysi entity.
 type QueryAnalysi struct {
-	ExplainOutput *map[string]any `json:"explainOutput,omitempty"`
-	MysqlVersion *string `json:"mysqlVersion,omitempty"`
-	Query string `json:"query"`
-	Recommendations *[]any `json:"recommendations,omitempty"`
-	Visualization *map[string]any `json:"visualization,omitempty"`
 }
 
 // QueryAnalysiCreateData is the typed request payload for QueryAnalysi.CreateTyped.
@@ -32,8 +27,6 @@ type QueryAnalysiCreateData struct {
 
 // SystemInfo is the typed data model for the system_info entity.
 type SystemInfo struct {
-	Version *string `json:"version,omitempty"`
-	VersionComment *string `json:"versionComment,omitempty"`
 }
 
 // SystemInfoLoadMatch is the typed request payload for SystemInfo.LoadTyped.

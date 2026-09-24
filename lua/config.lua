@@ -88,29 +88,34 @@ local function make_config()
         ["fields"] = {
           {
             ["name"] = "explainOutput",
-            ["short"] = "Raw EXPLAIN output from MySQL",
+            ["title"] = "Explain Output",
             ["type"] = "`$OBJECT`",
+            ["short"] = "Raw EXPLAIN output from MySQL",
           },
           {
             ["name"] = "mysqlVersion",
-            ["short"] = "MySQL version for compatibility (e.g., 8.0, 5.7)",
+            ["title"] = "Mysql Version",
             ["type"] = "`$STRING`",
+            ["short"] = "MySQL version for compatibility (e.g., 8.0, 5.7)",
           },
           {
             ["name"] = "query",
+            ["title"] = "Query",
+            ["type"] = "`$STRING`",
             ["req"] = true,
             ["short"] = "The SQL query to analyze and visualize",
-            ["type"] = "`$STRING`",
           },
           {
             ["name"] = "recommendations",
-            ["short"] = "Performance optimization recommendations",
+            ["title"] = "Recommendations",
             ["type"] = "`$ARRAY`",
+            ["short"] = "Performance optimization recommendations",
           },
           {
             ["name"] = "visualization",
-            ["short"] = "The visual representation data of the query execution plan",
+            ["title"] = "Visualization",
             ["type"] = "`$OBJECT`",
+            ["short"] = "The visual representation data of the query execution plan",
           },
         },
         ["name"] = "query_analysi",
@@ -120,7 +125,6 @@ local function make_config()
             ["name"] = "create",
             ["points"] = {
               {
-                ["args"] = {},
                 ["kind"] = "http",
                 ["method"] = "POST",
                 ["orig"] = "/api/explain",
@@ -132,15 +136,17 @@ local function make_config()
                     ["lit"] = "explain",
                   },
                 },
-                ["select"] = {},
-                ["transform"] = {
-                  ["req"] = "`reqdata`",
-                  ["res"] = "`body`",
-                },
                 ["parts"] = {
                   "api",
                   "explain",
                 },
+                ["rename"] = {},
+                ["transform"] = {
+                  ["req"] = "`reqdata`",
+                  ["res"] = "`body`",
+                },
+                ["args"] = {},
+                ["select"] = {},
               },
             },
           },
@@ -153,13 +159,15 @@ local function make_config()
         ["fields"] = {
           {
             ["name"] = "version",
-            ["short"] = "MySQL version string",
+            ["title"] = "Version",
             ["type"] = "`$STRING`",
+            ["short"] = "MySQL version string",
           },
           {
             ["name"] = "versionComment",
-            ["short"] = "Additional version information",
+            ["title"] = "Version Comment",
             ["type"] = "`$STRING`",
+            ["short"] = "Additional version information",
           },
         },
         ["name"] = "system_info",
@@ -169,7 +177,6 @@ local function make_config()
             ["name"] = "load",
             ["points"] = {
               {
-                ["args"] = {},
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/version",
@@ -181,15 +188,17 @@ local function make_config()
                     ["lit"] = "version",
                   },
                 },
-                ["select"] = {},
-                ["transform"] = {
-                  ["req"] = "`reqdata`",
-                  ["res"] = "`body`",
-                },
                 ["parts"] = {
                   "api",
                   "version",
                 },
+                ["rename"] = {},
+                ["transform"] = {
+                  ["req"] = "`reqdata`",
+                  ["res"] = "`body`",
+                },
+                ["args"] = {},
+                ["select"] = {},
               },
             },
           },

@@ -1,0 +1,18 @@
+# BasicQueryAnalysiFlow
+
+main: kit: flow: BasicQueryAnalysiFlow:
+{
+  entity: "query_analysi",
+  kind: "basic",
+  name: "BasicQueryAnalysiFlow",
+  step: [
+    {
+      i: {
+        ref: "query_analysi_ref01"
+      }
+
+      o: "create"
+    }
+  ],
+  "key$": "BasicQueryAnalysiFlow"
+}
