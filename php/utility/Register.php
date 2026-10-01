@@ -37,6 +37,8 @@ require_once __DIR__ . '/TransformResponse.php';
 
 MysqlVisualExplainUtility::setRegistrar(function (MysqlVisualExplainUtility $u): void {
     $u->clean = [MysqlVisualExplainClean::class, 'call'];
+    $u->clean_add = [MysqlVisualExplainClean::class, 'add'];
+    $u->clean_explain = [MysqlVisualExplainDone::class, 'clean_explain'];
     $u->done = [MysqlVisualExplainDone::class, 'call'];
     $u->make_error = [MysqlVisualExplainMakeError::class, 'call'];
     $u->feature_add = [MysqlVisualExplainFeatureAdd::class, 'call'];

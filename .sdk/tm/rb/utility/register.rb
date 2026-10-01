@@ -33,6 +33,8 @@ require_relative 'transform_response'
 
 MysqlVisualExplainUtility.registrar = ->(u) {
   u.clean = MysqlVisualExplainUtilities::Clean
+  u.clean_add = MysqlVisualExplainUtilities::CleanAdd
+  u.clean_explain = MysqlVisualExplainUtilities::CleanExplain
   u.done = MysqlVisualExplainUtilities::Done
   u.make_error = MysqlVisualExplainUtilities::MakeError
   u.feature_add = MysqlVisualExplainUtilities::FeatureAdd
