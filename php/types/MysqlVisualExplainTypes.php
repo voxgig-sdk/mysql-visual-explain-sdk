@@ -25,11 +25,8 @@ class QueryAnalysi
 /** Request payload for QueryAnalysi#create. */
 class QueryAnalysiCreateData
 {
-    public ?array $explainOutput = null;
     public ?string $mysqlVersion = null;
     public string $query;
-    public ?array $recommendations = null;
-    public ?array $visualization = null;
 }
 
 /** SystemInfo entity data model. */

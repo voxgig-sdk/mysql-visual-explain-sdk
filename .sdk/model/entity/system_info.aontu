@@ -34,6 +34,10 @@ main: kit: entity: system_info: {
           }
           m: "GET"
           o: "/api/version"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "api"

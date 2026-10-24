@@ -32,10 +32,7 @@ class QueryAnalysiCreateDataRequired(TypedDict):
 
 
 class QueryAnalysiCreateData(QueryAnalysiCreateDataRequired, total=False):
-    explainOutput: dict
     mysqlVersion: str
-    recommendations: list
-    visualization: dict
 
 
 class SystemInfo(TypedDict, total=False):

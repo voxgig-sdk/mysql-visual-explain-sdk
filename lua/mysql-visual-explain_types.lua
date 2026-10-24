@@ -14,11 +14,8 @@
 ---@field visualization? table
 
 ---@class QueryAnalysiCreateData
----@field explainOutput? table
 ---@field mysqlVersion? string
 ---@field query string
----@field recommendations? table
----@field visualization? table
 
 ---@class SystemInfo
 ---@field version? string

@@ -48,6 +48,10 @@ main: kit: entity: query_analysi: {
       name: "create"
       points: [
         {
+          bf: [
+            "mysqlVersion"
+            "query"
+          ]
           co: {
             id: "POST /api/explain"
             source: "openapi3"
@@ -55,6 +59,10 @@ main: kit: entity: query_analysi: {
           }
           m: "POST"
           o: "/api/explain"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "api"

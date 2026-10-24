@@ -18,11 +18,8 @@ type QueryAnalysi struct {
 
 // QueryAnalysiCreateData is the typed request payload for QueryAnalysi.CreateTyped.
 type QueryAnalysiCreateData struct {
-	ExplainOutput *map[string]any `json:"explainOutput,omitempty"`
 	MysqlVersion *string `json:"mysqlVersion,omitempty"`
 	Query string `json:"query"`
-	Recommendations *[]any `json:"recommendations,omitempty"`
-	Visualization *map[string]any `json:"visualization,omitempty"`
 }
 
 // SystemInfo is the typed data model for the system_info entity.

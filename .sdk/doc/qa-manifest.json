@@ -3,5 +3,20 @@
     "SUMMARY.md"
   ],
   "config": ".sdk/doc/qa/vale.ini",
-  "routes": {}
+  "routes": {},
+  "quoted": {
+    "SUMMARY.md": [
+      "Additional version information",
+      "MySQL version for compatibility (for example, 8.0, 5.7)",
+      "MySQL version string",
+      "Performance optimization recommendations",
+      "Production server",
+      "Raw EXPLAIN output from MySQL",
+      "Successfully generated visual explanation",
+      "Successfully retrieved MySQL version",
+      "The SQL query to analyze and visualize",
+      "The visual representation data of the query execution plan",
+      "This API provides a visualization tool that helps users understand and optimize their MySQL queries through easy-to-read graphical outputs. It transforms the cryptic output of MySQL&#39;s EXPLAIN command into interactive graphics, assisting users in identifying performance issues and understanding complex query plans."
+    ]
+  }
 }

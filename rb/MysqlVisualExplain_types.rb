@@ -35,26 +35,14 @@ QueryAnalysi = Struct.new(
 
 # Request payload for QueryAnalysi#create.
 #
-# @!attribute [rw] explainOutput
-#   @return [Hash, nil]
-#
 # @!attribute [rw] mysqlVersion
 #   @return [String, nil]
 #
 # @!attribute [rw] query
 #   @return [String]
-#
-# @!attribute [rw] recommendations
-#   @return [Array, nil]
-#
-# @!attribute [rw] visualization
-#   @return [Hash, nil]
 QueryAnalysiCreateData = Struct.new(
-  :explainOutput,
   :mysqlVersion,
   :query,
-  :recommendations,
-  :visualization,
   keyword_init: true
 )
 

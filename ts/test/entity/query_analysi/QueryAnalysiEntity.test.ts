@@ -9,7 +9,7 @@ import { createLiveTransport } from '../../live-runner'
 import { runLiveEntity } from '../../live-entity'
 
 
-import { MysqlVisualExplainSDK, BaseFeature, stdutil } from '../../..'
+import { MysqlVisualExplainSDK, BaseFeature, config, stdutil } from '../../..'
 
 import {
   envOverride,
@@ -41,6 +41,18 @@ describe('QueryAnalysiEntity', async () => {
   })
 
 
+  test('validate', async (t) => {
+    if (null == (config as any).feature?.validate) {
+      t.skip('feature not present in this SDK: validate')
+      return
+    }
+    const client = MysqlVisualExplainSDK.test(undefined, { feature: { validate: { active: true } } })
+    await assert.rejects(client.QueryAnalysi().create({"mysqlVersion":1,"query":"x"} as any),
+      (err: any) => 'validate_failed' === err.code)
+  })
+
+
+
   test('basic', async (t) => {
 
     const live = 'TRUE' === process.env.MYSQL_VISUAL_EXPLAIN_TEST_LIVE
@@ -51,7 +63,7 @@ describe('QueryAnalysiEntity', async () => {
     
     const setup = basicSetup()
     if (setup.live) {
-      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"explainOutput":{"a":true,"h":"Explain Output","n":"explainOutput","r":false,"sh":"Raw EXPLAIN output from MySQL","t":"`$OBJECT`","key$":"explainOutput","index$":0},"mysqlVersion":{"a":true,"h":"Mysql Version","n":"mysqlVersion","r":false,"sh":"MySQL version for compatibility (e.g., 8.0, 5.7)","t":"`$STRING`","key$":"mysqlVersion","index$":1},"query":{"a":true,"h":"Query","n":"query","r":true,"sh":"The SQL query to analyze and visualize","t":"`$STRING`","key$":"query","index$":2},"recommendations":{"a":true,"h":"Recommendations","n":"recommendations","r":false,"sh":"Performance optimization recommendations","t":"`$ARRAY`","key$":"recommendations","index$":3},"visualization":{"a":true,"h":"Visualization","n":"visualization","r":false,"sh":"The visual representation data of the query execution plan","t":"`$OBJECT`","key$":"visualization","index$":4}},"name":"query_analysi","op":{"create":{"input":"data","name":"create","points":[{"a":true,"co":{"id":"POST /api/explain","source":"openapi3","version":2},"g":{},"k":"http","m":"POST","o":"/api/explain","q":{},"r":{},"s":[{"lit":"api"},{"lit":"explain"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"create"}},"relations":{"ancestors":[]},"key$":"query_analysi","name__orig":"query_analysi","Name":"QueryAnalysi","name_":"query_analysi","name-":"query-analysi","NAME":"QUERY_ANALYSI","index$":0}, {"active":true,"entity":"query_analysi","key$":"BasicQueryAnalysiFlow","kind":"basic","name":"BasicQueryAnalysiFlow","param":{},"step":[{"a":true,"d":{},"i":{"ref":"query_analysi_ref01"},"m":{},"o":"create","s":[],"v":[],"index$":0}]}, 'QueryAnalysi', {"POST /api/explain":{"protocol":"http","requestBody":{"required":true,"content":{"application/json":{"schema":{"type":"object","required":["query"],"properties":{"query":{"type":"string","description":"The SQL query to analyze and visualize","example":"SELECT * FROM users WHERE id = 1","key$":"query"},"mysqlVersion":{"type":"string","description":"MySQL version for compatibility (e.g., 8.0, 5.7)","example":"8.0","key$":"mysqlVersion"}},"index$":1},"examples":{"simpleQuery":{"summary":"Simple SELECT query","value":{"query":"SELECT * FROM users WHERE id = 1","mysqlVersion":"8.0"}},"joinQuery":{"summary":"Query with JOIN","value":{"query":"SELECT u.*, o.* FROM users u JOIN orders o ON u.id = o.user_id WHERE u.status = 'active'","mysqlVersion":"8.0"}},"subqueryExample":{"summary":"Query with subquery","value":{"query":"SELECT * FROM users WHERE id IN (SELECT user_id FROM orders WHERE amount > 100)","mysqlVersion":"8.0"}}}}}},"parameters":[]}})
+      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"explainOutput":{"a":true,"h":"Explain Output","n":"explainOutput","r":false,"sh":"Raw EXPLAIN output from MySQL","t":"`$OBJECT`","key$":"explainOutput","index$":0},"mysqlVersion":{"a":true,"h":"Mysql Version","n":"mysqlVersion","r":false,"sh":"MySQL version for compatibility (e.g., 8.0, 5.7)","t":"`$STRING`","key$":"mysqlVersion","index$":1},"query":{"a":true,"h":"Query","n":"query","r":true,"sh":"The SQL query to analyze and visualize","t":"`$STRING`","key$":"query","index$":2},"recommendations":{"a":true,"h":"Recommendations","n":"recommendations","r":false,"sh":"Performance optimization recommendations","t":"`$ARRAY`","key$":"recommendations","index$":3},"visualization":{"a":true,"h":"Visualization","n":"visualization","r":false,"sh":"The visual representation data of the query execution plan","t":"`$OBJECT`","key$":"visualization","index$":4}},"name":"query_analysi","op":{"create":{"input":"data","name":"create","points":[{"a":true,"bf":["mysqlVersion","query"],"co":{"id":"POST /api/explain","source":"openapi3","version":2},"g":{},"k":"http","m":"POST","o":"/api/explain","q":{},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"api"},{"lit":"explain"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"create"}},"relations":{"ancestors":[]},"key$":"query_analysi","name__orig":"query_analysi","Name":"QueryAnalysi","name_":"query_analysi","name-":"query-analysi","NAME":"QUERY_ANALYSI","index$":0}, {"active":true,"entity":"query_analysi","key$":"BasicQueryAnalysiFlow","kind":"basic","name":"BasicQueryAnalysiFlow","param":{},"step":[{"a":true,"d":{},"i":{"ref":"query_analysi_ref01"},"m":{},"o":"create","s":[],"v":[],"index$":0}]}, 'QueryAnalysi', {"POST /api/explain":{"protocol":"http","requestBody":{"required":true,"content":{"application/json":{"schema":{"type":"object","required":["query"],"properties":{"query":{"type":"string","description":"The SQL query to analyze and visualize","example":"SELECT * FROM users WHERE id = 1","key$":"query"},"mysqlVersion":{"type":"string","description":"MySQL version for compatibility (e.g., 8.0, 5.7)","example":"8.0","key$":"mysqlVersion"}},"index$":1},"examples":{"simpleQuery":{"summary":"Simple SELECT query","value":{"query":"SELECT * FROM users WHERE id = 1","mysqlVersion":"8.0"}},"joinQuery":{"summary":"Query with JOIN","value":{"query":"SELECT u.*, o.* FROM users u JOIN orders o ON u.id = o.user_id WHERE u.status = 'active'","mysqlVersion":"8.0"}},"subqueryExample":{"summary":"Query with subquery","value":{"query":"SELECT * FROM users WHERE id IN (SELECT user_id FROM orders WHERE amount > 100)","mysqlVersion":"8.0"}}}}}},"parameters":[]}}, { strict: LIVE_STRICT, t })
     }
     const client = setup.client
     const struct = setup.struct
@@ -72,6 +84,12 @@ describe('QueryAnalysiEntity', async () => {
 })
 
 
+
+// main.kit.test.live.strict is true (the default is true): a live
+// request that fails, or a live test missing an input it needs,
+// fails the test.
+// An account with no record for a test to read skips it either way.
+const LIVE_STRICT = true
 
 function basicSetup(extra?: any) {
   // TODO: fix test def options
